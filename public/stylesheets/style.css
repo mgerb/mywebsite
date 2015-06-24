@@ -1,0 +1,30 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.textCenter {
+	text-align: center;
+}
+
+.header {
+	height: 500px;
+	background: url("../images/headerBackground.jpg") center;
+	background-size: cover;
+}
+
+.headerText{
+	font-size: 80px;
+	color: white;
+	margin-top: 0px;
+}
+
+.centerDiv{
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+

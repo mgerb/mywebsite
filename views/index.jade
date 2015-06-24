@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	div.header
+		div.centerDiv
+			h1.headerText.textCenter mitchellG.me
+
+	div.container
+		div.row
+			div.col-lg-4
+				h1 Submit Form
+				form(action="/", method="post")
+					div.form-group
+						Span Phone Number:
+						br
+						input.form-control(type="text", name="number", placeholder="555-555-5555")
+						br
+						Span Date:
+						br
+						input.form-control(type="text", name="date", placeholder="mm/dd/yy")
+						br
+						Span Time:
+						br
+						input.form-control(type="text", name="time", placeholder="12:00 am")
+						br
+						Span Message:
+						input.form-control(type="textarea", name="message")
+						br
+						input(type="submit", value="submit").btn
