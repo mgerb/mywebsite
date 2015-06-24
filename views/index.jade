@@ -9,7 +9,7 @@ block content
 		div.row
 			div.col-lg-4
 				h1 Submit Form
-				form(action="/", method="post")
+				form(action="/information", method="post")
 					div.form-group
 						Span Phone Number:
 						br
@@ -17,13 +17,27 @@ block content
 						br
 						Span Date:
 						br
-						input.form-control(type="text", name="date", placeholder="mm/dd/yy")
+						input.form-control(type="text", name="date", id="datepicker" placeholder="mm/dd/yy")
 						br
 						Span Time:
 						br
-						input.form-control(type="text", name="time", placeholder="12:00 am")
+						input.form-control(type="text", name="time", id="timepicker" placeholder="12:00 am")
 						br
 						Span Message:
 						input.form-control(type="textarea", name="message")
 						br
 						input(type="submit", value="submit").btn
+			div.col-lg-4
+				h1 Search by number
+				form(action="/search", method="post")
+					div.form-group
+						Span Phone Number:
+						br
+						input.form-control(type="text", name="searchNumber", placeholder="555-555-5555")
+						br
+						input(type="submit", value="submit").btn
+				br
+				ul
+					each val, index in findParams
+						li= index + " " + val
+						br
