@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var mongoose = require('mongoose');
+var mainLoop = require('./main');
+
 
 var app = express();
 mongoose.connect('mongodb://localhost/sitedb');
@@ -64,5 +66,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//////////////////Main program loop //////////////////
+//mainLoop.queryLoop;
 
 module.exports = app;

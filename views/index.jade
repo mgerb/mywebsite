@@ -9,27 +9,31 @@ block content
 		div.row
 			div.col-lg-4
 				h1 Submit Form
-				form(action="/information", method="post")
+				form(action="/", method="post")
 					div.form-group
 						Span Phone Number:
 						br
 						input.form-control(type="text", name="number", placeholder="555-555-5555")
 						br
+						Span Carrier:
+						select.form-control(name="carrier")
+							option(value="@vtext.com") Verizon
+						br
 						Span Date:
 						br
-						input.form-control(type="text", name="date", id="datepicker" placeholder="mm/dd/yy")
+						input.form-control(type="text", name="date", id="datepicker" placeholder="YYYY-MM-DD")
 						br
 						Span Time:
 						br
-						input.form-control(type="text", name="time", id="timepicker" placeholder="12:00 am")
+						input.form-control(type="text", name="time", id="timepicker" placeholder="12:00am")
 						br
 						Span Message:
-						input.form-control(type="textarea", name="message")
+						input.form-control(type="textarea", name="message", placeholder="Type your message here...")
 						br
 						input(type="submit", value="submit").btn
 			div.col-lg-4
 				h1 Search by number
-				form(action="/search", method="post")
+				form(action="/", method="post")
 					div.form-group
 						Span Phone Number:
 						br
@@ -37,7 +41,20 @@ block content
 						br
 						input(type="submit", value="submit").btn
 				br
-				ul
-					each val, index in findParams
-						li= index + " " + val
-						br
+				if (findParams != null)
+					div.col-lg-4
+						each index in findParams
+							-var date = new Date(index.date);
+							
+							Span= index.number
+							br
+							Span= date
+							br
+							Span= index.time
+							br
+							Span= index.message
+							br
+							Span= index.updated
+							br
+							br
+					
