@@ -10,7 +10,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res,next) {
+	var serverTimeZone = 240;
+	var clientTimeZone = req.body.timeZone;
+	var timeZoneOffset = clientTimeZone - serverTimeZone;
 
+	if (timeZoneOffset < 0){
+		timeZoneOffset = 0 - (Math.abs(timeZoneOffset)/60);
+	}
+	else if (timeZoneOffset > 0){
+		timeZoneOffset = timeZoneOffset/60;
+	}
+	
 	var number = req.body.number;
 	var date = req.body.date;
 	var time = req.body.time;
@@ -43,7 +53,26 @@ router.post('/', function(req, res,next) {
 		number = number.concat(carrier);
 
 		date = new Date(date);
-		date.setHours(get24Hours(time));
+		var newTime;
+
+		//check to see if time zone sets back a day
+		//if the time zone offset is greater than 24 hours and the offset is possitive
+		//need to set date ahead a day
+		if ((get24Hours(time) + timeZoneOffset) > 23){
+			date.setDate(date.getDate() + 1);
+			newTime = (get24Hours(time) + timeZoneOffset) - 24;
+		}
+
+		else if ((get24Hours(time) + timeZoneOffset) < 0){
+			date.setDate(date.getDate() - 1);
+			newTime = (get24Hours(time) + timeZoneOffset) + 24;
+		}
+
+		else {
+			newTime = get24Hours(time) + timeZoneOffset;
+		}
+
+		date.setHours(newTime);
 		date.setMinutes(getMinutes(time));
 
 		var entry = new info({
@@ -59,7 +88,7 @@ router.post('/', function(req, res,next) {
 		});
 
 	  	console.log(entry);
-	  	res.render('index');
+	  	res.render('success');
 	}
 });
 

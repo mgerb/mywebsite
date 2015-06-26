@@ -6,7 +6,7 @@ block content
 			h1.headerText.textCenter mitchellG.me
 
 	div.container
-		h1.textCenter Submit Form
+		h1.textCenter Enter Reminder
 		form(action="/", method="post")
 			div.form-signin
 				Span Phone Number:
@@ -48,5 +48,7 @@ block content
 				Span Message:
 				textarea.form-control(required type="textarea", name="message", placeholder="Type your message here...")
 				br
-				input(type="submit", value="Remind Me").btn.btn-lg.btn-primary.btn-block
+				input(hidden type="text" name="timeZone" id="timeZone")
+				input(type="submit", value="Remind Me", id="submitButton").btn.btn-lg.btn-primary.btn-block
+
 					

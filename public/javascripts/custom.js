@@ -1,9 +1,16 @@
 $(document).ready(function(){
-		$(function() {
-    	$( "#datepicker" ).datepicker();
-  		});
+	
+	var date = new Date();
+	var offset = new Date().getTimezoneOffset();
+	$("#timeZone").val(offset);
 
-  		$(function() {
-  			$("#timepicker").timepicker();
-  		});
+	console.log("offset - " + offset);
+	$(function() {
+	$( "#datepicker" ).datepicker();
+		});
+
+		$(function() {
+			$("#timepicker").timepicker();
+		});
+		
 });
