@@ -1,0 +1,26 @@
+			div.col-lg-4
+				h1 Search by number
+				form(action="/", method="post")
+					div.form-group
+						Span Phone Number:
+						br
+						input.form-control(type="text", name="searchNumber", placeholder="555-555-5555")
+						br
+						input(type="submit", value="submit").btn
+				br
+				if (findParams != null)
+					div.col-lg-4
+						each index in findParams
+							-var date = new Date(index.date);
+							
+							Span= index.number
+							br
+							Span= date
+							br
+							Span= index.time
+							br
+							Span= index.message
+							br
+							Span= index.updated
+							br
+							br

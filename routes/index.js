@@ -10,46 +10,41 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res,next) {
-	
-	//check to see which form is being submitted
-	var checkPage = req.body.searchNumber;
 
-	//if searching for number
-	if (typeof checkPage != 'undefined'){
+	var number = req.body.number;
+	var date = req.body.date;
+	var time = req.body.time;
+	var message = req.body.message;
+	var carrier = req.body.carrier;
+	var invalid = {};
+	var validInputs = true;
 
-		var searchNumber = req.param("searchNumber");
-
-		var query = info.find({'number' : searchNumber});
-
-		query.select("number date time message updated");
-
-		query.exec(function (err, callback) {
-			if (err) return handleError(err);
-			else {
-				console.log(callback);
-				res.render('index', {findParams : callback});
-			}
-		});
-
-		
+	if(!numberValidator(number)){
+		invalid.number = 'Invalid Number';
+		validInputs = false;
 	}
 
-	//if submitting records
+	if(!dateValidator(date)){
+		invalid.date = 'Invalid Date';
+		validInputs = false;
+	}
+
+	if (!timeValidator(time)){
+		invalid.time = "Invalid Time";
+		validInputs = false;
+	}
+
+	if (validInputs == false){
+		res.render('index', invalid);
+	}
 	else {
-		
-		var number = req.body.number;
-		var date = new Date(req.body.date);
-		var time = req.body.time;
-		var message = req.body.message;
-		var carrier = req.body.carrier;
-		console.log("------------------------------" + carrier);
 		number = number.replace("-", "");
 		number = number.replace("-", "");
 		number = number.concat(carrier);
 
+		date = new Date(date);
 		date.setHours(get24Hours(time));
 		date.setMinutes(getMinutes(time));
-		console.log("------------------ " + number);
 
 		var entry = new info({
 			number: number,
@@ -65,12 +60,7 @@ router.post('/', function(req, res,next) {
 
 	  	console.log(entry);
 	  	res.render('index');
-  }
-});
-
-router.post('/search', function(req, res, next) {
-	
-
+	}
 });
 
 module.exports = router;
@@ -101,4 +91,20 @@ function get24Hours(time){
 function getMinutes(time){
 	var minutes = parseInt(time.substring(time.indexOf(':') + 1, time.length -2));
 	return minutes;
+}
+
+function numberValidator(number){
+	var re = /^\d{3}\-?\d{3}\-?\d{4}$/;
+	return re.test(number);
+}
+
+function dateValidator(date){
+	var re = /^\d{2}\/\d{2}\/\d{4}$/;
+	return re.test(date);
+}
+
+function timeValidator(time){
+	//var re = /^\d{1,2}\:\d{2}am$|^\d{1,2}\:\d{2}pm$/;
+	var re = /^[0-9]\:[0-5][0-9]am$|^[0-9]\:[0-5][0-9]pm$|^1[0-2]\:[0-5][0-9]am$|^1[0-2]\:[0-5][0-9]pm$/;
+	return re.test(time);
 }

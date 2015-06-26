@@ -4,6 +4,6 @@ $(document).ready(function(){
   		});
 
   		$(function() {
-  			$("#timepicker").timepicker({ 'step' : 15});
+  			$("#timepicker").timepicker();
   		});
 });

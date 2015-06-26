@@ -6,55 +6,47 @@ block content
 			h1.headerText.textCenter mitchellG.me
 
 	div.container
-		div.row
-			div.col-lg-4
-				h1 Submit Form
-				form(action="/", method="post")
-					div.form-group
-						Span Phone Number:
-						br
-						input.form-control(type="text", name="number", placeholder="555-555-5555")
-						br
-						Span Carrier:
-						select.form-control(name="carrier")
-							option(value="@vtext.com") Verizon
-						br
-						Span Date:
-						br
-						input.form-control(type="text", name="date", id="datepicker" placeholder="YYYY-MM-DD")
-						br
-						Span Time:
-						br
-						input.form-control(type="text", name="time", id="timepicker" placeholder="12:00am")
-						br
-						Span Message:
-						input.form-control(type="textarea", name="message", placeholder="Type your message here...")
-						br
-						input(type="submit", value="submit").btn
-			div.col-lg-4
-				h1 Search by number
-				form(action="/", method="post")
-					div.form-group
-						Span Phone Number:
-						br
-						input.form-control(type="text", name="searchNumber", placeholder="555-555-5555")
-						br
-						input(type="submit", value="submit").btn
+		h1.textCenter Submit Form
+		form(action="/", method="post")
+			div.form-signin
+				Span Phone Number:
+				if (number != null)
+					Span.colorRed= " " + number
 				br
-				if (findParams != null)
-					div.col-lg-4
-						each index in findParams
-							-var date = new Date(index.date);
-							
-							Span= index.number
-							br
-							Span= date
-							br
-							Span= index.time
-							br
-							Span= index.message
-							br
-							Span= index.updated
-							br
-							br
+				input.form-control(required type="text", name="number", placeholder="555-555-5555")
+				br
+				Span Carrier:
+				select.form-control(name="carrier")
+					option(value="@vtext.com") Verizon
+					option(value="@txt.att.net") AT&T
+					option(value="@tmomail.net") T-Mobile
+					option(value="@messaging.sprintpcs.com ") Sprint
+					option(value="@vmobl.com") Virgin Mobile
+					option(value="@mmst5.tracfone.com") Tracfone
+					option(value="@mymetropcs.com") Metro PCS
+					option(value="@myboostmobile.com") Boost Mobile
+					option(value="@sms.mycricket.com") Cricket
+					option(value="@messaging.nextel.com") Nextel
+					option(value="@message.alltel.com") Alltel
+					option(value="@ptel.com") Ptel
+					option(value="@tms.suncom.com") Suncom
+					option(value="@qwestmp.com") Quest
+					option(value="@email.uscc.net") U.S. Cellular
+				br
+				Span Date:
+				if (date != null)
+					Span.colorRed= " " + date
+				br
+				input.form-control(required type="text", name="date", id="datepicker" placeholder="YYYY-MM-DD")
+				br
+				Span Time:
+				if (time != null)
+					Span.colorRed= " " + time
+				br
+				input.form-control(required type="text", name="time", id="timepicker" placeholder="12:00am")
+				br
+				Span Message:
+				textarea.form-control(required type="textarea", name="message", placeholder="Type your message here...")
+				br
+				input(type="submit", value="Remind Me").btn.btn-lg.btn-primary.btn-block
 					
