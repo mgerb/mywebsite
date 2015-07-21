@@ -31,10 +31,10 @@ router.post('/', function(req, res,next) {
 	var invalid = {};
 	var validInputs = true;
 
-	hours = ("0" + hours).slice(-2);
-	minutes = ("0" + minutes).slice(-2);
+	
 
 	var time = hours + ":" + minutes + ampm;
+	console.log("--time: " + time);
 
 	if(!numberValidator(number)){
 		invalid.number = 'Invalid Number';
@@ -141,6 +141,6 @@ function dateValidator(date){
 
 function timeValidator(time){
 	//var re = /^\d{1,2}\:\d{2}am$|^\d{1,2}\:\d{2}pm$/;
-	var re = /^[0-9]\:[0-5][0-9]am$|^[0-9]\:[0-5][0-9]pm$|^1[0-2]\:[0-5][0-9]am$|^1[0-2]\:[0-5][0-9]pm$/;
+	var re = /^[0-9]\:[0-5][0-9]AM$|^[0-9]\:[0-5][0-9]PM$|^1[0-2]\:[0-5][0-9]AM$|^1[0-2]\:[0-5][0-9]PM$/;
 	return re.test(time);
 }
