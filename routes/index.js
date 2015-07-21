@@ -81,7 +81,8 @@ router.post('/', function(req, res,next) {
 
 		date.setHours(newTime);
 		date.setMinutes(getMinutes(time));
-
+		console.log("---date: " + date);
+		
 		var entry = new info({
 			number: number,
 			date: date,
@@ -141,6 +142,6 @@ function dateValidator(date){
 
 function timeValidator(time){
 	//var re = /^\d{1,2}\:\d{2}am$|^\d{1,2}\:\d{2}pm$/;
-	var re = /^[0-9]\:[0-5][0-9]AM$|^[0-9]\:[0-5][0-9]PM$|^1[0-2]\:[0-5][0-9]AM$|^1[0-2]\:[0-5][0-9]PM$/;
+	var re = /^[0-9]\:[0-5][0-9]am$|^[0-9]\:[0-5][0-9]pm$|^1[0-2]\:[0-5][0-9]am$|^1[0-2]\:[0-5][0-9]pm$/;
 	return re.test(time);
 }
