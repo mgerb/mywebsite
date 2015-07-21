@@ -23,11 +23,18 @@ router.post('/', function(req, res,next) {
 	
 	var number = req.body.number;
 	var date = req.body.date;
-	var time = req.body.time;
+	var hours = req.body.hours;
+	var minutes = req.body.minutes;
+	var ampm = req.body.ampm;
 	var message = req.body.message;
 	var carrier = req.body.carrier;
 	var invalid = {};
 	var validInputs = true;
+
+	hours = ("0" + hours).slice(-2);
+	minutes = ("0" + minutes).slice(-2);
+
+	var time = hours + ":" + minutes + ampm;
 
 	if(!numberValidator(number)){
 		invalid.number = 'Invalid Number';
