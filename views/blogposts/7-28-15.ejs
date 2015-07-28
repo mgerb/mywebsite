@@ -1,0 +1,88 @@
+<div class="blog-post">
+
+	<h2 class="blog-post-title">How do I use git?</h2>
+
+	<p class="blog-post-meta">July 28 2015 by Mitchell</p>
+
+	<p>Git is a very useful file management system that you will find very handy. There are many services that host git repositories and it can also be installed on a personal server if you so choose. I'm going to explain how to set up git and discuss some useful commands and what they do.
+	</p>
+
+	<hr>
+
+	<p>Throughout this tutorial I am going to be focusing on <a href="http://www.github.com">Github</a>, because I find it easy to use and it is what I use most of the time. Github is just one of the many web-based git repository hosting services. It also has a nice GUI interface that may be useful to beginners, but I will mainly be focusing on git via command line. I have used both in the past and although command line may seem intimidating at first, it becomes easier and more powerful over time.
+	</p>
+
+	<p>What exactly does git do? Git is basically a cloud service that you can use for your coding projects. You may be wondering why use git over other cloud hosting services such as dropbox? Git is essentially the same thing, but has many built-in utilities for coding projects specifically. For example, you can see the changes between each commit (or each time you save new changes) displayed in each file. Github has a nice web interface that displays of this information. This helps with version control and it allows you to see which users have made what changes.
+	</p>
+
+	<h3>How to set up git</h3>
+
+	<code>$ Sudo apt-get install git</code>
+
+	<p> In linux just use the command above to install git. You will then run all git commands within the terminal. If you are on a Windows machine you can install git <a href="http://git-scm.com/download/win">here</a>. Once git is installed you can start using it immediately.
+	</p>
+
+	<code> $ cd Desktop && mkdir testgit && cd testgit && git init</code>
+
+	<p>Executing the above command will create a folder on the desktop and initialize a git repository. It also creates a .git folder that contains the settings of the repository. If you have already created a project and want to set it up as a git repository just simply navigate to the root directory and use <code>$ git init</code>.
+	</p>
+
+	<code> $ echo "testgit" >> README.md</code>
+
+	<p>You must create a readme file within the directory to be able to push to github. You can put anything in the readme, but github uses this file to display information about your repository on the main page.
+	</p>
+
+	<p>You must also first register with Github before you can create your own repositories. When pushing to your repository, you will be asked for your login credentials. You can globally configure these if you do not wish to be asked every time.
+	</p>
+
+	<code>$ git config --global user.name "John Doe"</code>
+	<br>
+	<code>$ git config --global user.email johndoe@example.com</code>
+
+	<p>Now that you have initialized your git repositor, you can start on your project and begin adding files. When you wish to save your files to the repository, you must first add all of the changes. YOU MUST ADD CHANGES BEFORE YOU COMMIT!! I have commited and pushed without adding changes multiple times before so do not forget!
+	</p>
+
+	<code>$ git add -A</code>
+
+	<p>This will add all changes of all files in the directory. Once you have added all of the changes you can now commit.</p>
+
+	<code>$ git commit -m "First Commit"</code>
+
+	<p>Committing your changes does NOT push them to Github. It just saves all of the new changes and sets them up to be pushed. The above command will make a commit with the message "First Commit". You must have a message with each commit! The -m parameter allows you to put a message in quotes without opening it up with an editor.
+	</p>
+
+	<p>Now everything is ready to be pushed to Github. We first need to create a repository on Github that we can push to. You can simply do this by clicking the "New Repository" button on Github's website. Once the repository is created, we need to attach our newly created repository to it. We can do this by using the <code>remote</code> command.
+	</p>
+
+	<code> $ git remote add origin https://github.com/username/repositoryname.git</code>
+	
+	<p>Replace "username" and "repositoryname" with your username and the name of your newly created repository and now your local repository should be attached to Github. Now we can finally push all changes to Github.
+	</p>
+
+	<code>$ git push origin master</code>
+
+	<p>You should be prompted to enter your username and password, unless you configured that globally before. Now, each time you want to save your changes to github, execute the follwoing commands.
+	</p>
+
+	<code>$ git add -A</code>
+	<br>
+	<code>$ git commit -m "Commit Message"</code>
+	<br>
+	<code>$ git push origin master</code>
+
+	<p>If you ever lose files, or want to work on this same project on another machine you can simply clone the entire repository and continue working on it from the last time you pushed. Just navite to your repository on Github's website and copy the URL.</p>
+
+	<code>$ git clone https://github.com/username/repositoryname.git</code>
+
+	<p> This will copy the entire repository into its own folder. If you implement changes on one machine and you want to update the repository on another, you can pull all of the most recent changes.
+	</p>
+
+	<code>$ git pull</code>
+
+	<p>Note: You must do this in the directory of the repository you wish to pull the changes.
+	</p>
+
+	<p>This is just a beginner guide on how to use git for the first time. There are still many other things that git has to offer, but these are the basic commands to get you started and using git.
+	</p>
+
+</div>

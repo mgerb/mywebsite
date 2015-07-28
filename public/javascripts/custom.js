@@ -5,12 +5,13 @@ $(document).ready(function(){
 	$("#timeZone").val(offset);
 
 	console.log("offset - " + offset);
-	$(function() {
-	$( "#datepicker" ).datepicker();
-		});
 
-		$(function() {
-			$("#timepicker").timepicker();
-		});
+	$(function() {
+	    $( "#dpicker" ).datepicker();
+ 	 });
+
+	$(function() {
+	    $( "#datepicker" ).datepicker();
+ 	 });
 		
 });

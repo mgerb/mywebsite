@@ -6,7 +6,16 @@ var info = mongoose.model('currentdata');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  	res.render('index');
+	var post = req.query.blogpost;
+
+	if (post != 'undefined'){
+		post = 'blogposts/' + post;
+	}
+	else {
+  		post = 'blogposts/frontpage';
+  	}
+
+	res.render('index', {content : post});
 });
 
 router.post('/', function(req, res,next) {
