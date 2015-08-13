@@ -19,14 +19,9 @@
 
 
 		<div class="col-sm-8 blog-main">
+		<% include ./blogposts/8-13-15.ejs%>
 		<% include ./blogposts/7-28-15.ejs%>
 		<% include ./blogposts/7-21-15.ejs%>
-
-
-
-
-
-
 
 
 
@@ -111,7 +106,7 @@
 							</select>
 
 							<select class="form-control timeForm" name="minutes">
-								<% for (var i = 1; i < 60; i++){ 
+								<% for (var i = 0; i < 60; i++){ 
 									if(i < 10) {%>
 										<option value="<%="0"+i%>"><%="0" + i%></option>
 									<% }
