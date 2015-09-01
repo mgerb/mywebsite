@@ -157,11 +157,9 @@ function timeValidator(time){
 
 function renderIndex(res, json){
 
-	temperature.findOne().sort('-updated').exec(function(err,query) {
-		console.log(query);
-
-		console.log(query.temperature);
-		res.render('index',{validation : json, query : query});
+	temperature.findOne().sort('-updated').exec(function(err,info) {
+		
+		res.render('index',{validation : json, query : info});
 	});
 	
 }
