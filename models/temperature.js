@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var temperatureSchema = new mongoose.Schema({
 	temperature: String,
 	humidity: String,
-	located: String,
+	location: String,
 	updated: {type: Date, default: Date.now}
 });
 

@@ -25,6 +25,7 @@ router.post('/', function(req, res, next) {
 
 		});
 
+		console.log("--information saved--");
 
 		res.send("Information Logged");
 
@@ -32,6 +33,7 @@ router.post('/', function(req, res, next) {
 
 	else{
 
+		console.log("--information not saved--");
 		res.send("Invalid Authentication");
 	}
 	
