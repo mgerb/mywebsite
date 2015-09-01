@@ -3,7 +3,20 @@
 <body>
 
 <div class="header">
-	<div class="centerDiv"></div>
+	
+		<div class="container">
+			<div class="lowerLeft">
+				<span class="colorWhite">ESP8266 With DHT11 Sensor</span>
+				<br>
+				<span class="colorWhite">Location: <%=query.location%></span>
+				<br>
+				<span class="colorWhite">Temperature: <%=query.temperature%>°F</span>
+				<br>
+				<span class="colorWhite">Humidity: <%=query.humidity%>%</span>
+			</div>
+		</div>
+		
+	
 </div>
 
 <div class="container">
@@ -12,6 +25,7 @@
 
 		<h1 class="blog-title">mitchellG.me</h1>
 		<p class="lead blog-description">A "blog" about computer related projects that I find interesting.</p>
+		
 
 	</div>
 
@@ -53,8 +67,8 @@
 					<div class="form-signin">
 
 						<Span>Phone Number:</Span> 
-							<% if (typeof number != 'undefined') { %>
-								<Span class="colorRed"> <%=" " + number%></Span>
+							<% if (typeof validation.number != 'undefined') { %>
+								<Span class="colorRed"> <%=" " + validation.number%></Span>
 							<%}%>
 						<br>
 
@@ -82,8 +96,8 @@
 						<br>
 
 						<Span>Date:</Span>
-							<% if (typeof date != 'undefined') { %>
-								<Span class="colorRed"><%=" " + date%></Span>
+							<% if (typeof validation.date != 'undefined') { %>
+								<Span class="colorRed"><%=" " + validation.date%></Span>
 							<%}%>
 
 						<br>
@@ -92,8 +106,8 @@
 						<br>
 
 						<Span>Time:</Span>
-							<% if (typeof time != 'undefined') { %>
-								<Span class="colorRed"><%=" " + time%></Span>
+							<% if (typeof validation.time != 'undefined') { %>
+								<Span class="colorRed"><%=" " + validation.time%></Span>
 							<%}%>
 
 						<br>

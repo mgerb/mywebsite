@@ -211,3 +211,15 @@ a {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+
+.lowerLeft{
+    display: table-cell;
+    vertical-align: bottom;
+    height: 400px;
+    width: 300px;
+}
+
+.colorWhite{
+  color: white;
+}

@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var success = require('./routes/success');
+var temperature = require('./routes/temperature');
 
 var mongoose = require('mongoose');
 var mainLoop = require('./main');
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/success', success);
+app.use('/temperature', temperature);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

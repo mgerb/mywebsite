@@ -1,21 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+
 require('../models/currentdata');
 var info = mongoose.model('currentdata');
 
+require("../models/temperature");
+var temperature = mongoose.model("temperature");
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	var post = req.query.blogpost;
 
-	if (post != 'undefined'){
-		post = 'blogposts/' + post;
-	}
-	else {
-  		post = 'blogposts/frontpage';
-  	}
 
-	res.render('index', {content : post});
+	renderIndex(res,{test: 1234});
+
 });
 
 router.post('/', function(req, res,next) {
@@ -61,8 +59,9 @@ router.post('/', function(req, res,next) {
 	}
 
 	if (validInputs == false){
-		res.render('index', invalid);
+		renderIndex(res, invalid);
 	}
+
 	else {
 		number = number.replace("-", "");
 		number = number.replace("-", "");
@@ -153,4 +152,16 @@ function timeValidator(time){
 	//var re = /^\d{1,2}\:\d{2}am$|^\d{1,2}\:\d{2}pm$/;
 	var re = /^[0-9]\:[0-5][0-9]am$|^[0-9]\:[0-5][0-9]pm$|^1[0-2]\:[0-5][0-9]am$|^1[0-2]\:[0-5][0-9]pm$/;
 	return re.test(time);
+}
+
+
+function renderIndex(res, json){
+
+	temperature.findOne().sort('-updated').exec(function(err,query) {
+		console.log(query);
+
+		console.log(query.temperature);
+		res.render('index',{validation : json, query : query});
+	});
+	
 }
