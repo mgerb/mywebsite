@@ -5,11 +5,11 @@ require('../models/temperature');
 var info = mongoose.model('temperature');
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
-	var temperature = req.body.temperature;
-	var humidity = req.body.humidity;
-	var location = req.body.location;
-	var key = req.body.key;
+router.get('/', function(req, res, next) {
+	var temperature = req.query.temperature;
+	var humidity = req.query.humidity;
+	var location = req.query.location;
+	var key = req.query.key;
 
 	if(key == "esp1234"){
 
