@@ -1,0 +1,43 @@
+<% include layout.ejs %>
+
+<body>
+
+<div class="header">
+		
+	
+</div>
+
+	<div class="container">
+
+      <form action="/newpost" method="post" enctype="multipart/form-data" class="form-signin">
+        <h2 class="form-signin-heading text-center">Submit New Post</h2>
+        <input type="text"  class="form-control" name="title" placeholder="Title" required autofocus>
+        <br>
+        <input type="text"  class="form-control" name="date" placeholder="Date" required>
+        <br>
+        <textarea type="text" class="form-control" name="intro" placeholder="Intro"></textarea>
+        <br>
+        <input type="text"  class="form-control" namel="key" placeholder="Key" required>
+        <% 
+      		if (typeof message != 'undefined'){ %>
+
+      			<span class="text-center colorRed"><%=message%></span>
+
+      	<%}%>
+        <br>
+        <span class="btn btn-default btn-file">
+        	Browse<input type="file" name="file">
+        </span>
+        <br>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		
+      </form>
+      
+
+    </div>
+
+</body>
+
+<% include layoutBottom.ejs %>
+
