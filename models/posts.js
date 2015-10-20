@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 
 var postsSchema = new mongoose.Schema({
 	title: String,
-	date: Date,
+	date: String,
 	intro: String,
-	file: String,
+	path: String,
+	fileName: String,
 	updated: {type: Date, default: Date.now}
 });
 

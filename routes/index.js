@@ -6,13 +6,17 @@ require('../models/currentdata');
 var info = mongoose.model('currentdata');
 
 require("../models/temperature");
-var temperature = mongoose.model("temperature");
+var temperature = mongoose.model('temperature');
+
+require('../models/posts');
+var posts = mongoose.model('posts');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
+	console.log(req.query.post);
 
-	renderIndex(res,{test: 1234});
+	renderIndex(res, {getPost : req.query.post, validation : {}});
 
 });
 
@@ -59,7 +63,7 @@ router.post('/', function(req, res,next) {
 	}
 
 	if (validInputs == false){
-		renderIndex(res, invalid);
+		renderIndex(res, {validation: invalid});
 	}
 
 	else {
@@ -159,7 +163,14 @@ function renderIndex(res, json){
 
 	temperature.findOne().sort('-updated').exec(function(err,info) {
 		
-		res.render('index',{validation : json, query : info});
+		posts.find().sort('-updated').exec(function(err, postsQuery){
+			console.log(json.validation);
+			res.render('index',{returnParameters : json, 
+								query : info, 
+								blogPosts : postsQuery});
+
+		});
+		
 	});
 	
 }

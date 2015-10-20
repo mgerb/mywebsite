@@ -5,6 +5,9 @@
 <div class="header">
 	
 		<div class="container">
+
+		<% if (query != null) { %>			
+							
 			<div class="lowerLeft">
 				<span class="colorWhite">ESP8266 With DHT11 Sensor</span>
 				<br>
@@ -14,8 +17,10 @@
 				<br>
 				<span class="colorWhite">Humidity: <%=query.humidity%>%</span>
 			</div>
-		</div>
-		
+
+		<%}%>
+
+		</div>	
 	
 </div>
 
@@ -24,21 +29,32 @@
 	<div class="blog-header">
 
 		<h1 class="blog-title">mitchellG.me</h1>
-		<p class="lead blog-description">A "blog" about computer related projects that I find interesting.</p>
-		
+		<p class="lead blog-description">A "blog" about computer related projects that I find interesting.</p>	
 
 	</div>
 
 	<div class="row">
-
-
 		<div class="col-sm-8 blog-main">
-		<% include ./blogposts/8-13-15.ejs%>
-		<% include ./blogposts/7-28-15.ejs%>
-		<% include ./blogposts/7-21-15.ejs%>
 
+			<%if (typeof returnParameters.getPost == 'undefined'){ %>
+				
 
+				<% for (p in blogPosts) {%>
+				<h2 class="blog-post-title"><%=blogPosts[p].title%></h2>
 
+				<p class="blog-post-meta"><%=blogPosts[p].date%> by Mitchell</p>
+
+				<p><%=blogPosts[p].intro%>
+				<br>
+				<a href="?post=<%=blogPosts[p].fileName%>">Continue reading...</a>
+				</p>
+				
+				<%}%>
+		
+				<%} else {%>
+
+					<%- include('./blogposts/' + returnParameters.getPost)%>
+				<%}%>
 
 		</div> <!-- new blog posts-->
 
@@ -57,7 +73,9 @@
 					<i class="icon-large icon-linked-in"></i>
 				</a>
 			</div>
-
+			<div>
+			<a href="/newpost"><button class="center btn btn-default">Submit Post</button></a>
+			</div>
 			<div class="sidebar-module">
 
 				<h3 class="textCenter">Enter Reminder</h3>
@@ -67,8 +85,8 @@
 					<div class="form-signin">
 
 						<Span>Phone Number:</Span> 
-							<% if (typeof validation.number != 'undefined') { %>
-								<Span class="colorRed"> <%=" " + validation.number%></Span>
+							<% if (typeof returnParameters.validation.number != 'undefined') { %>
+								<Span class="colorRed"> <%=" " + returnParameters.validation.number%></Span>
 							<%}%>
 						<br>
 
@@ -96,8 +114,8 @@
 						<br>
 
 						<Span>Date:</Span>
-							<% if (typeof validation.date != 'undefined') { %>
-								<Span class="colorRed"><%=" " + validation.date%></Span>
+							<% if (typeof returnParameters.validation.date != 'undefined') { %>
+								<Span class="colorRed"><%=" " + returnParameters.validation.date%></Span>
 							<%}%>
 
 						<br>
@@ -106,8 +124,8 @@
 						<br>
 
 						<Span>Time:</Span>
-							<% if (typeof validation.time != 'undefined') { %>
-								<Span class="colorRed"><%=" " + validation.time%></Span>
+							<% if (typeof returnParameters.validation.time != 'undefined') { %>
+								<Span class="colorRed"><%=" " + returnParameters.validation.time%></Span>
 							<%}%>
 
 						<br>
