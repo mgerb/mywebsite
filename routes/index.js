@@ -17,6 +17,10 @@ router.get('/discord', function(req, res, next) {
 
 });
 
+router.get('/vpn', function(req, red, next){
+	red.redirect('https://mitchellg.me:943');
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -99,7 +103,6 @@ router.post('/', function(req, res,next) {
 
 		date.setHours(newTime);
 		date.setMinutes(getMinutes(time));
-		console.log("---date: " + date);
 		
 		var entry = new info({
 			number: number,
@@ -170,7 +173,7 @@ function renderIndex(res, json){
 	temperature.findOne().sort('-updated').exec(function(err,info) {
 		
 		posts.find().sort('-updated').exec(function(err, postsQuery){
-			console.log(json.validation);
+		
 			res.render('index',{returnParameters : json, 
 								query : info, 
 								blogPosts : postsQuery});
