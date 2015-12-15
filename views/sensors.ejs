@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>mitchellg.me</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/stylesheets/style.css">
+	<link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.icon-large.min.css">
+	<link href="http://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<div class="header">
+	
+		<div class="container">
+
+		<% if (query[0] != null) { %>			
+							
+			<div class="lowerLeft">
+				<span class="colorWhite">ESP8266 With DHT11 Sensor</span>
+				<br>
+				<span class="colorWhite">Location: <%=query[0]._id%></span>
+				<br>
+				<span class="colorWhite">Temperature: <%=query[0].temperature%>°F</span>
+				<br>
+				<span class="colorWhite">Humidity: <%=query[0].humidity%>%</span>
+			</div>
+
+		<%}%>
+
+		</div>	
+	
+</div>
+
+<div class="container">
+<br>
+<h1 class="text-center">ESP8266 Temperature Sensors</h1>
+<hr>
+	<% for (var i = 0; i < query.length; i++){ %>
+		<div class="col-lg-4">
+			<h3><%=query[i]._id%></h3>
+			<h4>Temperature: <%=query[i].temperature%></h4>
+			<h4>Humidity: <%=query[i].humidity%></h4>
+		</div>
+	<%}%>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<footer class="blog-footer">
+	<p>Site created and managed by Mitchell Gerber</p>
+	<span>©2015</span>
+	<br>
+	<span>Glyphicons provided by</span><br>
+	<a href="http://glyphicons.com/" target="_blank"><span>glyphicons.com</span></a>
+</footer>
+
+</body>
+
+	
+
+	
+	<script src="jquery-1.11.3.min.js"></script>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+	<script src="javascripts/custom.js"></script>
+
+</html>
+
