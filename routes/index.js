@@ -17,9 +17,21 @@ router.get('/discord', function(req, res, next) {
 
 });
 
-router.get('/vpn', function(req, red, next){
-	red.redirect('https://mitchellg.me:943');
+router.get('/vpn', function(req, res, next){
+	res.redirect('https://mitchellg.me:943');
 });
+
+
+router.get('/sensors', function(req, res, next) {
+
+	temperature.aggregate( [ {$sort : {location : -1, updated : -1}}, { $group : { _id : "$location", temperature : {$first : "$temperature"}, humidity : {$first : "$humidity"}} } ] ).exec(function(err, info){
+		
+		res.render('sensors', {query : info});
+	});
+
+
+});
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -170,7 +182,7 @@ function timeValidator(time){
 
 function renderIndex(res, json){
 
-	temperature.findOne().sort('-updated').exec(function(err,info) {
+	temperature.findOne({location : "Winona Apartment"}).sort("-updated").exec(function(err, info){
 		
 		posts.find().sort('-updated').exec(function(err, postsQuery){
 		
@@ -183,3 +195,15 @@ function renderIndex(res, json){
 	});
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+

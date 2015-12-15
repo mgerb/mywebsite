@@ -6,12 +6,13 @@ var info = mongoose.model('temperature');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
 	var temperature = req.query.temperature;
 	var humidity = req.query.humidity;
 	var location = req.query.location;
 	var key = req.query.key;
 
-	if(key == "esp1234"){
+	if(key == "esp1234" && temperature != "nan" && humidity != "nan"){
 
 
 		var insert = new info({
