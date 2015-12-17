@@ -46,6 +46,8 @@
 			<h3><%=query[i]._id%></h3>
 			<h4>Temperature: <%=query[i].temperature%></h4>
 			<h4>Humidity: <%=query[i].humidity%></h4>
+			<span>Updated: <%=query[i].lastUpdate%></span>
+			<br>
 			<% if (query[i].connected){ %>
 			<span class="colorGreen">Connected</span>
 			<%} else {%>
