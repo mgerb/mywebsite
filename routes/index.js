@@ -24,8 +24,25 @@ router.get('/vpn', function(req, res, next){
 
 router.get('/sensors', function(req, res, next) {
 
-	temperature.aggregate( [ {$sort : {location : -1, updated : -1}}, { $group : { _id : "$location", temperature : {$first : "$temperature"}, humidity : {$first : "$humidity"}} } ] ).exec(function(err, info){
-		
+	temperature.aggregate( [ {$sort : {location : -1, updated : -1}}, { $group : { _id : "$location", temperature : {$first : "$temperature"}, humidity : {$first : "$humidity"}, updated : {$first : "$updated"}} } ] ).exec(function(err, info){
+		var date1 = new Date();
+
+		for (var i = 0; i < info.length; i++){
+				console.log(info[i].updated.getTime());
+				console.log(Date.now());
+
+				//compared current time to last db entry - 1200000 milliseconds is 2 minutes
+				if(info[i].updated.getTime() > (Date.now() - 120000)){
+					info[i].connected = true;
+				}
+				else {
+					info[i].connected = false;
+				}
+
+				console.log(info[i].connected);
+				
+		}
+
 		res.render('sensors', {query : info});
 	});
 
@@ -185,7 +202,7 @@ function renderIndex(res, json){
 	temperature.findOne({location : "Winona Apartment"}).sort("-updated").exec(function(err, info){
 		
 		posts.find().sort('-updated').exec(function(err, postsQuery){
-		
+
 			res.render('index',{returnParameters : json, 
 								query : info, 
 								blogPosts : postsQuery});

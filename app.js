@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var success = require('./routes/success');
 var temperature = require('./routes/temperature');
 var newpost = require('./routes/newpost');
+var sensors = require('./routes/sensors');
 
 var mongoose = require('mongoose');
 var mainLoop = require('./main');
@@ -39,12 +40,14 @@ app.use('/', index);
 app.use('/success', success);
 app.use('/temperature', temperature);
 app.use('/newpost', newpost);
+app.use('/sensors', sensors);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  res.render('404');
+  //next(err);
 });
 
 // error handlers
