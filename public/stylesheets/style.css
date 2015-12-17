@@ -26,6 +26,10 @@ a {
 	margin-top: 0px;
 }
 
+.large-text{
+  font-size: 100px;
+}
+
 .centerDiv{
 	position: relative;
   	top: 50%;
@@ -49,6 +53,9 @@ a {
 
 .colorRed {
 	color: red;
+}
+.colorGreen {
+  color: green;
 }
 
 .timeForm {
@@ -222,4 +229,10 @@ a {
 
 .colorWhite{
   color: white;
+}
+
+.mitchell-navbar{
+  border-radius: 0 !important;
+  background-color: #262626;
+  border: 0;
 }

@@ -35,6 +35,8 @@
 	
 </div>
 
+<% include ../public/html/navbar.html %>
+
 <div class="container">
 <br>
 <h1 class="text-center">ESP8266 Temperature Sensors</h1>
@@ -44,6 +46,12 @@
 			<h3><%=query[i]._id%></h3>
 			<h4>Temperature: <%=query[i].temperature%></h4>
 			<h4>Humidity: <%=query[i].humidity%></h4>
+			<% if (query[i].connected){ %>
+			<span class="colorGreen">Connected</span>
+			<%} else {%>
+			<span class="colorRed">Disconnected</span>
+			<%}%>
+
 		</div>
 	<%}%>
 
