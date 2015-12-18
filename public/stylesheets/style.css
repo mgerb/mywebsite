@@ -236,3 +236,16 @@ a {
   background-color: #262626;
   border: 0;
 }
+
+.gist {
+  width:600px !important;
+}
+
+.gist-file{
+
+}
+
+.gist-data{
+  max-height: 500px;
+  max-width: 600px;
+}
