@@ -9,9 +9,9 @@ var temperature = mongoose.model('temperature');
 /* GET sensors page. */
 router.get('/tempsensors', function(req, res, next) {
 
-	var location = request.query.location;
+	//var location = req.query.location;
 
-	
+
 	temperature.aggregate([ {$sort : {location : -1, updated : -1}}, 
 		{ $group : { _id : {location : "$location", month: {$month: "$updated" }, day: { $dayOfMonth: "$updated" }, year: { $year: "$updated" }},
 						max : {$max : "$temperature"},
