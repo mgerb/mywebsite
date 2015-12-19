@@ -32,12 +32,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res,next) {
-	var serverTimeZone = 240;
+	var serverTimeZone = 300;
 	var clientTimeZone = req.body.timeZone;
 	var timeZoneOffset = clientTimeZone - serverTimeZone;
 
 	if (timeZoneOffset < 0){
-		timeZoneOffset = 0 - (Math.abs(timeZoneOffset)/60);
+		timeZoneOffset = timeZoneOffset/60;
 	}
 	else if (timeZoneOffset > 0){
 		timeZoneOffset = timeZoneOffset/60;
