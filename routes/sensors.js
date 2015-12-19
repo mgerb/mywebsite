@@ -11,6 +11,9 @@ router.get('/', function(req, res, next) {
 
 	temperature.aggregate( [ {$sort : {location : -1, updated : -1}}, { $group : { _id : "$location", temperature : {$first : "$temperature"}, humidity : {$first : "$humidity"}, updated : {$first : "$updated"}} } ] ).exec(function(err, info){
 
+		//get month for each entry and convert 24 hour time to US time
+		//also check to see if device has sent a data point in past 5 minutes
+		//if not will show up as disconnected
 		for (var i = 0; i < info.length; i++){
 				var monthNames = ["January", "February", "March", "April", "May", "June",
   									"July", "August", "September", "October", "November", "December"];
@@ -23,6 +26,17 @@ router.get('/', function(req, res, next) {
 
 				var dateString = month + " " + date + ", " + year;
 
+				var loc = info[i]._id;
+				
+				var info_link = "/sensors/information?location="
+
+				if (loc != null){
+					loc = loc.split().join("+");
+					 info_link += loc;
+				}
+
+				info[i].info_link = info_link;
+				
 				//converting 24 hours time to AM or PM
 				if (hours < 12){
 					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " AM (ET)";
@@ -36,7 +50,7 @@ router.get('/', function(req, res, next) {
 				}
 
 				//compared current time to last db entry - 1200000 milliseconds is 2 minutes
-				if(info[i].updated.getTime() > (Date.now() - 120000)){
+				if(info[i].updated.getTime() > (Date.now() - 350000)){
 					info[i].connected = true;
 				}
 				else {
@@ -53,7 +67,15 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.post('/', function(req, res,next) {
+router.get('/information', function(req, res, err){
+
+	var sensor_location = req.query.location;
+
+	if (sensor_location == null){
+		res.redirect('/404');
+	}
+
+	res.render('sensor_information', {info : {location : sensor_location}});
 
 });
 

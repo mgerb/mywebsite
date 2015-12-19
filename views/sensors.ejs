@@ -2,38 +2,13 @@
 <html lang="en">
 
 <head>
-	<title>mitchellg.me</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" href="/stylesheets/style.css">
-	<link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.css">
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.icon-large.min.css">
-	<link href="http://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" type="text/css">
+	<% include layout.ejs %>
 
 </head>
 
 <body>
 
-<div class="header">
-	
-		<div class="container">
-
-		<% if (query[0] != null) { %>			
-							
-			<div class="lowerLeft">
-				<span class="colorWhite">ESP8266 With DHT11 Sensor</span>
-				<br>
-				<span class="colorWhite">Location: <%=query[0]._id%></span>
-				<br>
-				<span class="colorWhite">Temperature: <%=query[0].temperature%>°F</span>
-				<br>
-				<span class="colorWhite">Humidity: <%=query[0].humidity%>%</span>
-			</div>
-
-		<%}%>
-
-		</div>	
-	
-</div>
+<div class="header"></div>
 
 <% include ../public/html/navbar.html %>
 
@@ -53,7 +28,9 @@
 			<%} else {%>
 			<span class="colorRed">Disconnected</span>
 			<%}%>
-
+			<br>
+			<br>
+			<a href="<%=query[i].info_link%>"><button class="btn btn-default">View Graph</button></a>
 		</div>
 	<%}%>
 
@@ -86,10 +63,7 @@
 	
 
 	
-	<script src="jquery-1.11.3.min.js"></script>
-	<script src="bootstrap/js/bootstrap.js"></script>
-	<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-	<script src="javascripts/custom.js"></script>
+	<% include layoutBottom.ejs %>
 
 </html>
 

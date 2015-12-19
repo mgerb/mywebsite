@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<% include layout.ejs %>
+
+</head>
+
+<body>
+
+<div class="header"></div>
+
+<% include ../public/html/navbar.html %>
+
+<div class="container">
+<br>
+<h1 class="text-center" id="sensor-location"><%=info.location%></h1>
+<hr>
+<br>
+<canvas class="center" id="info-chart" width="800" height="400"></canvas>
+
+</div>
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<footer class="blog-footer">
+	<p>Site created and managed by Mitchell Gerber</p>
+	<span>©2015</span>
+	<br>
+	<span>Glyphicons provided by</span><br>
+	<a href="http://glyphicons.com/" target="_blank"><span>glyphicons.com</span></a>
+</footer>
+
+</body>
+	
+	<% include layoutBottom.ejs %>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+	<script src="/javascripts/sensor_information.js"></script>
+</html>
+
