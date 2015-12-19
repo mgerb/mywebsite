@@ -7,15 +7,13 @@ var temperature = mongoose.model('temperature');
 
 
 /* GET sensors page. */
-router.get('/tempsensors', function(req, res, next) {
+router.get('/allsensors', function(req, res, next) {
 
 	//var location = req.query.location;
-
-
-	temperature.aggregate([ {$sort : {location : -1, updated : -1}}, 
-		{ $group : { _id : {location : "$location", month: {$month: "$updated" }, day: { $dayOfMonth: "$updated" }, year: { $year: "$updated" }},
-						max : {$max : "$temperature"},
-						min : {$min : "$temperature"}}}]).exec(function(err, info){
+	temperature.aggregate([{$group : { _id : {location : "$location", month: {$month: "$updated" }, day: { $dayOfMonth: "$updated" }, year: { $year: "$updated" }},
+								max : {$max : "$temperature"},
+								min : {$min : "$temperature"}}},
+							{$sort : {"_id.month" : -1, "_id.day" : -1, "_id.year" : -1}}]).exec(function(err, info){
 
 			console.log(info);
 			res.setHeader('Content-Type', 'application/json');
@@ -23,11 +21,25 @@ router.get('/tempsensors', function(req, res, next) {
 
 		});
 
+});
 
+router.get('/sensorbylocation', function(req, res, next) {
 
+	var loc = req.query.location;
+	console.log(loc);
+	//var location = req.query.location;
+	temperature.aggregate([ {$match : {location : loc}},
+							{$group : { _id : {location : "$location", month: {$month: "$updated" }, day: { $dayOfMonth: "$updated" }, year: { $year: "$updated" }},
+								max : {$max : "$temperature"},
+								min : {$min : "$temperature"}}},
+							{$sort : {"_id.month" : -1}}]).exec(function(err, info){
 
+			console.log(info);
+			res.setHeader('Content-Type', 'application/json');
+			res.send(JSON.stringify(info, null, 4));
 
-	
+		});
+
 });
 
 router.post('/', function(req, res,next) {
