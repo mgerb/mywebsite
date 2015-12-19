@@ -32,7 +32,7 @@ router.get('/sensorbylocation', function(req, res, next) {
 							{$group : { _id : {location : "$location", month: {$month: "$updated" }, day: { $dayOfMonth: "$updated" }, year: { $year: "$updated" }},
 								max : {$max : "$temperature"},
 								min : {$min : "$temperature"}}},
-							{$sort : {"_id.month" : -1}}]).exec(function(err, info){
+							{$sort : {"_id.month" : -1, "_id.day" : -1, "_id.year" : -1}}]).exec(function(err, info){
 
 			console.log(info);
 			res.setHeader('Content-Type', 'application/json');
