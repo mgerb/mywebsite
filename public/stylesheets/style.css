@@ -249,3 +249,10 @@ a {
   max-height: 500px;
   max-width: 600px;
 }
+
+.chart-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
