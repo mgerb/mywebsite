@@ -38,7 +38,11 @@ router.get('/', function(req, res, next) {
 				info[i].info_link = info_link;
 				
 				//converting 24 hours time to AM or PM
-				if (hours < 12){
+				if (hours == 0){
+					hours = 12;
+					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " AM (ET)";
+				}
+				else if (hours < 12){
 					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " AM (ET)";
 				}
 				else if (hours == 12){
