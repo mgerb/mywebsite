@@ -19,8 +19,8 @@
 	<% for (var i = 0; i < query.length; i++){ %>
 		<div class="col-lg-4">
 			<h3><%=query[i]._id%></h3>
-			<h4>Temperature: <%=query[i].temperature%></h4>
-			<h4>Humidity: <%=query[i].humidity%></h4>
+			<h4>Temperature: <%=query[i].temperature%>°F </h4>
+			<h4>Humidity: <%=query[i].humidity%>%</h4>
 			<span>Updated: <%=query[i].lastUpdate%></span>
 			<br>
 			<% if (query[i].connected){ %>
