@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res,next) {
-	var serverTimeZone = 300;
+	var serverTimeZone = 360;
 	var clientTimeZone = req.body.timeZone;
 	var timeZoneOffset = clientTimeZone - serverTimeZone;
 

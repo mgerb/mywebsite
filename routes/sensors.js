@@ -40,17 +40,17 @@ router.get('/', function(req, res, next) {
 				//converting 24 hours time to AM or PM
 				if (hours == 0){
 					hours = 12;
-					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " AM (ET)";
+					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " AM";
 				}
 				else if (hours < 12){
-					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " AM (ET)";
+					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " AM";
 				}
 				else if (hours == 12){
-					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " PM (ET)";
+					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " PM";
 				}
 				else{
 					hours = hours - 12;
-					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " PM (ET)";
+					info[i].lastUpdate = dateString + " - " + hours + ":" + minutes + " PM";
 				}
 
 				//compared current time to last db entry - 1200000 milliseconds is 2 minutes
