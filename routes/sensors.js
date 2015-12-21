@@ -37,6 +37,11 @@ router.get('/', function(req, res, next) {
 
 				info[i].info_link = info_link;
 				
+				//adjust minutes to show up correctly
+				if (minutes < 10){
+					minutes = "0" + minutes;
+				}
+
 				//converting 24 hours time to AM or PM
 				if (hours == 0){
 					hours = 12;
@@ -60,8 +65,6 @@ router.get('/', function(req, res, next) {
 				else {
 					info[i].connected = false;
 				}
-
-				
 				
 		}
 
