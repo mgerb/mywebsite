@@ -1,8 +1,16 @@
 $(document).ready(function(){	
+	
+	var yearChart_year = $("#option-year").val();
+	displayChart("#info-chart-year", "#legend-year", yearChart_year, null);
 
-	displayChart("#info-chart-year", "#legend-year", 2015, null);
-	displayChart("#info-chart-month", "#legend-month", 2015, 9);
+	
+	var text = $("#option-month option:selected").text();
+	console.log(text);
+	var month = $("#option-month").val();
+	var monthChart_year = text.substring(text.length, text.length -4);
 
+	displayChart("#info-chart-month", "#legend-month", monthChart_year, month);
+	
 });
 
 $("#option-year").on("change", function(){
