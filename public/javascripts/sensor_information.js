@@ -1,7 +1,7 @@
 $(document).ready(function(){	
 	
 	var yearChart_year = $("#option-year").val();
-	displayChart("#info-chart-year", "#legend-year", yearChart_year, null);
+	displayChart("info-chart-year", "legend-year", yearChart_year, null);
 
 	
 	var text = $("#option-month option:selected").text();
@@ -9,7 +9,7 @@ $(document).ready(function(){
 	var month = $("#option-month").val();
 	var monthChart_year = text.substring(text.length, text.length -4);
 
-	displayChart("#info-chart-month", "#legend-month", monthChart_year, month);
+	displayChart("info-chart-month", "legend-month", monthChart_year, month);
 	
 });
 
@@ -17,7 +17,8 @@ $("#option-year").on("change", function(){
 
 	var year = this.value;
 
-	displayChart("#info-chart-year", "#legend-year", year, null);
+	resetCanvas("info-chart-year", "canvas1-id");
+	displayChart("info-chart-year", "legend-year", year, null);
 
 });
 
@@ -27,9 +28,15 @@ $("#option-month").on("change", function(){
 	var month = this.value;
 	var year = text.substring(text.length, text.length -4);
 
-	displayChart("#info-chart-month", "#legend-month", year, month);
+	resetCanvas("info-chart-month", "canvas2-id");
+	displayChart("info-chart-month", "legend-month", year, month);
 	
 });
+
+function resetCanvas(canvas_id, container_id){
+	$("#" + canvas_id).remove(); // this is my <canvas> element
+	$("#" + container_id).append('<canvas class="center" id="' + canvas_id + '" width="800" height="400"></canvas>');
+}
 
 function displayChart(chart_id, chart_legend_id, year, month){
 
@@ -90,11 +97,11 @@ function displayChart(chart_id, chart_legend_id, year, month){
 		}
 
 		// Get context with jQuery - using jQuery's .get() method.
-		var ctx = $(chart_id).get(0).getContext("2d");
+		var ctx = $("#" + chart_id).get(0).getContext("2d");
 		// This will get the first returned node in the jQuery collection.
 		var myLineChart = new Chart(ctx).Line(data);
 
-		$(chart_legend_id).html(myLineChart.generateLegend());
+		$("#" + chart_legend_id).html(myLineChart.generateLegend());
 
 	});
 
