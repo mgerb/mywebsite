@@ -25,8 +25,6 @@ router.get('/vpn', function(req, res, next){
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-	console.log(req.query.post);
-
 	renderIndex(res, {getPost : req.query.post, validation : {}});
 
 });
@@ -56,7 +54,6 @@ router.post('/', function(req, res,next) {
 	
 
 	var time = hours + ":" + minutes + ampm;
-	console.log("--time: " + time);
 
 	if(!numberValidator(number)){
 		invalid.number = 'Invalid Number';
@@ -117,7 +114,6 @@ router.post('/', function(req, res,next) {
 			console.dir(entry);
 		});
 
-	  	console.log(entry);
 	  	res.render('success');
 	}
 });
