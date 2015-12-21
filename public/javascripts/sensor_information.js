@@ -40,8 +40,6 @@ function resetCanvas(canvas_id, container_id){
 
 function displayChart(chart_id, chart_legend_id, year, month){
 
-	Chart.defaults.global.responsive = true;
-
 	var loc = $("#sensor-location").text();
 	loc = loc.split().join("+");
 
@@ -75,8 +73,8 @@ function displayChart(chart_id, chart_legend_id, year, month){
             console.log(json);
 
             data.datasets.push({
-                label: "Max Temperature",
-                fillColor: "rgba(255,100,100,0.2)",
+                label: "Max Temperature °F",
+                fillColor: "rgba(255,100,100,0)",
                 strokeColor: "rgba(255,100,100,1)",
                 pointColor: "rgba(255,100,100,1)",
                 pointStrokeColor: "#fff",
@@ -85,8 +83,8 @@ function displayChart(chart_id, chart_legend_id, year, month){
                 data: []
             },
             {
-                label: "Min Temperature",
-                fillColor: "rgba(151,187,205,0.2)",
+                label: "Min Temperature °F",
+                fillColor: "rgba(151,187,205,0)",
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
                 pointStrokeColor: "#fff",
@@ -95,8 +93,8 @@ function displayChart(chart_id, chart_legend_id, year, month){
                 data: []
             },
             {
-                label: "Average Humidity",
-                fillColor: "rgba(200,200,200,0.2)",
+                label: "Average Humidity %",
+                fillColor: "rgba(200,200,200,0)",
                 strokeColor: "rgba(200,200,200,1)",
                 pointColor: "rgba(200,200,200,1)",
                 pointStrokeColor: "#fff",
@@ -116,7 +114,7 @@ function displayChart(chart_id, chart_legend_id, year, month){
 
                 data.datasets[0].data.push(json[i].max);
                 data.datasets[1].data.push(json[i].min);
-                data.datasets[2].data.push(json[i].humidity);
+                data.datasets[2].data.push(Math.ceil(json[i].humidity));
             }
 
             // Get context with jQuery - using jQuery's .get() method.
@@ -148,7 +146,7 @@ Chart.defaults.global = {
     //  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
     //  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
     //  easeOutElastic, easeInCubic]
-    animationEasing: "easeOutQuart",
+    animationEasing: "easeOutCirc",
 
     // Boolean - If we should show the scale at all
     showScale: true,
@@ -180,7 +178,7 @@ Chart.defaults.global = {
     scaleIntegersOnly: true,
 
     // Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-    scaleBeginAtZero: false,
+    scaleBeginAtZero: true,
 
     // String - Scale label font declaration for the scale label
     scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
@@ -195,7 +193,7 @@ Chart.defaults.global = {
     scaleFontColor: "#666",
 
     // Boolean - whether or not the chart should be responsive and resize when the browser does.
-    responsive: false,
+    responsive: true,
 
     // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
     maintainAspectRatio: true,
