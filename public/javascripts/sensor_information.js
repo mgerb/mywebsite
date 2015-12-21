@@ -56,54 +56,68 @@ function displayChart(chart_id, chart_legend_id, year, month){
 		console.log("api 2");
 	}
 
-	$.get(api_url, function(request){
-
-		var json = request;
-		var data = {labels : [], datasets : []};
-		console.log(json);
-
-		data.datasets.push({
-            label: "Max Temperature",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: []
+    $.ajax(
+    {
+        type: 'GET',
+        url: api_url,
+        data: {},
+        beforeSend: function(){
+            $('body').addClass("loading");
         },
-        {
-            label: "Min Temperature",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: []
-        });
+        success: function(data){
 
-		for (var i in json){
+            $('body').removeClass("loading");
 
-			if (month == null){
-				data.labels.push(json[i]._id.month + "/" + json[i]._id.day);
-			}
-			else {
-				data.labels.push(json[i]._id.day);
-			}
+            var request = data;
 
-			data.datasets[0].data.push(json[i].max);
-			data.datasets[1].data.push(json[i].min);
-		}
+            var json = request;
+            var data = {labels : [], datasets : []};
+            console.log(json);
 
-		// Get context with jQuery - using jQuery's .get() method.
-		var ctx = $("#" + chart_id).get(0).getContext("2d");
-		// This will get the first returned node in the jQuery collection.
-		var myLineChart = new Chart(ctx).Line(data);
+            data.datasets.push({
+                label: "Max Temperature",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: []
+            },
+            {
+                label: "Min Temperature",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: []
+            });
 
-		$("#" + chart_legend_id).html(myLineChart.generateLegend());
+            for (var i in json){
 
-	});
+                if (month == null){
+                    data.labels.push(json[i]._id.month + "/" + json[i]._id.day);
+                }
+                else {
+                    data.labels.push(json[i]._id.day);
+                }
+
+                data.datasets[0].data.push(json[i].max);
+                data.datasets[1].data.push(json[i].min);
+            }
+
+            // Get context with jQuery - using jQuery's .get() method.
+            var ctx = $("#" + chart_id).get(0).getContext("2d");
+            // This will get the first returned node in the jQuery collection.
+            var myLineChart = new Chart(ctx).Line(data);
+
+            $("#" + chart_legend_id).html(myLineChart.generateLegend());
+        }
+
+
+    });
 
 }
 
