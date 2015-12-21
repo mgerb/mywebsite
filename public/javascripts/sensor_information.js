@@ -76,12 +76,12 @@ function displayChart(chart_id, chart_legend_id, year, month){
 
             data.datasets.push({
                 label: "Max Temperature",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
+                fillColor: "rgba(255,100,100,0.2)",
+                strokeColor: "rgba(255,100,100,1)",
+                pointColor: "rgba(255,100,100,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
+                pointHighlightStroke: "rgba(255,50,50,1)",
                 data: []
             },
             {
@@ -92,6 +92,16 @@ function displayChart(chart_id, chart_legend_id, year, month){
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(151,187,205,1)",
+                data: []
+            },
+            {
+                label: "Average Humidity",
+                fillColor: "rgba(200,200,200,0.2)",
+                strokeColor: "rgba(200,200,200,1)",
+                pointColor: "rgba(200,200,200,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(200,200,200,1)",
                 data: []
             });
 
@@ -106,6 +116,7 @@ function displayChart(chart_id, chart_legend_id, year, month){
 
                 data.datasets[0].data.push(json[i].max);
                 data.datasets[1].data.push(json[i].min);
+                data.datasets[2].data.push(json[i].humidity);
             }
 
             // Get context with jQuery - using jQuery's .get() method.
@@ -120,28 +131,6 @@ function displayChart(chart_id, chart_legend_id, year, month){
     });
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Chart.defaults.global = {
     // Boolean - Whether to animate the chart

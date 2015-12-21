@@ -83,7 +83,6 @@ router.get('/information', function(req, res, err){
 									{$match : {location : sensor_location}},
 									{$group : {_id : {year : "$year", month : "$month", location : "$location"}}},
 									{$sort : {"_id.year" : -1, "_id.month" : -1}}]).exec(function(err, info){
-			console.log(info);
 
 			//generate list of unique years to display in dropdown menu
 			var years_list = [];
