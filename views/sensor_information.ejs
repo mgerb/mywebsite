@@ -21,7 +21,6 @@
 
 <form class="text-center form-inline">
 	<div class="form-group">
-		<label for="input-year">Year</label>
 		<select class="form-control" id="option-year">
 		<% 
 			for (var i in years_list){ %>
@@ -40,7 +39,6 @@
 
 <form class="text-center form-inline">
 	<div class="form-group">
-		<label for="input-month">Month</label>
 		<select class="form-control" id="option-month">
 			<% 
 			for (var i in info){ %>
@@ -53,7 +51,6 @@
 </form>
 
 <br>
-<h2 class="text-center">Month</h2>
 <canvas class="center" id="info-chart-month" width="800" height="400"></canvas>
 <br>
 <div id="legend-month" class="chart-legend"></div>

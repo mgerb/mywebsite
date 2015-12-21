@@ -78,7 +78,7 @@ router.get('/information', function(req, res, err){
 			temperature.aggregate([{$project : {location : "$location", year : {$year : "$updated"}, month : {$month : "$updated"}}},
 									{$match : {location : sensor_location}},
 									{$group : {_id : {year : "$year", month : "$month", location : "$location"}}},
-									{$sort : {"_id.year" : 1, "_id.month" : 1}}]).exec(function(err, info){
+									{$sort : {"_id.year" : -1, "_id.month" : -1}}]).exec(function(err, info){
 			console.log(info);
 
 			//generate list of unique years to display in dropdown menu
