@@ -11,33 +11,54 @@
 <div class="header"></div>
 
 <% include ../public/html/navbar.html %>
-
+<% var monthNames = ["January", "February", "March", "April", "May", "June",
+  									"July", "August", "September", "October", "November", "December"]; %>
 <div class="container">
 <br>
-<h1 class="text-center" id="sensor-location"><%=info.location%></h1>
+<h1 class="text-center" id="sensor-location"><%=info[0]._id.location%></h1>
 <hr>
 <br>
-<canvas class="center" id="info-chart" width="800" height="400"></canvas>
 
+<form class="text-center form-inline">
+	<div class="form-group">
+		<label for="input-year">Year</label>
+		<select class="form-control" id="option-year">
+		<% 
+			for (var i in years_list){ %>
+				
+				<option value="<%=years_list[i]%>"><%=years_list[i]%></option>
+				
+		<% } %>
+		</select>
+	</div>
+</form>
+
+<br>
+<canvas class="center" id="info-chart-year" width="800" height="400"></canvas>
+<br>
+<div id="legend-year" class="chart-legend"></div>
+
+<form class="text-center form-inline">
+	<div class="form-group">
+		<label for="input-month">Month</label>
+		<select class="form-control" id="option-month">
+			<% 
+			for (var i in info){ %>
+				
+				<option value="<%=info[i]._id.month%>"><%=monthNames[info[i]._id.month -1] + ", " + info[i]._id.year%></option>
+				
+			<% } %>
+		</select>
+	</div>
+</form>
+
+<br>
+<h2 class="text-center">Month</h2>
+<canvas class="center" id="info-chart-month" width="800" height="400"></canvas>
+<br>
+<div id="legend-month" class="chart-legend"></div>
 </div>
 
-
-
-
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 
@@ -48,6 +69,7 @@
 	<span>Glyphicons provided by</span><br>
 	<a href="http://glyphicons.com/" target="_blank"><span>glyphicons.com</span></a>
 </footer>
+
 
 </body>
 	

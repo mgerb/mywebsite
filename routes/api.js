@@ -23,23 +23,24 @@ router.get('/allsensors', function(req, res, next) {
 
 });
 
-router.get('/sensorbylocation', function(req, res, next) {
+router.get('/sensorbylocation/year', function(req, res, next) {
 
 	var loc = req.query.location;
-	var year = req.query.year;
+	var ye = req.query.year;
 
-	if (year == null){
+	if (ye == null){
 		var date = new Date();
-		year = date.getFullYear();
+		ye = date.getFullYear();
 	}
 
 	//query finds a entries in a collection based on location and the year specified
 	//they are then grouped by date and sorted by date as well
-	temperature.aggregate([ {$match : {location : loc, updated : {$gte : new Date('1 Jan, ' + year), $lt : new Date('1 Jan ' + year +1)}}},
-							{$group : { _id : {location : "$location", month: {$month: "$updated" }, day: { $dayOfMonth: "$updated" }, year: { $year: "$updated" }},
+	temperature.aggregate([ {$project : {location : 1, temperature : 1, year : {$year : "$updated"}, month : {$month : "$updated"}, day : {$dayOfMonth : "$updated"}}},
+							{$match : {location : loc, year : parseInt(ye)}},
+							{$group : {_id : {location : "$location", day: "$day", month : "$month", year : "$year"},
 								max : {$max : "$temperature"},
 								min : {$min : "$temperature"}}},
-							{$sort : {"_id.month" : 1, "_id.day" : 1, "_id.year" : 1}}]).exec(function(err, info){
+							{$sort : {"_id.month" : 1, "_id.day" : 1}}]).exec(function(err, info){
 
 			console.log(info);
 			res.setHeader('Content-Type', 'application/json');
@@ -49,19 +50,41 @@ router.get('/sensorbylocation', function(req, res, next) {
 
 });
 
-router.post('/', function(req, res,next) {
+router.get('/sensorbylocation/month', function(req, res, next) {
+
+	var loc = req.query.location;
+	var ye = req.query.year;
+	var mo = req.query.month;
+	var date = new Date();
+
+	if (ye == null){
+		ye = date.getFullYear();
+	}
+
+	if (mo == null){
+		mo = date.getMonth();
+	}
+
+	console.log(ye + "/" + mo);
+	//query finds a entries in a collection based on location and the year specified
+	//they are then grouped by date and sorted by date as well
+	temperature.aggregate([ {$project : {location : 1, temperature : 1, year : {$year : "$updated"}, month : {$month : "$updated"}, day : {$dayOfMonth : "$updated"}}},
+							{$match : {location : loc, year : parseInt(ye), month : parseInt(mo)}},
+							{$group : {_id : {location : "$location", day: "$day", month : "$month", year : "$year"},
+										max : {$max : "$temperature"},
+										min : {$min : "$temperature"}}},
+							{$sort : {"_id.day" : 1}}]).exec(function(err, info){
+
+			console.log(info);
+			res.setHeader('Content-Type', 'application/json');
+			res.send(JSON.stringify(info, null, 4));
+
+		});
 
 });
 
+
 module.exports = router;
-
-
-
-
-
-
-
-
 
 
 
