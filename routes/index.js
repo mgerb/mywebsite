@@ -199,7 +199,7 @@ function getPosts(callback){
 
 				jsdom.env(data,["http://code.jquery.com/jquery.js"],function (err, window) {
 					
-					post.filename = file;
+					post.fileName = file;
 					post.title = window.$("#title").text();
 					post.date = window.$("#date").text();
 					post.intro = window.$("#intro").text();
