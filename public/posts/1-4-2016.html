@@ -1,0 +1,113 @@
+<div class="blog-post">
+	<h2 id="title" class="blog-post-title">Hosting a Node.js Web Server on Digital Ocean</h2>
+	
+	<p id="date" class="blog-post-meta">January 4, 2016 by Mitchell</p>
+
+	<p id="intro">A VPS or "Virtual Private Server" is a nice way to host a web server. Digital Ocean provides a great service based on my experiences. I recently rebuilt a new server to host this site and I will go over the entire setup process.
+	</p>
+
+	<hr>
+
+	<h3>Creating a Droplet</h3>
+
+	<p>Digital Ocean calls their VPS's "Droplets" and they are very simple to set up. Create an account on the site and attach a credit card. You are now ready to create a droplet. In my case I use an Ubuntu server but Digital Ocean offers a variety of linux operating systems. Select the size, location, and name and the server is up and running! You will be emailed with the login information.
+	</p>
+
+	<h3>Login with SSH</h3>
+
+	<p>Select your newly created droplet and navigate to console access. You will be prompted to change your password. Once the password is changed you can connect to the root user account via SSH.
+	</p>
+
+	<code>$ ssh root@&lt;ip address&gt;</code>
+
+	<p>If you are using a Windows machine you can download <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">putty</a> to connect with SSH. If you choose not to use SSH you can just use the console access on the Digital Ocean website.
+	</p>
+
+	<h3>Firewall</h3>
+
+	<p>The very next thing I do is set up the firewall. I only want to open ports that need to be open. I use the built in firewall tool in Ubuntu called UFW.
+	</p>
+
+	<code>$ ufw enable</code>
+
+	<p>Now that UFW is enabled I can start opening the necessary ports. I must open 22 if I want to continue to SSH into the server.
+	</p>
+
+	<code>$ ufw allow 22/tcp </code>
+
+	<p>This will open TCP port 22 for SSH. I also open port 80 because that is the port in which the web server will run on.
+	</p>
+
+	<h3>Network Monitoring</h3>
+
+	<code>$ sudo apt-get install vnstat</code>
+
+	<p>VNStat is a nice tool that will allow me to monitor the bandwidth my server consumes both outbound and inbound. Simply use the command "vnstat" to check the bandwidth. Note that it takes awhile for vnstat to capture bandwidth data if you just upon first installing it.
+	</p>
+
+	<h3>Terminal Multitasking</h3>
+
+	<code>$ sudo apt-get install screen</code>
+
+	<p>Screen is a really nice tool too use when dealing with multiple terminal windows. Simply use the command <code>$ screen</code> to start screen. Press CTRL>A then C to open another screen window. Navigate between screens by pressing CTRL>A then N. To check if scren is attached or detached simply use the command <code>$ screen -ls</code>. Reattach to screen by using <code>$ screen -r</code> and detach with <code>$ screen -d</code>. If screen is open and already attached, but you wish to attach to it, simply use the command <code>$ screen -d -r</code>.
+	</p>
+
+	<h3>NPM</h3>
+
+	<p>Now that I have the basics set up on my server I can start installing the dependencies for my Node.js web server. NPM is a package manager that is needed for Node.js. It makes things very easy when used properly.
+	</p>
+
+	<pre><code>
+		$ sudo apt-get install npm
+		$ sudo npm update npm -g
+	</code></pre>
+
+	<p>The package manager on ubuntu does not have the most recent NPM packge as of right now but it is very easy to update with NPM itself. The second command listed above will download the newest version of NPM and update itself.
+	</p>
+
+	<h3>Node.js</h3>
+
+	<p>Now that NPM is installed I can use it to install Node.js.
+	</p>
+
+	<pre><code>
+	$ sudo npm cache clean -f
+	$ sudo npm install -g n
+	$ sudo n stable
+	$ sudo ln -sf /usr/local/n/versions/node/&lt;VERSION&gt;/bin/node /usr/bin/node
+	</code></pre>
+
+	<p>This will install the latest version of Node.js.
+	</p>
+
+	<h3>MongoDB</h3>
+
+	<p>Installing MongoDB used to be very simple, but now they do not include the init scripts with the newest version. Installation instructions can be found <a href="https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/">here</a>.
+	</p>
+
+	<p>Once MongoDB is installed it can be run by using the command <code>$ mongod</code>, but I am going to show an easier way using the startup script. This way MongoDB will start when the VPS boots and it can also be monitored with the <code>$ service</code> linux command.
+	</p>
+
+	<pre><code>
+		$ cd /etc/init.d
+		$ sudo nano mongod
+	</code></pre>
+
+	<p>Once here copy the contents of <a href="https://github.com/mongodb/mongo/blob/master/debian/init.d">this file</a> into mongod. We now have the startup script, but we need to change some permissions first before it can run.
+	</p>
+
+	<pre><code>
+		$ sudo chmod 755 /etc/init.d/mongod
+		$ sudo chown root:root /etc/init.d/mongod
+	</code></pre>
+
+	<p>And to run MongoDB upon system startup.
+	</p>
+
+	<code>$ update-rc.d mongod defaults</code>
+
+	<h3>Restoring Database Files</h3>
+
+	<p>The web server is almost ready, but first I need to make sure all of my previous records are stored in the database. To do this I navigate to the folder which my records are stored in, which is contained in my git repository. I then use the command <code>$ mongorestore</code>, which loads everything from the dump into the freshly installed MongoDB. To backup MongoDB simply navigate to the desired folder to store the backup and issue the command <code>$ mongodump</code>.
+	</p>
+</div>

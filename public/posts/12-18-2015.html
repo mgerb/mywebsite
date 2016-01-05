@@ -1,0 +1,41 @@
+<div class="blog-post">
+	<h2 id="title" class="blog-post-title">Temperature Sensor on the Web</h2>
+	
+	<p id="date" class="blog-post-meta">December 18, 2015 by Mitchell</p>
+
+	<p id="intro">The temperature readings that are displayed on this site come from the ESP8266 with a DHT11 sensor attached to it. I am going to explain the steps in the entire process. I will split it up into two parts. In this post I will focus on programming the ESP8266 and how to send data to a web server.
+	</p>
+
+	<hr>
+
+	<p>For this project you will need an ESP8266 and a DHT temperature sensor. For prototyping purposes I prefer to use the <a href="http://www.banggood.com/NodeMcu-Lua-ESP-12E-WIFI-Development-Board-p-985891.html">NodeMCU module</a>. There are a variety of temperature sensors that you could use, but I prefer the DHT11 because it is easy to use and it is cheap! I ordered a 5 pack of them from <a href="http://www.banggood.com/5Pcs-KY-015-DHT11-Temperature-Humidity-Sensor-Module-For-Arduino-p-983263.html">Banggood</a>. The source code for this project can be found on <a href="https://github.com/mgerb42/esp8266-HTTPTempSensor">Github</a>. 
+	</p>
+
+	<h3>How it works</h3>
+
+	<p>When the ESP first boots up, it reads WiFi credentials from the EEPROM and tries to connect to an access point using those credentials. If no connection is made, it starts up it's own access point and runs a web server with a captive portal. This means that when anyone connects to it, it will redirect any dns request to itself, which forces anyone to the configuration page. The user can connect to the access point and enter in the ssid, password, and preferred sensor name. This information will be saved into EEPROM and the ESP will then reboot and start sending sensor data to the server.
+	</p>
+
+	<div>
+	<img class="img-responsive center" src="http://i.imgur.com/PhnDEyU.png" alt="image2">
+	</div>
+
+	<h3>ESP8266 File System</h3>
+
+	<p>To run the web server, I used the file system library within the arduino ESP library. This is how I store the web content in flash on the chip. It allows me to modify all of the necessary web files without having to deal with sending them as strings from the arduino code. 
+	</p>
+	<p>To use the file system, you must download the tool <a href="https://github.com/esp8266/arduino-esp8266fs-plugin/releases/download/0.1.3/ESP8266FS-0.1.3.zip">here</a> to upload your files to the ESP. Once downloaded, store it in a tools folder in the arduino folder (path "/Arduino/tools/ESP8266FS/tool/esp8266fs.jar"). Now when you create a new sketch go to the sketch folder and create a "data" folder. To upload data to this folder select "Tools > ESP8266 Sketch Data Upload" and the files will be uploaded to the ESP and will be ready to use within the program. More information on the ESP8266 file system can be found <a href="http://esp8266.github.io/Arduino/versions/2.0.0/doc/filesystem.html">here</a>.
+	</p>
+
+	<h3>Sending data to the server</h3>
+
+	<p>There are many ways to send the data to a server, but I implemented data transfer with a simple get request. I chose this route because it is extremely simple to create a REST API in Node.js. I will cover this in a nother post. If you are unfamiliar with a get request, it is a way a web server can receive a request, and also parameters within that request. In this case, I send temperature, humidity, location, and a key as parameters in the request.
+	</p>
+
+	<p>If this were a full production application, this would not be the ideal way to handle data transfer to a server because it is not encrypted. A better practice would be to implement this using another TCP transfer protocol. In my case, it would be better to send a POST request over SSL, but I have not looked into that for this project yet as the method I am currently using seems to work just fine.
+	</p>
+
+	<h2>Code</h2>
+
+	<script src="https://gist.github.com/mgerb42/fbed7864f8617ada797a.js"></script>
+</div>
