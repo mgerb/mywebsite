@@ -9,8 +9,9 @@
   "jquery": true,
   "node": true,
 
-  // Define globals used by M Project and Wherewolf
+  // Define globals
   "predef": [
+    "JSON"
   ],
 
   /*
@@ -27,9 +28,6 @@
 
   // Suppress warnings about == null comparisons.
   "eqnull": false,
-
-  // Force ES3 compliance - radix parameters and trailing commas
-  "es3":true,
 
   // Enforce tab width of 4 spaces.
   "indent": 4,

@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
+
 	<% include layout.ejs %>
 
 </head>
 
 <body>
 
-<div class="header"></div>
-
+<% include ../public/html/header.html %>
 <% include ../public/html/navbar.html %>
 <% var monthNames = ["January", "February", "March", "April", "May", "June",
   									"July", "August", "September", "October", "November", "December"]; %>
@@ -39,8 +39,6 @@
 
 <br>
 <div id="legend-year" class="chart-legend"></div>
-
-
 
 <form class="text-center form-inline">
 	<div class="form-group">
@@ -78,12 +76,10 @@
 	<a href="http://glyphicons.com/" target="_blank"><span>glyphicons.com</span></a>
 </footer>
 
-
 </body>
 	
 	<% include layoutBottom.ejs %>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-	<script src="/javascripts/sensor_information.js"></script>
+	<script src="/javascript/sensor_information.js"></script>
 </html>
-
