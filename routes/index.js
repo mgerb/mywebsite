@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var fs = require('fs');
+var jsdom = require("jsdom");
+var async = require('async');
 
 require('../models/currentdata');
 var info = mongoose.model('currentdata');
@@ -167,22 +170,49 @@ function timeValidator(time){
 
 function renderIndex(res, json){
 
-	temperature.findOne({location : "Winona Apartment"}).sort("-updated").exec(function(err, info){
-		
-		posts.find().sort('-updated').exec(function(err, postsQuery){
-
-			res.render('index',{returnParameters : json, 
-								query : info, 
-								blogPosts : postsQuery});
-
+	getPosts(function(posts){
+			res.render('index',{returnParameters : json,
+								blogPosts : posts});
 		});
-		
-	});
-	
+
 }
 
+//function to get the posts - sorts them by birth time
+//uses async to process them in order
+//calls outerCB to process next iteration
+function getPosts(callback){
 
+	var dir = './public/posts';
+	var posts = [];
 
+	fs.readdir(dir, function(err, files){
+		
+		files.sort(function(a, b){
+			return fs.statSync(dir + '/' + b).birthtime.getTime() -
+                      fs.statSync(dir + '/' + a).birthtime.getTime();
+		});
+		
+		async.eachSeries(files, function(file, outerCB){
+
+			var data = fs.readFileSync(dir + '/' + file, 'utf8');
+			var post = {};
+
+				jsdom.env(data,["http://code.jquery.com/jquery.js"],function (err, window) {
+					
+					post.filename = file;
+					post.title = window.$("#title").text();
+					post.date = window.$("#date").text();
+					post.intro = window.$("#intro").text();
+
+					posts.push(post);
+					outerCB(null);
+				});
+
+		}, function(err){
+			callback(posts);
+		});
+	});
+}
 
 
 

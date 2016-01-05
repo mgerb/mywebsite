@@ -2,39 +2,10 @@
 
 <body>
 
-<div class="header">
-	
-		<div class="container">
-
-		<% if (query != null) { %>			
-							
-			<div class="lowerLeft">
-				<span class="colorWhite">ESP8266 With DHT11 Sensor</span>
-				<br>
-				<span class="colorWhite">Location: <%=query.location%></span>
-				<br>
-				<span class="colorWhite">Temperature: <%=query.temperature%>°F</span>
-				<br>
-				<span class="colorWhite">Humidity: <%=query.humidity%>%</span>
-			</div>
-
-		<%}%>
-
-		</div>	
-	
-</div>
-
+<% include ../public/html/header.html %>
 <% include ../public/html/navbar.html %>
 
 <div class="container">
-
-
-	<div class="blog-header">
-
-		<h1 class="blog-title">mitchellG.me</h1>
-		<p class="lead blog-description">A site in which I share information about my personal projects.</p>	
-
-	</div>
 
 	<div class="row">
 		<div class="col-sm-8 blog-main">

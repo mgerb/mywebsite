@@ -2,38 +2,41 @@
 
 <body>
 
-<div class="header">
-		
-	
-</div>
-
+<% include ../public/html/header.html %>
 <% include ../public/html/navbar.html %>
 
-	<div class="container">
+  <div class="container">
 
-      <form action="/newpost" method="post" enctype="multipart/form-data" class="form-signin">
-        <h2 class="form-signin-heading text-center">Submit New Post</h2>
-        <input type="text"  class="form-control" name="title" placeholder="Title" required autofocus>
-        <br>
-        <input type="text"  class="form-control" name="date" placeholder="Date" required>
-        <br>
-        <textarea type="text" class="form-control" name="intro" placeholder="Intro"></textarea>
+      <form action="/newpost" method="post" enctype="multipart/form-data" class="form-file">
+        <h2 class="text-center">Submit New Post</h2>
         <br>
         <input type="password"  class="form-control" name="key" placeholder="Key" required>
-        <% 
-      		if (typeof message != 'undefined'){ %>
 
-      			<span class="text-center colorRed"><%=message%></span>
+        <!--<input class="center btn btn-default" type="file" name="file">-->
+        <br>
 
-      	<%}%>
-        <br>
-        <br>
-        <input class="btn btn-default" type="file" name="file">
-       
-        <br>
+        <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        Browse… <input type="file" name="file" required>
+                    </span>
+                </span>
+                <input id="input_file" type="text" class="form-control" readonly="">
+            </div>
         
+        <br>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-		
+        
+        <br>
+
+        <% 
+          if (typeof message != 'undefined'){ %>
+
+            <div class="text-center colorRed"><%=message%></div>
+
+        <%}%>
+
       </form>
       
 
@@ -42,4 +45,3 @@
 </body>
 
 <% include layoutBottom.ejs %>
-
