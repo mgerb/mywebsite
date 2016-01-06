@@ -17,29 +17,31 @@ router.post('/', multer.single('file'), function(req, res,next) {
 	var key = req.body.key;
 	var file = req.file;
 	var folder = './public/uploads/';
-
+	
 	if (key == "Chimera#55.com"){
 
 		fs.access((folder + file.originalname), fs.F_OK, function(err){
 
 			//if file doesn't already exist
 			if (err){
-				fs.writeFile((folder + file.originalname), file.buffer, function(err) {
-					if (!err){
-						
-						renderPage(res, 'File Uploaded');
-						
-					}
 
-					else {
-						renderPage(res, 'Error Saving File');
-					}
+				var write_stream = fs.createWriteStream(folder + file.originalname);
+				write_stream.write(file.buffer);
+
+				write_stream.on('error', function(){
+					res.send("Error Uploading File");
 				});
+
+				write_stream.on('finish', function(){
+					res.send("File Uploaded");
+				});
+
+				write_stream.end();
 			}
 
 			//file already exists
 			else {
-				renderPage(res, 'File Already Exists');
+				res.send("File already exists");
 			}
 		});
 

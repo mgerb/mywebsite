@@ -7,7 +7,7 @@
 
   <div class="container">
 
-      <form action="/upload" method="post" enctype="multipart/form-data" class="form-file">
+      <form enctype="multipart/form-data" class="form-file">
         <h2 class="text-center">File Upload</h2>
         <br>
         <input type="password"  class="form-control" name="key" placeholder="Key" required>
@@ -26,16 +26,11 @@
         
         <br>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <button id="upload-form" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
         
         <br>
 
-        <% 
-          if (typeof message != 'undefined'){ %>
-
-            <div class="text-center colorRed"><%=message%></div>
-
-        <%}%>
+        <div id="response" class="text-center colorRed"></div>
 
       </form>
 
@@ -49,7 +44,8 @@
             }%>
         </div>
     </div>
-
+<div class="modal"><!-- Place at bottom of page --></div>
 </body>
 
 <% include layoutBottom.ejs %>
+<script src="/javascript/upload.js"></script>
