@@ -170,10 +170,18 @@ function timeValidator(time){
 
 function renderIndex(res, json){
 
-	getPosts(function(posts){
-			res.render('index',{returnParameters : json,
-								blogPosts : posts});
+	if(typeof json.getPost == 'undefined'){
+
+		getPosts(function(posts){
+			res.render('index', {returnParameters : json, blogPosts : posts});
 		});
+
+	}
+
+	else{
+		res.render('index', {returnParameters : json});
+	}
+
 
 }
 
