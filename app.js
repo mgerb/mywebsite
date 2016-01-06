@@ -11,6 +11,7 @@ var temperature = require('./routes/temperature');
 var newpost = require('./routes/newpost');
 var sensors = require('./routes/sensors');
 var api = require('./routes/api');
+var upload = require('./routes/upload');
 
 var mongoose = require('mongoose');
 var mainLoop = require('./main');
@@ -43,6 +44,7 @@ app.use('/temperature', temperature);
 app.use('/newpost', newpost);
 app.use('/sensors', sensors);
 app.use('/api', api);
+app.use('/upload', upload);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,64 @@
+<div class="blog-post">
+
+	<h2 id="title" class="blog-post-title">ESP8266 - Cheap Wifi Microcontroller</h2>
+
+	<p id="date" class="blog-post-meta">August 13, 2015 by Mitchell</p>
+
+	<p id="intro">I've recently started playing around with microcontrollers, or more specifically arduinos. I have always had some projects in mind that require the use of some sort of microcontroller, most of which requred a wifi connection. There are a few wifi options availabe for the arduino, some of which can be very expensive. I eventually stumbled upon the ESP8266, which I have finally figured out... mostly.
+	</p>
+
+	<hr>
+
+	<h3>Why the ESP8266?</h3>
+
+	<p>It is extremely cheap! They can be found for roughly $3 apiece whereas the wifi arduino shield is around $70! I figured I would take my chances with the cheaper option and I ordered <a href="http://www.banggood.com/ESP8266-Remote-Serial-Port-WIFI-Transceiver-Wireless-Module-p-947259.html">three of these</a>. After frying two of these in process of trying to figure the darn things out, I ordered a <a href="http://www.banggood.com/ESP8266-ESP-07-Remote-Serial-Port-WIFI-Transceiver-Wireless-Module-p-968190.html">5 pack of the ESP-07 version.</a> Banggood also sent me 7 of them which was a bonus.
+
+	<h3>Why the ESP-07 version?</h3>
+
+	<p>The ESP8266 can be programmed as a stand alone device with the <a href="https://github.com/esp8266/Arduino">Arduino IDE!</a> That's right, you don't even need an arduino! Also, most of the arduino libraries work with it! I went this direction after exeriencing many frustrations using the ESP8266 in conjunction with an arduino. The ESP-07 version has more GPIO pins and is about the same price, whereas the ESP-01 only has two GPIO pins, one of which much be grounded to program the device.
+	</p>
+
+	<h3>First experiences with the ESP8266</h3>
+	<p>After playing around with this microcontroller for some time now, I have concluded that it can be finicky at times. Documentation for the device can also be difficult to find, especially if you run into problems. I am going to discuss what I went through to finally get the device fully working, along with the frustrations that I experienced. 
+	</p>
+
+	<p>When you first get the device, make sure to have solid connections to each one of the pins. You will need an FTDI programmer to connect to USB. <a href="http://www.banggood.com/FT232RL-FTDI-USB-To-TTL-Serial-Converter-Adapter-Module-For-Arduino-p-917226.html">This is the one that I have and it works fine.</a> Just make sure you have one that is 3.3v capable or it will not work! The ESP8266 can draw over 200 mA at times and the FTDI programmer simply does not provide enough power. <a href="http://www.banggood.com/3Pcs-MB102-Breadboard-Module-Adapter-Shield-3_3V5V-For-Arduino-Board-p-957095.html">This is the power supply I used.</a>
+	</p>
+
+	<h3>Wiring</h3>
+	<p>Wiring is pretty much the same across different versions of the ESP8266. Connect VCC and CH_PD to power at all times. Gnd to gnd and on the ESP-07 GPIO15 must also go to gnd. When you program the device, you must have GPIO0 to ground for programming mode. You must also connect RX on the ESP8266 to TX on the FTDI programmer and vice versa. Make sure to connect all of the power and ground wires to the power supply and NOT the FTDI programmer. The only two wires you should have connected to the FTDI programmer are RX and TX.
+	</p>
+
+	<h3>Testing the ESP8266</h3>
+	<p>To test out the device, plug it into your computer and use a serial monitor. You can use the arduino serial monitor, or you can also use putty. Make sure to select the correct COM port and the right baud rate. Baud rates can vary. I have had some that are 9600 and others have been 115200. Just change the baud rate until you see text that you can actually read. Once connected, you can change the baud rate of the ESP8266.
+	</p>
+	<p>There is a set of AT commands to communicate with the ESP8266. The documentation of these commands is descent although some commands were a bit hard to find. <a href="https://nurdspace.nl/ESP8266">Here is a list of most of the commands.</a> A few important commands that are often missed are to change the baud rate and update the firmware on the device. You can update the firmware by using AT+CIUPDATE. You can also change the baud rate by using AT+CIOBAUD=9600, or whatever baud rate you desire.
+	</p>
+
+	<p>These commands can be used to test the ESP8266, but they are also the same commands if you wanted to use it with an arduino. Simply wire it up to serial on an arduino and print out the commands. I played around with this for a bit, but not long enough to get it fully working. This is how I was originally going to use the device, but I found it to be much easier programming the ESP8266 directly as a standalone device.
+	</p>
+
+	<h3>Programming ESP8266 with Arduino IDE</h3>
+	<p>A major advantage of programming the ESP8266 is that it is more powerful, yet much smaller in size. It uses a 32 bit processor and also has 1mb of ram (on the newer versions). <a href="https://github.com/esp8266/Arduino">Link to Github ESP8266 Arduino IDE.</a> You can install this in your Arduino IDE by File > preferences and adding <code>http://arduino.esp8266.com/package_esp8266com_index.json</code> to Additional Boards Manager URLs. Now you can go to Sketch > Libraries > Manage Libraries and add the ESP8266 library.
+	</p>
+
+	<p>Select an example sketch (WIFIScan) and make sure your ESP8266 is plugged in with GPIO0 to ground! It must be to ground to enter programming mode! Select Generic ESP8266 Module for the board and the right port. It shouldn't matter which programmer is selected. Compile and upload your sketch and it is as simple as that!
+	</p>
+
+	<h3>Complications</h3>
+	<p>I just want to reiterate some of my complications that I ran into throughout this process. The biggest thing to keep in mind it to check your connections! The first time I soldered all of the connections I couldn't figure out why it wasn't working. I checked each connection with a meter only to find out one of them was bad. Another thing is to make sure you use an external power supply! Connect all power and ground connections to these! Also connect the ground of your FTDI programmer to the ground of your power supply. Make sure the voltage of your power supply and FTDI programmer are 3.3v! Remember to connect GPIO0 to ground ONLY when uploading to the ESP8266. 
+	</p>
+	<h3>Sources</h3>
+
+	<a href="https://www.sparkfun.com/products/13678">https://www.sparkfun.com/products/13678</a>
+	<br>
+	<a href="http://www.esp8266.com/">http://www.esp8266.com/</a>
+	<br>
+	<a href="https://github.com/esp8266/Arduino">https://github.com/esp8266/Arduino</a>
+	<br>
+	<a href="http://www.pridopia.co.uk/pi-doc/ESP8266ATCommandsSet.pdf">http://www.pridopia.co.uk/pi-doc/ESP8266ATCommandsSet.pdf</a>
+	<br>
+	<a href="https://nurdspace.nl/ESP8266">https://nurdspace.nl/ESP8266</a>
+	<br>
+	<a href="http://www.electrodragon.com/w/ESP8266">http://www.electrodragon.com/w/ESP8266</a>
+</div>
