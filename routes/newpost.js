@@ -23,26 +23,26 @@ router.post('/', multer.single('file'), function(req, res,next) {
 				fs.writeFile((postsFolder + file.originalname), file.buffer, function(err) {
 					if (!err){
 						
-						res.render('newpost', {message : "Submission Accepted"});
+						res.send("Submission Accepted");
 						
 					}
 
 					else {
-						res.render('newpost', {message : "Error saving file"});
+						res.send("Error saving file");
 					}
 				});
 			}
 
 			//file already exists
 			else {
-				res.render('newpost', {message : "File already exists"});
+				res.send("File already exists");
 			}
 		});
 
 	}
 
 	else {
-		res.render('newpost', {message : "Invalid Key"});
+		res.send("Invalid Key");
 	}
 });
 
