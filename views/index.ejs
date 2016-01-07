@@ -16,7 +16,7 @@
 				<% for (p in blogPosts) {%>
 				<h2 class="blog-post-title"><%=blogPosts[p].title%></h2>
 
-				<p class="blog-post-meta"><%=blogPosts[p].date%> by Mitchell</p>
+				<p class="blog-post-meta"><%=blogPosts[p].date%></p>
 
 				<p><%=blogPosts[p].intro%>
 				<br>
@@ -88,8 +88,6 @@
 							<% if (typeof returnParameters.validation.date != 'undefined') { %>
 								<Span class="colorRed"><%=" " + returnParameters.validation.date%></Span>
 							<%}%>
-
-						<br>
 
 						<input name="date" id="datepicker" placeholder="mm/dd/yyyy" class="form-control">
 						<br>
