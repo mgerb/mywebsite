@@ -11,9 +11,6 @@ var info = mongoose.model('currentdata');
 require("../models/temperature");
 var temperature = mongoose.model('temperature');
 
-require('../models/posts');
-var posts = mongoose.model('posts');
-
 router.get('/discord', function(req, res, next) {
 
 	res.redirect('https://discord.gg/0Z2tzxKECEj2BHwj');
