@@ -21,7 +21,6 @@ router.get('/vpn', function(req, res, next){
 	res.redirect('https://mitchellg.me:943');
 });
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -209,7 +208,10 @@ function getPosts(callback){
 					post.date = window.$("#date").text();
 					post.intro = window.$("#intro").text();
 
-					posts.push(post);
+					if(post.intro != "" && post.date != "" && post.title != ""){
+						posts.push(post);
+					};
+					
 					outerCB(null);
 				});
 
