@@ -18,7 +18,11 @@ router.get('/discord', function(req, res, next) {
 });
 
 router.get('/vpn', function(req, res, next){
-	res.redirect('https://mitchellg.me:943');
+	res.redirect('https://mitchel.io:943');
+});
+
+router.get('/resume', function(req, res, next){
+	res.redirect('/?post=resume.html');
 });
 
 /* GET home page. */
