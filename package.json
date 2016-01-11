@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "forever start ./bin/www",
-    "stop" : "forever stop ./bin/www"
+    "start": "forever ./bin/www",
+    "stop" : "forever ./bin/www"
   },
   "dependencies": {
     "body-parser": "*",
