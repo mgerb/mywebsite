@@ -34,7 +34,7 @@ router.get('/sensorbylocation/year', function(req, res, next) {
 
 	//query finds a entries in a collection based on location and the year specified
 	//they are then grouped by date and sorted by date as well
-	temperature.aggregate([ {$project : {location : 1, temperature : 1, humidity : 1, year : {$year : "$updated"}, month : {$month : "$updated"}, day : {$dayOfMonth : "$updated"}}},
+	temperature.aggregate([ {$project : {location : 1, temperature : 1, humidity : 1, year : {$year : {$subtract : ["$updated", 21600000]}}, month : {$month : {$subtract : ["$updated", 21600000]}}, day : {$dayOfMonth : {$subtract : ["$updated", 21600000]}}}},
 							{$match : {location : loc, year : parseInt(ye)}},
 							{$group : {_id : {location : "$location", day: "$day", month : "$month", year : "$year"},
 								max : {$max : "$temperature"},
@@ -66,7 +66,7 @@ router.get('/sensorbylocation/month', function(req, res, next) {
 
 	//query finds a entries in a collection based on location and the year specified
 	//they are then grouped by date and sorted by date as well
-	temperature.aggregate([ {$project : {location : 1, temperature : 1, humidity : 1, year : {$year : "$updated"}, month : {$month : "$updated"}, day : {$dayOfMonth : "$updated"}}},
+	temperature.aggregate([ {$project : {location : 1, temperature : 1, humidity : 1, year : {$year : {$subtract : ["$updated", 21600000]}}, month : {$month : {$subtract : ["$updated", 21600000]}}, day : {$dayOfMonth : {$subtract : ["$updated", 21600000]}}}},
 							{$match : {location : loc, year : parseInt(ye), month : parseInt(mo)}},
 							{$group : {_id : {location : "$location", day: "$day", month : "$month", year : "$year"},
 										max : {$max : "$temperature"},
@@ -74,7 +74,6 @@ router.get('/sensorbylocation/month', function(req, res, next) {
 										humidity : {$avg : "$humidity"}}},
 							{$sort : {"_id.day" : 1}}]).exec(function(err, info){
 
-			console.log(info);
 			res.setHeader('Content-Type', 'application/json');
 			res.send(JSON.stringify(info, null, 4));
 
