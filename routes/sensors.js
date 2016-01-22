@@ -9,8 +9,7 @@ var temperature = mongoose.model('temperature');
 /* GET sensors page. */
 router.get('/', function(req, res, next) {
 
-	temperature.aggregate( 	[{$project : {location : 1, temperature : 1, humidity : 1, sDate : {$subtract : ["$updated", 21600000]}}},
-							{ $group : { _id : "$location", temperature : {$last : "$temperature"}, humidity : {$last : "$humidity"}, updated : {$last : "$sDate"}}},
+	temperature.aggregate( 	[{ $group : { _id : "$location", temperature : {$last : "$temperature"}, humidity : {$last : "$humidity"}, updated : {$last : "$updated"}}},
 							{$sort : {location : -1, updated : -1}} ] ).exec(function(err, info){
 
 		//get month for each entry and convert 24 hour time to US time
