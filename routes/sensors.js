@@ -10,7 +10,8 @@ var temperature = mongoose.model('temperature');
 router.get('/', function(req, res, next) {
 
 	temperature.aggregate( 	[{ $group : { _id : "$location", temperature : {$last : "$temperature"}, humidity : {$last : "$humidity"}, updated : {$last : "$updated"}}},
-							{$sort : {location : -1, updated : -1}} ] ).exec(function(err, info){
+							{$sort : {_id : -1}} ] ).exec(function(err, info){
+
 
 		//get month for each entry and convert 24 hour time to US time
 		//also check to see if device has sent a data point in past 5 minutes
@@ -22,8 +23,8 @@ router.get('/', function(req, res, next) {
 				var hours = info[i].updated.getHours();
 				var minutes = info[i].updated.getMinutes();
 				var month = monthNames[info[i].updated.getMonth()];
-				var date = info[i].updated.getUTCDate();
-				var year = info[i].updated.getUTCFullYear();
+				var date = info[i].updated.getDate();
+				var year = info[i].updated.getFullYear();
 
 				var dateString = month + " " + date + ", " + year;
 
