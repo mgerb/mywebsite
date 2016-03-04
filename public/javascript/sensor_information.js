@@ -114,7 +114,12 @@ function displayChart(chart_id, chart_legend_id, year, month){
 
                 data.datasets[0].data.push(json[i].max);
                 data.datasets[1].data.push(json[i].min);
-                data.datasets[2].data.push(Math.ceil(json[i].humidity));
+
+                //add humidity to chart if it is not null in the database query
+                if (json[i].humidity != null){
+                    data.datasets[2].data.push(Math.ceil(json[i].humidity));
+                }
+                
             }
 
             // Get context with jQuery - using jQuery's .get() method.
