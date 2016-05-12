@@ -18,5 +18,7 @@ func Routes() *httprouter.Router {
 	//set up public folder path
 	r.ServeFiles("/public/*filepath", http.Dir("./public"))
 
+	//404 not found
+	r.NotFound = http.NotFoundHandler()
 	return r
 }
