@@ -2,97 +2,82 @@
 <html lang="en">
 
 <head>
-	<title>mitchel.io</title>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" href="/public/css/style.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-
-	<style>
-	    [ng\:cloak], [ng-cloak], .ng-cloak {
-	      display: none;
-	    }
-	</style>
-
+    <title>mitchel.io</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <style>
+    [ng\:cloak],
+    [ng-cloak],
+    .ng-cloak {
+        display: none;
+    }
+    </style>
 </head>
 
-<body ng-app="app" ng-cloak>
-
-<div class="header">
-    
+<body ng-app="app" ng-init="array = [1,2,3,4];" ng-cloak>
+    <div class="header">
         <div class="container">
-
             <div class="lowerLeft">
                 <h1 class="">mitchel.io</h1>
                 <p class="">A site in which I share information about my personal projects.</p>
             </div>
-
-        </div>  
-    
-</div>
-
-<nav class="navbar mitchell-navbar" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-            	<li>
-                    <a href="/">Home</a>
-                </li>
-                <li>
-                    <a href="/sensors">Sensors</a>
-                </li>
-                <li>
-                    <a href="/resume">Resume</a>
-                </li>
-                <li>
-                    <a href="mailto:mgerber11@winona.edu">Contact</a>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/newpost">New Post</a>
-                </li>
-            </ul>
-
-        </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
-</nav>
-
-
-
-<!-- dynamically load content into the page with angular (ng-view) -->
-<ng-view></ng-view>
-<!-- ------------------------------------------------------------- -->
-
-
-
-<footer class="blog-footer">
-	<p>Site created and managed by Mitchell Gerber</p>
-	<span>©2015-2016</span>
-	<br>
-	<span>Glyphicons provided by</span><br>
-	<a href="http://glyphicons.com/" target="_blank"><span>glyphicons.com</span></a>
-</footer>
-
+    <nav class="navbar mitchell-navbar" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/sensors">Sensors</a>
+                    </li>
+                    <li>
+                        <a href="/post/resume">Resume</a>
+                    </li>
+                    <li>
+                        <a href="mailto:mgerber11@winona.edu">Contact</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/newpost">New Post</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- dynamically load content into the page with angular (ng-view) -->
+    <div ng-view></div>
+    <!-- ------------------------------------------------------------- -->
+    <footer class="blog-footer">
+        <p>Site created and managed by Mitchell Gerber</p>
+        <span>©2015-2016</span>
+        <br>
+        <span>Glyphicons provided by</span>
+        <br>
+        <a href="http://glyphicons.com/" target="_blank"><span>glyphicons.com</span></a>
+    </footer>
 </body>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>   
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-resource.js"></script>
 <script src="/public/js/app.js"></script>
