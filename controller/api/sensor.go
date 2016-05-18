@@ -40,9 +40,6 @@ func HandleSensorRequest(w http.ResponseWriter, r *http.Request, ps httprouter.P
 			message = "Data inserted into database"
 		}
 
-		//send response back
-		fmt.Fprint(w, "{ message : \""+message+"\"}")
-
 		//compare current readings with dialy_sensor readings
 		//update daily_sensor readings if out of bounds
 		//**********************************************************************************
@@ -98,6 +95,9 @@ func HandleSensorRequest(w http.ResponseWriter, r *http.Request, ps httprouter.P
 	} else {
 		message = "Incorrect api key"
 	}
+
+	//send response back
+	fmt.Fprint(w, "{ message : \""+message+"\"}")
 }
 
 func HandleAllSensors(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
