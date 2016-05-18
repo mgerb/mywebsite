@@ -2,16 +2,26 @@ package route
 
 import (
 	"github.com/julienschmidt/httprouter"
+	"log"
 	"net/http"
 
+	"github.com/mgerb42/mywebsite/controller"
 	"github.com/mgerb42/mywebsite/controller/api"
 )
 
 func Routes() *httprouter.Router {
 
+	log.Println("Server Started")
+
 	r := httprouter.New()
 
-	r.GET("/api/:fname/:lname", api.TestApiCall)
+	r.GET("/api/storedata", api.HandleSensorRequest)
+	r.GET("/api/allsensors", api.HandleAllSensors)
+	r.GET("/api/sensor/:location", api.HandleSensorByLocation)
+	r.GET("/api/sensor/:location/:year", api.HandleSensorByLocationYear)
+	r.GET("/api/sensor/:location/:year/:month", api.HandleSensorByLocationMonth)
+
+	r.GET("/discord", controller.Discord)
 
 	//set up public folder path
 	r.ServeFiles("/public/*filepath", http.Dir("./public"))

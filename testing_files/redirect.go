@@ -1,4 +1,4 @@
-package controller
+package test
 
 import (
 	"github.com/julienschmidt/httprouter"

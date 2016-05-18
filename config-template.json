@@ -1,0 +1,12 @@
+{
+    "database": {
+        "url": "",
+        "database": ""
+    },
+    "api": {
+        "key": ""
+    },
+    "server": {
+        "port": ""
+    }
+}
