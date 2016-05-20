@@ -15,13 +15,14 @@ const (
 )
 
 type Data struct {
-	ID       bson.ObjectId `bson:"_id,omitempty"`
-	MaxTemp  float64       `json:"maxtemp" bson:"maxtemp"`
-	MinTemp  float64       `json:"mintemp" bson:"mintemp"`
-	Location string        `json:"location" bson:"location"`
-	Month    string        `json:"month" bson:"month"`
-	Day      int           `json:"day" bson:"day"`
-	Year     int           `json:"year" bson:"year"`
+	ID        bson.ObjectId `bson:"_id,omitempty"`
+	MaxTemp   float64       `json:"maxtemp" bson:"maxtemp"`
+	MinTemp   float64       `json:"mintemp" bson:"mintemp"`
+	Location  string        `json:"location" bson:"location"`
+	Month     int           `json:"month" bson:"month"`
+	MonthName string        `json:"monthname" bson:"monthname"`
+	Day       int           `json:"day" bson:"day"`
+	Year      int           `json:"year" bson:"year"`
 }
 
 //convert struct to json string
@@ -70,7 +71,7 @@ func (s *Data) UpdateData() error {
 
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 
-		colQuerier := bson.M{"location": s.Location}
+		colQuerier := bson.M{"location": s.Location, "month": s.Month, "monthname": s.MonthName, "day": s.Day, "year": s.Year}
 		change := bson.M{"$set": bson.M{"maxtemp": s.MaxTemp, "mintemp": s.MinTemp}}
 
 		err := c.Update(colQuerier, change)
@@ -87,10 +88,12 @@ func (s *Data) UpdateData() error {
 func GetDailySensorInfo(sensor_location string) (Data, error) {
 
 	d := Data{}
+	t := time.Now()
 
-	day := time.Now().Day()
-	month := time.Now().Month().String()
-	year := time.Now().Year()
+	day := t.Day()
+	month := int(t.Month())
+	monthname := t.Month().String()
+	year := t.Year()
 
 	if db.Mongo.Connected() == true {
 
@@ -99,7 +102,7 @@ func GetDailySensorInfo(sensor_location string) (Data, error) {
 
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 
-		err := c.Find(bson.M{"location": sensor_location, "day": day, "month": month, "year": year}).One(&d)
+		err := c.Find(bson.M{"location": sensor_location, "day": day, "month": month, "monthname": monthname, "year": year}).One(&d)
 
 		if err != nil {
 			fmt.Println(err)
@@ -124,7 +127,9 @@ func GetAllSensorInfo(sensor_location string) ([]Data, error) {
 
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 
-		err := c.Find(bson.M{"location": sensor_location}).All(&d)
+		//err := c.Find(bson.M{"location": sensor_location}).Sort("-year, -month").All(&d)
+		err := c.Pipe([]bson.M{{"$match": bson.M{"location": sensor_location}},
+			{"$sort": bson.M{"year": -1, "month": 1}}}).All(&d)
 
 		if err != nil {
 			fmt.Println(err)
@@ -148,7 +153,8 @@ func GetAllSensorInfoByYear(sensor_location string, year int) ([]Data, error) {
 
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 
-		err := c.Find(bson.M{"location": sensor_location, "year": year}).All(&d)
+		err := c.Pipe([]bson.M{{"$match": bson.M{"location": sensor_location, "year": year}},
+			{"$sort": bson.M{"year": -1, "month": 1}}}).All(&d)
 
 		if err != nil {
 			fmt.Println(err)
@@ -162,7 +168,7 @@ func GetAllSensorInfoByYear(sensor_location string, year int) ([]Data, error) {
 	}
 }
 
-func GetAllSensorInfoByMonth(sensor_location string, year int, month string) ([]Data, error) {
+func GetAllSensorInfoByMonth(sensor_location string, year int, monthname string) ([]Data, error) {
 	d := []Data{}
 
 	if db.Mongo.Connected() == true {
@@ -172,7 +178,8 @@ func GetAllSensorInfoByMonth(sensor_location string, year int, month string) ([]
 
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 
-		err := c.Find(bson.M{"location": sensor_location, "year": year, "month": month}).All(&d)
+		err := c.Pipe([]bson.M{{"$match": bson.M{"location": sensor_location, "year": year, "monthname": monthname}},
+			{"$sort": bson.M{"year": -1, "month": 1}}}).All(&d)
 
 		if err != nil {
 			fmt.Println(err)

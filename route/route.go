@@ -19,7 +19,7 @@ func Routes() *httprouter.Router {
 	r.GET("/api/allsensors", api.HandleAllSensors)
 	r.GET("/api/sensor/:location", api.HandleSensorByLocation)
 	r.GET("/api/sensor/:location/:year", api.HandleSensorByLocationYear)
-	r.GET("/api/sensor/:location/:year/:month", api.HandleSensorByLocationMonth)
+	r.GET("/api/sensor/:location/:year/:monthname", api.HandleSensorByLocationMonth)
 
 	r.GET("/discord", controller.Discord)
 

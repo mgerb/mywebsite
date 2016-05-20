@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	collection = "temperatures"
+	collection = "raw_sensor"
 )
 
 type Data struct {

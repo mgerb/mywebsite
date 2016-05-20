@@ -328,3 +328,11 @@ input[readonly] {
     background-color: white !important;
     cursor: text !important;
 }
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: inline;
+}

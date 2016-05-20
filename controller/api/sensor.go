@@ -58,7 +58,8 @@ func HandleSensorRequest(w http.ResponseWriter, r *http.Request, ps httprouter.P
 			storedData.MaxTemp = temperature
 			storedData.MinTemp = temperature
 			storedData.Day = t.Day()
-			storedData.Month = t.Month().String()
+			storedData.Month = int(t.Month())
+			storedData.MonthName = t.Month().String()
 			storedData.Year = t.Year()
 
 			err := storedData.StoreData()
@@ -184,11 +185,11 @@ func HandleSensorByLocationMonth(w http.ResponseWriter, r *http.Request, ps http
 
 	location := ps.ByName("location")
 	year, _ := strconv.Atoi(ps.ByName("year"))
-	month := ps.ByName("month")
+	monthname := ps.ByName("monthname")
 
 	w.Header().Set("Content-Type", "application/json")
 
-	s, err := daily_sensor.GetAllSensorInfoByMonth(location, year, month)
+	s, err := daily_sensor.GetAllSensorInfoByMonth(location, year, monthname)
 
 	var response string
 
