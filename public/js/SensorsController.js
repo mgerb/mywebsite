@@ -16,7 +16,7 @@ app.controller('SensorsController', function($scope, $http) {
 
             $scope.information[i].date = date.toLocaleString('en-US', options);
 
-            if ((Date.now() - date) < 120000) {
+            if ((Date.now() - date) < 420000) {
                 $scope.information[i].status = "Connected";
                 $scope.information[i].css = "colorGreen";
             } else {
