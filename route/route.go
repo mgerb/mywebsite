@@ -21,7 +21,8 @@ func Routes() *httprouter.Router {
 	r.GET("/api/sensor/:location/:year", api.HandleSensorByLocationYear)
 	r.GET("/api/sensor/:location/:year/:monthname", api.HandleSensorByLocationMonth)
 
-	r.GET("/discord", controller.Discord)
+	r.GET("/discord", controller.DiscordRedirect)
+	r.GET("/vpn", controller.VPNRedirect)
 
 	//set up public folder path
 	r.ServeFiles("/public/*filepath", http.Dir("./public"))
