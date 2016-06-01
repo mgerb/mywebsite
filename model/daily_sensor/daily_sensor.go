@@ -60,6 +60,7 @@ func (s *Data) StoreData() error {
 	return nil
 }
 
+//function to update the daily temperature max or min for a location
 func (s *Data) UpdateData() error {
 
 	if db.Mongo.Connected() {
@@ -85,6 +86,8 @@ func (s *Data) UpdateData() error {
 
 }
 
+//get the current daily sensor reading to compare
+//if the max or min temp needs to be updated
 func GetDailySensorInfo(sensor_location string) (Data, error) {
 
 	d := Data{}
@@ -143,6 +146,8 @@ func GetAllSensorInfo(sensor_location string) ([]Data, error) {
 	}
 }
 
+//return all daily temperature readings per year for a location
+//sort by most recent year and oldest month
 func GetAllSensorInfoByYear(sensor_location string, year int) ([]Data, error) {
 	d := []Data{}
 
@@ -168,6 +173,7 @@ func GetAllSensorInfoByYear(sensor_location string, year int) ([]Data, error) {
 	}
 }
 
+//return all temperature readings for a specific month and location
 func GetAllSensorInfoByMonth(sensor_location string, year int, monthname string) ([]Data, error) {
 	d := []Data{}
 

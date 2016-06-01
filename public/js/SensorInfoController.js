@@ -10,7 +10,7 @@ app.controller('SensorInfoController', function($scope, $http, $routeParams) {
 
         if ($scope.list.length > 0) {
             $scope.selectedObject = $scope.list[0];
-            $scope.selectedMonth = $scope.list[0].months[0];
+            $scope.selectedMonth = $scope.list[0].months[$scope.list.months.length];
 
             $scope.loadingMonth = true;
             $scope.loadingYear = true;
