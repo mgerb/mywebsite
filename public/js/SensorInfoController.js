@@ -10,7 +10,7 @@ app.controller('SensorInfoController', function($scope, $http, $routeParams) {
 
         if ($scope.list.length > 0) {
             $scope.selectedObject = $scope.list[0];
-            $scope.selectedMonth = $scope.list[0].months[$scope.list.months.length];
+            $scope.selectedMonth = $scope.list[0].months[$scope.list[0].months.length - 1];
 
             $scope.loadingMonth = true;
             $scope.loadingYear = true;
@@ -20,7 +20,7 @@ app.controller('SensorInfoController', function($scope, $http, $routeParams) {
                     $scope.loadingYear = false;
                 });
             });
-            displayChart("info-chart-month", "legend-month", $scope.location, $scope.list[0].year, $scope.list[0].months[0], function() {
+            displayChart("info-chart-month", "legend-month", $scope.location, $scope.list[0].year, $scope.selectedMonth, function() {
                 $scope.$apply(function() {
                     $scope.loadingMonth = false;
                 });
