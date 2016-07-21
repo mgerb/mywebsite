@@ -18,7 +18,7 @@
 	<p>Above is the GET request that is sent to the server from the ESP8266. Data is tranferred through GET parameters. The key is an authentication code that I set to prevent unwanted HTTP requests. This is similar to an API key. Below is the code implemented to handle the HTTP request from the ESP8266.
 	</p>
 
-	<script src="https://gist.github.com/mgerb42/4bedafa2bde264ee3135.js"></script>
+	<script src="https://gist.github.com/mgerb/4bedafa2bde264ee3135.js"></script>
 
 	<h3>Creating the REST API</h3>
 
@@ -31,7 +31,7 @@
 	<p>Now that I know what information I need I can start developing my REST API. I have a MongoDB collection called "temperature", which stores temperature, humidity, location, and time updated. Updated is a type of Date, which I will use in all of the queries to group by each day. To do the grouping in MongoDB I needed to use the <a href="https://docs.mongodb.org/v3.0/aggregation/">aggregation functionality</a> of MongoDB. Aggregation allows me to essentially perform queries on top of queries using the MongoDB "pipeline". This is similar to an SQL query when a selection is performed within a selection.
 	</p>
 
-	<script src="https://gist.github.com/mgerb42/4879f4897f7e863e9003.js"></script>
+	<script src="https://gist.github.com/mgerb/4879f4897f7e863e9003.js"></script>
 
 	<h3>Explanation of MongoDB Queries</h3>
 
