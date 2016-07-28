@@ -17,5 +17,5 @@ func VPNRedirect(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 // Redirect to security cameras
 func CameraRedirect(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	http.Redirect(w, r, "https://24.118.44.161:8080/html/", 301)
+	http.Redirect(w, r, "http://24.118.44.161:8080/html/", 301)
 }
