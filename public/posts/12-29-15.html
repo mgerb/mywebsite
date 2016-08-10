@@ -23,10 +23,10 @@
 	<p>There were a few other updates that I made. I realized that if the access point the ESP was connected to goes down, it would not try to reconnect. It will now check if it is connected to the access point every time it tries to take a temperature reading and send data. If it is not connected to the access point it will reboot. Now that it reboots, if it still cannot connect to the access point it will be stuck in config mode. I fixed this by creating a timeout. If it has been sitting in config mode for 10 minutes the device will reboot.
 	</p>
 
-	<p>These example are show below. Keep in mind that this is not the entire program, but just the new functionality that I mentioned. The source code for the project can be found <a href="https://github.com/mgerb42/esp8266-HTTPTempSensor/tree/working">here</a>.
+	<p>These example are show below. Keep in mind that this is not the entire program, but just the new functionality that I mentioned. The source code for the project can be found <a href="https://github.com/mgerb/esp8266-HTTPTempSensor/tree/working">here</a>.
 	</p>
 
-	<script src="https://gist.github.com/mgerb42/61882e3676688bd4fb74.js"></script>
+	<script src="https://gist.github.com/mgerb/61882e3676688bd4fb74.js"></script>
 
 	<h3>Problems flashing the ESP</h3>
 	<p>I previously used the ESP-07, but recently got some new ESP-12e's because of the higher flash size. I thought this would be great if I was going to make use of the file system. After spending hours and hours trying to flash these chips, I came to the conclusion that I need a better serial to USB programmer. The current one that I use came from China and was very cheap.

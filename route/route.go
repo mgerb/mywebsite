@@ -23,7 +23,8 @@ func Routes() *httprouter.Router {
 
 	r.GET("/discord", controller.DiscordRedirect)
 	r.GET("/vpn", controller.VPNRedirect)
-
+	r.GET("/camera", controller.CameraRedirect)
+	
 	//set up public folder path
 	r.ServeFiles("/public/*filepath", http.Dir("./public"))
 
