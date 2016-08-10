@@ -1,4 +1,4 @@
-# A new branch to rebuild this enire application using:
+# A new branch to rebuild this entire application using:
 
 - ReactJS
 - Go App Engine
