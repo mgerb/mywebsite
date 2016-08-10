@@ -3,3 +3,5 @@
 config.json
 mywebsite
 mywebsite.exe
+node_modules
+dist
