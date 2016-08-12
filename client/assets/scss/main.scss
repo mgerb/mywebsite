@@ -1,0 +1,80 @@
+body{
+  position: relative;
+}
+
+.Layout {
+  height: 100%;
+  display:        flex;
+  flex-direction: column;
+
+  .Header, .Main, .Footer {
+    display:    flex;
+    box-sizing: padding-box;
+    padding:    1em calc(50% - 997px / 2);
+    
+    @media (max-width: 768px) { /* phone */
+      padding: 1em calc(50% - 736px / 2);
+    }
+
+    @media (min-width: 992px) { /* tablet */
+      padding: 1em calc(50% - 960px / 2);
+    }
+
+    @media (min-width: 1200px) { /* desktop */
+      padding: 1em calc(50% - 1168px / 2);
+    }
+    
+    &:before, &:after { content: " "; width: 1em; }
+  }
+}
+
+.Main{
+  padding-top: 1em;
+  flex: 1;
+}
+
+.Header{
+  width: 100%;
+  background: url("/images/header.jpg");
+  background-size: cover;
+  height: 30em;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #DADADA;
+  
+  h1{
+    text-align: center;
+  }
+}
+
+.Footer{
+  height: 5em;
+  line-height: 5em;
+  background-color: #F1F1F1;
+  border-top: solid;
+  border-width: 1px;
+  border-color: #DADADA;
+}
+
+.Previews{
+  flex: 1;
+  -webkit-flex: 1;
+}
+
+.Sidebar{
+  background: #fff;
+  width: 300px;
+  
+  img{
+      width: 100%;
+      height: auto;
+  }
+  
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
