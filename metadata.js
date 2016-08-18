@@ -43,7 +43,6 @@ function parse_dir(dir, folder_name){
                 title: marked('<h2>' + tokens[0].text + '</h2>'),
                 intro: marked(tokens[1].text)
             }
-            console.log(marked(file));
             json.posts.push(temp);
         }
     }

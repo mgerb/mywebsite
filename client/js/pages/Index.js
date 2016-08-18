@@ -2,7 +2,7 @@ import React from 'react';
 
 //components
 import Header from '../components/Header';
-import Previews from '../components/Previews';
+import Preview from '../components/Preview';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 
@@ -11,16 +11,20 @@ import '../../assets/css/normalize.css';
 import '../../assets/scss/main.scss';
 
 export default class Index extends React.Component{
+    componentDidMount(){
+        this.props.actions.fetchPreview();
+    }
+    
     render(){
         return(
-            <div class="Layout">
-                <Header/>
-                <div class="Main">
-                    <Previews/>
-                    <Sidebar/>
+                <div class="Layout">
+                    <Header/>
+                    <div class="Main">
+                        <Preview posts={this.props.redux.preview.posts}/>
+                        <Sidebar />
+                    </div>
+                    <Footer/>
                 </div>
-                <Footer/>
-            </div>
             );
     }
 }

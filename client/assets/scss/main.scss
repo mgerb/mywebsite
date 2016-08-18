@@ -11,19 +11,6 @@ body{
     display:    flex;
     box-sizing: padding-box;
     padding:    1em calc(50% - 997px / 2);
-    
-    @media (max-width: 768px) { /* phone */
-      padding: 1em calc(50% - 736px / 2);
-    }
-
-    @media (min-width: 992px) { /* tablet */
-      padding: 1em calc(50% - 960px / 2);
-    }
-
-    @media (min-width: 1200px) { /* desktop */
-      padding: 1em calc(50% - 1168px / 2);
-    }
-    
     &:before, &:after { content: " "; width: 1em; }
   }
 }

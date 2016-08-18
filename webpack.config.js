@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./client/js/routes.js",
+  entry: "./client/js/app.js",
   module: {
     loaders: [
       {
