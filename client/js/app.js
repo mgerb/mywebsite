@@ -40,7 +40,7 @@ ReactDOM.render((
         <Router history={history}>
             <Route path="/" component={App}>
                 <IndexRoute component={Index}/>
-                <Route path="/test" component={Index}/>
+                <Route path="/:page" component={Index}/>
             </Route>
         </Router>
     </Provider>

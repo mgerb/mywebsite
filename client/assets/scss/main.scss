@@ -1,5 +1,26 @@
+@import './utils.scss';
+
 body{
   position: relative;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a{
+  background-color: transparent;
+  color: #3598db;
+  text-decoration: none;
+ 
+ &:hover{
+   color: #3598db;
+ }
 }
 
 .Layout {
@@ -47,21 +68,3 @@ body{
   flex: 1;
   -webkit-flex: 1;
 }
-
-.Sidebar{
-  background: #fff;
-  width: 300px;
-  
-  img{
-      width: 100%;
-      height: auto;
-  }
-  
-  @media (max-width: 768px) {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-  }
-}
-

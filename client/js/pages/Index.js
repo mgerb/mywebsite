@@ -9,6 +9,7 @@ import Sidebar from '../components/Sidebar';
 //css
 import '../../assets/css/normalize.css';
 import '../../assets/scss/main.scss';
+import 'font-awesome/css/font-awesome.min.css';
 
 export default class Index extends React.Component{
     componentDidMount(){

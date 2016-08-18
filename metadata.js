@@ -8,6 +8,7 @@
 */
 
 import fs from 'fs';
+import ncp from 'ncp';
 import marked from 'marked';
 import highlight from 'highlight.js';
 
@@ -61,3 +62,11 @@ fs.writeFile('./dist/metadata.json', JSON.stringify(json,null,4), (err) => {
     if (err) throw err;
     console.log("Saved metadata.json");
 })
+
+//copy posts folder to dist
+ncp('./posts', './dist/posts', (err) => {
+ if (err) {
+   return console.error(err);
+ }
+ console.log('copied');
+});

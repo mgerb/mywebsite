@@ -8,9 +8,9 @@ export default class Preview extends React.Component{
         for (let i in posts){
             elements.push(
                             <div key={i}>
-                                <h1>{posts[i].title}</h1>
                                 <p>{posts[i].date}</p>
-                                <p>{posts[i].intro}</p>
+                                <h1 dangerouslySetInnerHTML={this.decodeHtml(posts[i].title.toString())}></h1>
+                                <p dangerouslySetInnerHTML={this.decodeHtml(posts[i].intro.toString())}></p>
                             </div>
                         );
         }
@@ -18,6 +18,12 @@ export default class Preview extends React.Component{
         return elements;
     }
     
+    decodeHtml(html) {
+      var txt = document.createElement("textarea");
+      txt.innerHTML = html;
+      return {__html : txt.value};
+    }
+  
     render(){
         const posts = this.props.posts;
         
