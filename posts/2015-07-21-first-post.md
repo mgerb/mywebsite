@@ -1,11 +1,13 @@
 
-## First Blog Post
+# First Blog Post
 
 My first blog post introduces this website and the motives behind it. I discuss setting up a Node.js webserver for the first time and  my experiences with it thus far.
 
 I have had this site up for awhile now, but I've decided to turn it into a blog style website, more or less. I first started working on the site because I wanted to learn new web development tools, in this case, Node.js and MongoDB.
 
 I already had previous experience with SQL databases and other server side scripting languages such as PHP and JSP, but I heard good things about Node.js and I wanted to familiarize myself with a NoSQL database. At first, Node.js was a bit confusing to work with and figure everything out. Now that I am starting to get the hang of Node and MongoDB I am enjoying them more and more.
+
+---
 
 ## Setting up Node.js for the first time
 

@@ -1,13 +1,10 @@
-<h2 id="title" class="blog-post-title">How do I use git?</h2>
+# How do I use git?
 
-<p id="date" class="blog-post-meta">July 28 2015 by Mitchell</p>
+Git is a very useful file management system that you will find very handy. There are many services that host git repositories and it can also be installed on a personal server if you so choose. I'm going to explain how to set up git and discuss some useful commands and what they do.
 
-<p id="intro">Git is a very useful file management system that you will find very handy. There are many services that host git repositories and it can also be installed on a personal server if you so choose. I'm going to explain how to set up git and discuss some useful commands and what they do.
-</p>
+---
 
-<hr>
-
-<p>Throughout this tutorial I am going to be focusing on <a href="http://www.github.com">Github</a>, because I find it easy to use and it is what I use most of the time. Github is just one of the many web-based git repository hosting services. It also has a nice GUI interface that may be useful to beginners, but I will mainly be focusing on git via command line. I have used both in the past and although command line may seem intimidating at first, it becomes easier and more powerful over time.
+Throughout this tutorial I am going to be focusing on [Github](http://www.github.com), because I find it easy to use and it is what I use most of the time. Github is just one of the many web-based git repository hosting services. It also has a nice GUI interface that may be useful to beginners, but I will mainly be focusing on git via command line. I have used both in the past and although command line may seem intimidating at first, it becomes easier and more powerful over time.
 
 What exactly does git do? Git is basically a cloud service that you can use for your coding projects. You may be wondering why use git over other cloud hosting services such as dropbox? Git is essentially the same thing, but has many built-in utilities for coding projects specifically. For example, you can see the changes between each commit (or each time you save new changes) displayed in each file. Github has a nice web interface that displays of this information. This helps with version control and it allows you to see which users have made what changes.
 

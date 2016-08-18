@@ -1,3 +1,12 @@
+/*
+    This script runs through each markdown post and scrapes out the title and intro.
+    folder/files within posts are scanned recursively
+    each post is contained within category, which is supplied by the direct parent folder
+    Posts are sorted by date
+    Stores all metadata in ./dist/metadata.json
+    Client uses metadata to display posts on preview page
+*/
+
 import fs from 'fs';
 import marked from 'marked';
 import highlight from 'highlight.js';
@@ -40,11 +49,12 @@ function parse_dir(dir, folder_name){
     }
 }
 
+//recursively parse posts directory for all markdown files
 parse_dir(dir, 'posts');
 
 //sort posts by date
 json.posts.sort((a, b) => {
-    return     new Date(b.date) - new Date(a.date);
+    return new Date(b.date) - new Date(a.date);
 });
 
 //output to public path
