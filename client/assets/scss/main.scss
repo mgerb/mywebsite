@@ -1,8 +1,21 @@
 @import './utils.scss';
 
+html{
+    font-family: 'Roboto Slab', serif;
+}
+
 body{
   position: relative;
   -webkit-font-smoothing: subpixel-antialiased;
+}
+
+h1, h2, h3, h4, h5, h6{
+  margin: 0;
+  font-weight: 500;
+}
+
+p{
+  font-weight: 300;
 }
 
 *,
@@ -17,7 +30,7 @@ a{
   background-color: transparent;
   color: #3598db;
   text-decoration: none;
- 
+
  &:hover{
    color: #3598db;
  }
@@ -30,8 +43,8 @@ a{
 
   .Header, .Main, .Footer {
     display:    flex;
-    box-sizing: padding-box;
-    padding:    1em calc(50% - 997px / 2);
+    padding-right:    calc(50% - 997px / 2);
+    padding-left:    calc(50% - 997px / 2);
     &:before, &:after { content: " "; width: 1em; }
   }
 }
@@ -49,22 +62,8 @@ a{
   border-bottom: solid;
   border-width: 1px;
   border-color: #DADADA;
-  
+
   h1{
     text-align: center;
   }
-}
-
-.Footer{
-  height: 5em;
-  line-height: 5em;
-  background-color: #F1F1F1;
-  border-top: solid;
-  border-width: 1px;
-  border-color: #DADADA;
-}
-
-.Previews{
-  flex: 1;
-  -webkit-flex: 1;
 }

@@ -1,0 +1,22 @@
+.Preview{
+  flex: 1;
+  -webkit-flex: 1;
+
+  .post + .post{
+    margin-top: 2em;
+  }
+
+  .date{
+    margin: 0;
+    opacity: 0.7;
+    font-weight: 300;
+  }
+
+  .intro{
+    margin-bottom: 0.5em;
+  }
+
+  p{
+    font-weight: 300;
+  }
+}
