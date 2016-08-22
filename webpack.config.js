@@ -33,8 +33,8 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + "/dist/",
-    publicPath: "/dist/",
+    path: __dirname + "/public/",
+    publicPath: "/public/",
     filename: "client.min.js"
   },
   plugins: debug ? [] : [
@@ -48,6 +48,6 @@ module.exports = {
       template: 'index.html',
       inject: 'body',
       hash: true
-    })  
+    })
   ]
 };

@@ -1,0 +1,9 @@
+{
+    "database": {
+        "url": "",
+        "database": ""
+    },
+    "api": {
+        "key": ""
+    }
+}

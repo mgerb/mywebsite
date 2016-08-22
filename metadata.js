@@ -3,7 +3,7 @@
     folder/files within posts are scanned recursively
     each post is contained within category, which is supplied by the direct parent folder
     Posts are sorted by date
-    Stores all metadata in ./dist/metadata.json
+    Stores all metadata in ./public/metadata.json
     Client uses metadata to display posts on preview page
 */
 
@@ -27,10 +27,10 @@ const json = {
 //do everything synchronously to keep posts ordered
 function parse_dir(dir, folder_name){
     const posts = fs.readdirSync(dir);
-    
+
     for(let post of posts){
         const stats = fs.statSync(dir + post);
-        
+
         if(stats.isDirectory()){
             parse_dir(dir + post + '/', post);
         } else {
@@ -58,13 +58,13 @@ json.posts.sort((a, b) => {
 });
 
 //output to public path
-fs.writeFile('./dist/metadata.json', JSON.stringify(json,null,4), (err) => {
+fs.writeFile('./public/metadata.json', JSON.stringify(json,null,4), (err) => {
     if (err) throw err;
     console.log("Saved metadata.json");
 })
 
-//copy posts folder to dist
-ncp('./posts', './dist/posts', (err) => {
+//copy posts folder to public
+ncp('./posts', './public/posts', (err) => {
  if (err) {
    return console.error(err);
  }

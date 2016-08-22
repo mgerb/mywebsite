@@ -11,10 +11,10 @@ function initPreview(posts){
 //in this case we can send the http request here rather in the react component
 export function fetchPreview(){
     return (dispatch) => {
-        return fetch('/metadata.json')
+        return fetch('/public/metadata.json')
             .then(response => response.json())
             .then(json => {
-               dispatch(initPreview(json)); 
+               dispatch(initPreview(json));
             })
             .catch(error => {
                 console.log(error);
