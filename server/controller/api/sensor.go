@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"time"
 
-	"mywebsite/server/model/daily_sensor"
-	"mywebsite/server/model/raw_sensor"
+	"server/model/daily_sensor"
+	"server/model/raw_sensor"
 )
 
 // handle http request from sensors

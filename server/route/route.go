@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"mywebsite/server/controller"
-	"mywebsite/server/controller/api"
+	"server/controller"
+	"server/controller/api"
 )
 
 func Routes() *httprouter.Router {

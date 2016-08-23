@@ -25,25 +25,29 @@ func Configure(d DatabaseInfo) {
 }
 
 func (d *Driver) Connect() {
-	// Connect to MongoDB
-	s, err := mgo.DialWithTimeout(d.Info.URL, 5*time.Second)
-
-	if err != nil {
-		log.Println("MongoDB Driver Error", err)
-		return
+	if (d.Info.URL != ""){
+		// Connect to MongoDB
+		s, err := mgo.DialWithTimeout(d.Info.URL, 5*time.Second)
+	
+		if err != nil {
+			log.Println("MongoDB Driver Error", err)
+			return
+		}
+	
+		d.Session = s
+	
+		// Prevents these errors: read tcp 127.0.0.1:27017: i/o timeout
+		d.Session.SetSocketTimeout(10 * time.Second)
+	
+		// Check if is alive
+		if err = d.Session.Ping(); err != nil {
+			log.Println("Database Error", err)
+		}
+	
+		log.Println("Connected to database")
+	} else {
+		log.Println("Database not configured")
 	}
-
-	d.Session = s
-
-	// Prevents these errors: read tcp 127.0.0.1:27017: i/o timeout
-	d.Session.SetSocketTimeout(10 * time.Second)
-
-	// Check if is alive
-	if err = d.Session.Ping(); err != nil {
-		log.Println("Database Error", err)
-	}
-
-	log.Println("Connected to database")
 }
 
 func (d *Driver) Connected() bool {

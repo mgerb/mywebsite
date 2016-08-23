@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"mywebsite/server/db"
+	"server/db"
 )
 
 const (

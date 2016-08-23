@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"mywebsite/server/controller/api"
-	"mywebsite/server/db"
+	"server/controller/api"
+	"server/db"
 )
 
 //structure for application configurations

@@ -2,11 +2,12 @@ package main
 
 import (
 	"net/http"
-
-	"mywebsite/server/controller/api"
-	"mywebsite/server/db"
-	"mywebsite/server/route"
-	"mywebsite/server/utils"
+	
+	//local import paths relative to app.yaml file
+	"server/controller/api"
+	"server/db"
+	"server/route"
+	"server/utils"
 )
 
 func init() {
