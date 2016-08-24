@@ -16,7 +16,7 @@ import Index from './pages/Index';
 class Main extends React.Component{
     render(){
         return(
-            <div>{React.cloneElement(this.props.children, this.props)}</div>  
+            <div>{React.cloneElement(this.props.children, this.props)}</div>
         );
     }
 }
@@ -40,7 +40,7 @@ ReactDOM.render((
         <Router history={history}>
             <Route path="/" component={App}>
                 <IndexRoute component={Index}/>
-                <Route path="/:page" component={Index}/>
+                <Route path="/:page(/:category)(/:post)" component={Index}/>
             </Route>
         </Router>
     </Provider>

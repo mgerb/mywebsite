@@ -36,13 +36,12 @@ function parse_dir(dir, folder_name){
         } else {
             const file = fs.readFileSync(dir+post, 'utf8');
             const tokens = marked.lexer(file, null);
-            const path = dir + post;
             const temp = {
-                path: path.slice(1, path.length),
+                filename: post.slice(0, post.length - 3),
                 category: folder_name,
                 date: post.slice(0, 10),
-                title: marked('<h2>' + tokens[0].text + '</h2>'),
-                intro: marked(tokens[1].text)
+                title: tokens[0].text,
+                intro: tokens[1].text
             }
             json.posts.push(temp);
         }

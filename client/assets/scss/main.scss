@@ -1,69 +1,82 @@
 @import './utils.scss';
-
-html{
+html {
     font-family: 'Roboto Slab', serif;
 }
-
-body{
-  position: relative;
-  -webkit-font-smoothing: subpixel-antialiased;
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
-
-h1, h2, h3, h4, h5, h6{
-  margin: 0;
-  font-weight: 500;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 500;
 }
-
-p{
-  font-weight: 300;
+p {
+    font-weight: 300;
 }
-
 *,
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-
-a{
-  background-color: transparent;
-  color: #3598db;
-  text-decoration: none;
-
- &:hover{
-   color: #3598db;
- }
+a {
+    background-color: transparent;
+    color: #3598db;
+    text-decoration: none;
+    &:hover {
+        color: #3598db;
+    }
 }
-
+code,
+pre code{
+  white-space: pre-wrap;
+  position: relative;
+}
 .Layout {
-  height: 100%;
-  display:        flex;
-  flex-direction: column;
-
-  .Header, .Main, .Footer {
-    display:    flex;
-    padding-right:    calc(50% - 997px / 2);
-    padding-left:    calc(50% - 997px / 2);
-    &:before, &:after { content: " "; width: 1em; }
-  }
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .Footer,
+    .Header,
+    .Main {
+        display: flex;
+        padding-right: calc(50% - 997px / 2);
+        padding-left: calc(50% - 997px / 2);
+        &:after,
+        &:before {
+            content: " ";
+            width: 1em;
+        }
+    }
 }
-
-.Main{
-  padding-top: 1em;
-  flex: 1;
+.Main {
+    padding-top: 1em;
 }
+.Content {
+    flex: 1;
 
-.Header{
-  width: 100%;
-  background: url("../images/header.jpg");
-  background-size: cover;
-  height: 30em;
-  border-bottom: solid;
-  border-width: 1px;
-  border-color: #DADADA;
-
-  h1{
-    text-align: center;
-  }
+    img{
+      width: 100%;
+      height: auto;
+    }
+}
+.Header {
+    width: 100%;
+    background: url("../images/header.jpg");
+    background-size: cover;
+    height: 30em;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #DADADA;
+    h1 {
+        text-align: center;
+    }
 }

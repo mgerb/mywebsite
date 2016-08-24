@@ -1,8 +1,7 @@
 /* Effect 1: Brackets */
-.link{
+.link {
     position: relative;
-    
-    &:before{
+    &:before {
         content: "";
         position: absolute;
         width: 100%;
@@ -16,8 +15,7 @@
         -webkit-transition: all 0.2s ease-in-out 0s;
         transition: all 0.2s ease-in-out 0s;
     }
-    
-    &:hover:before{
+    &:hover:before {
         visibility: visible;
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
