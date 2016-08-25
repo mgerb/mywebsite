@@ -9,6 +9,10 @@
 - the posts folder is then copied into the dist folder
 
 ## TODO
+- fix font sizing
+- clean up css
+- adjust animations
+
 - fix goapp serve and webpack-dev-server so paths work correctly
 - posts page
 - add sensor page
