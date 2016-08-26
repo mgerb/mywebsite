@@ -37,10 +37,8 @@ export default class Index extends React.Component {
           <div class="Layout" >
             <Header />
               <div class="Main">
-                <div class="Content">
                   {typeof this.page === 'undefined' ? <Preview posts={this.props.redux.preview.posts} /> : ""}
                   {this.page === 'post' ? <Post content={this.props.redux.post}/> : ""}
-                </div>
                 <Sidebar />
               </div>
             <Footer />

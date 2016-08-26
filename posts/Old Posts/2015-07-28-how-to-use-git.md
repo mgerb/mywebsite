@@ -91,31 +91,31 @@ This is just a beginner guide on how to use git for the first time. There are st
 I would like to discuss a few more things about git that I have learned and become familiar with. I am hosting this website on an Ubuntu VPS from Digital Ocean and I rely heavily on git to update and make changes. I've recently added a new "working" branch to my repository. This makes it easier to work on changes while not breaking the master branch. Another branch can be made on github and you can base it off another branch. I started a "working" branch and copied the master branch.
 
 ```bash
-$git checkout working
+$ git checkout working
 ```
 
 Now, after cloning my repository I can switch to my new working branch with the checkout command. Keep in mind that if I was working on my master branch with uncommited changes, I cannot checkout to another branch without commiting current changes to the master branch. After making new changes to my new "working" branch I can add, commit, and push them to Github. If and when I want to update my master branch I can checkout to my master branch, merge changes with "working" and push changes to Github. The master branch should then be up to date with the "working" branch.
 
 ```bash
-$git add -A
-$git commit -m "commit message"
-$git push origin working
-$git checkout master
-$git merge working
-$git push origin master
+$ git add -A
+$ git commit -m "commit message"
+$ git push origin working
+$ git checkout master
+$ git merge working
+$ git push origin master
 ```
 
 At any time you can check to see which branch you are working on and if any files have been updated/are ready to commit by using the status command:
 
 ```bash
-$git status
+$ git status
 ```
 
 Now that my changes with "working" are updated on "master" I can pull the changes to my server on Digital Ocean. I sometimes have to log into my server and make minor updates to the code. This can cause merge conflicts with git and I may be unable to pull the master branch. To resolve this issue I must reset the master branch so that I can pull new changes.
 
 ```bash
-$git reset --hard
-$git pull
+$ git reset --hard
+$ git pull
 ```
 
 This will reset the branch to the last commit and get rid of any uncommited changes. Only do this if you have not made changes that you want to save. Because it is running on my server, I want to overwrite any changes anyway.
