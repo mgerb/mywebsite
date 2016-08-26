@@ -1,6 +1,8 @@
 @import './utils.scss';
 html {
     font-family: 'Roboto Slab', serif;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 body {
     max-width: 100%;
