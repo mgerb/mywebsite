@@ -10,7 +10,7 @@
     "prod": "export NODE_ENV=production && webpack -p && babel-node metadata.js",
     "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js",
     "deploy": "goapp deploy",
-    "serve": "goapp serve"
+    "serve-c9": "npm run build && goapp serve --port=$PORT --host=$IP"
   },
   "repository": {
     "type": "git",
