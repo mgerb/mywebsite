@@ -17,7 +17,9 @@ const defaultState = {
     filteredPreview: {
         posts: []
     },
-    post: ""
+    post: "",
+    fetched: false,
+    fetching: false
 };
 
 //default reducer
@@ -26,7 +28,9 @@ function reducer(state = defaultState, action) {
     switch (action.type) {
         case types.INIT_PREVIEW:
             return Object.assign({}, state, {
-                preview: Object.assign({}, state.preview, action.posts)
+                preview: Object.assign({}, state.preview, action.posts),
+                fetched: true,
+                fetching: false
             });
         case types.FILTER_PREVIEW:
             return Object.assign({}, state, {
@@ -34,9 +38,15 @@ function reducer(state = defaultState, action) {
             });
         case types.LOAD_POST:
             return Object.assign({}, state, {
-                post: action.post
-            })
-
+                post: action.post,
+                fetched: true,
+                fetching: false
+            });
+        case types.FETCHING:
+            return Object.assign({}, state, {
+                fetched : false,
+                fetching: true
+            });
     }
 
     //return present state if no actions get called

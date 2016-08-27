@@ -33,12 +33,16 @@ export default class Index extends React.Component {
     }
 
     render() {
+      const fetched = this.props.redux.fetched;
+      const fetching = this.props.redux.fetching;
+      
         return (
           <div>
             <Header />
               <div class="Main">
-                  {typeof this.page === 'undefined' ? <Preview posts={this.props.redux.preview.posts} /> : ""}
-                  {this.page === 'post' ? <Post content={this.props.redux.post}/> : ""}
+                  {typeof this.page === 'undefined' && !fetching ? <Preview posts={this.props.redux.preview.posts} /> : null}
+                  {this.page === 'post' && !fetching ? <Post content={this.props.redux.post}/> : null}
+                  {fetching ? <div class="Content">Fetching</div> : null}
                 <Sidebar />
               </div>
             <Footer />

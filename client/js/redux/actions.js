@@ -15,10 +15,17 @@ function loadPost(post){
     }
 }
 
+function fetching(){
+    return{
+        type: types.FETCHING
+    }
+}
+
 //using redux-thunk we can modify actions before they get called
 //in this case we can send the http request here rather in the react component
 export function fetchPreview() {
     return (dispatch) => {
+        dispatch(fetching());
         return fetch('/public/metadata.json')
             .then(response => response.json())
             .then(json => {
@@ -32,6 +39,7 @@ export function fetchPreview() {
 
 export function fetchPost(category, post) {
     return (dispatch) => {
+        dispatch(fetching());
         return fetch(`/public/posts/${category}/${post}.md`)
             .then(response => response.text())
             .then(response => {
