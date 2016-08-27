@@ -27,7 +27,15 @@ func Configure(d DatabaseInfo) {
 func (d *Driver) Connect() {
 	if (d.Info.URL != ""){
 		// Connect to MongoDB
-		s, err := mgo.DialWithTimeout(d.Info.URL, 5*time.Second)
+		database_info := &mgo.DialInfo{
+			Addrs: []string{d.Info.URL},
+			Database: d.Info.Database,
+			Timeout: 5*time.Second,
+			Username: d.Info.Username,
+			Password: d.Info.Password,
+		}
+		
+		s, err := mgo.DialWithInfo(database_info)
 	
 		if err != nil {
 			log.Println("MongoDB Driver Error", err)

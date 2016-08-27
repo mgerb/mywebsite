@@ -1,5 +1,6 @@
 .Content {
   flex: 1;
+  flex-wrap: wrap;
     .post + .post {
         margin-top: 2em;
     }
@@ -22,5 +23,9 @@
         max-width: 100%;
         height: auto;
         margin: auto;
+    }
+    code,
+    pre {
+        white-space: pre-wrap;
     }
 }

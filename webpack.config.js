@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./client/js/app.js",
+  entry: ["babel-polyfill", , "whatwg-fetch", "./client/js/app.js"],
   module: {
     loaders: [
       {

@@ -1,7 +1,9 @@
 {
     "database": {
         "url": "",
-        "database": ""
+        "database": "",
+        "username": "",
+        "password": ""
     },
     "api": {
         "key": ""

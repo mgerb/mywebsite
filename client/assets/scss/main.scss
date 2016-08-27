@@ -3,6 +3,7 @@ html {
     font-family: 'Roboto Slab', serif;
     max-width: 100%;
     overflow-x: hidden;
+    overflow-y: scroll;
 }
 body {
     max-width: 100%;
@@ -39,29 +40,20 @@ a {
         color: #3598db;
     }
 }
-code,
-pre {
-    white-space: pre-wrap;
-}
 hr {
     margin: 1em;
     border: 0;
     border-top: 1px solid #eee;
 }
-.Layout {
-    height: 100%;
+.Footer,
+.Main {
     display: flex;
-    flex-direction: column;
-    .Footer,
-    .Main {
-        display: flex;
-        padding-right: calc(50% - 997px / 2);
-        padding-left: calc(50% - 997px / 2);
-        &:after,
-        &:before {
-            content: " ";
-            width: 1em;
-        }
+    padding-right: calc(50% - 997px / 2);
+    padding-left: calc(50% - 997px / 2);
+    &:after,
+    &:before {
+        content: " ";
+        width: 1em;
     }
 }
 .Main {
