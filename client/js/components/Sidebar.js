@@ -33,17 +33,12 @@ export default class Sidebar extends React.Component{
             class="fa fa-2x fa-navicon"
             aria-hidden="true" />
         </a>
-        <h2>
-          About Me
-        </h2>
+        <h2>About Me</h2>
         <img src={me}/>
         <p>
           My name is Mitchell and I have a passion for software development. I am currently a software engineer and enjoy working on personal projects in my free time.
         </p>
 
-        <h3>
-          Contact Me
-        </h3>
         <p>
           <i class="fa fa-envelope" aria-hidden="true"></i>
           <a class="link" href="mailto:mgerb42@gmail.com"> eMail</a>
@@ -60,6 +55,12 @@ export default class Sidebar extends React.Component{
           <i class="fa fa-wpforms" aria-hidden="true"> </i>
           <a href="/resume" class="link"> Resume</a>
         </p>
+
+        <br/>
+
+        <h2>Sensors</h2>
+        <hr/>
+
       </div>
     );
   }

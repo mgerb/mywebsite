@@ -1,4 +1,7 @@
 @import './utils.scss';
+
+$linkColor: #3598db;
+
 html {
     font-family: 'Roboto Slab', serif;
     max-width: 100%;
@@ -34,10 +37,10 @@ p {
 }
 a {
     background-color: transparent;
-    color: #3598db;
+    color: $linkColor;
     text-decoration: none;
     &:hover {
-        color: #3598db;
+        color: $linkColor;
     }
 }
 hr {
@@ -70,4 +73,9 @@ hr {
     h1 {
         text-align: center;
     }
+}
+.Loading{
+    display: flex;
+    flex: 1;
+    justify-content: center;
 }

@@ -13,6 +13,9 @@ import '../../assets/scss/main.scss';
 import 'font-awesome/css/font-awesome.min.css';
 import '../../assets/css/dracula.css';
 
+//loading icon
+import loading from '../../assets/images/loading.svg';
+
 export default class Index extends React.Component {
     componentDidMount() {
         this.props.actions.fetchPreview();
@@ -35,14 +38,14 @@ export default class Index extends React.Component {
     render() {
       const fetched = this.props.redux.fetched;
       const fetching = this.props.redux.fetching;
-      
+
         return (
           <div>
             <Header />
               <div class="Main">
                   {typeof this.page === 'undefined' && !fetching ? <Preview posts={this.props.redux.preview.posts} /> : null}
                   {this.page === 'post' && !fetching ? <Post content={this.props.redux.post}/> : null}
-                  {fetching ? <div class="Content">Fetching</div> : null}
+                  {fetching ? loadingElement : null}
                 <Sidebar />
               </div>
             <Footer />
@@ -50,3 +53,7 @@ export default class Index extends React.Component {
         );
     }
 }
+
+const loadingElement = <div class="Loading">
+                          <img src={loading} alt="loading..."/>
+                        </div>;
