@@ -1,6 +1,9 @@
 import React from 'react';
 
-//assest
+//components
+import SensorList from './sensors/SensorList';
+
+//assets
 import me from '../../assets/images/me.jpg';
 import '../../assets/scss/Sidebar.scss';
 
@@ -60,7 +63,7 @@ export default class Sidebar extends React.Component{
 
         <h2>Sensors</h2>
         <hr/>
-
+        <SensorList/>
       </div>
     );
   }

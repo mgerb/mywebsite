@@ -1,5 +1,6 @@
 import * as types from "./constants";
 import marked from 'marked';
+import 'whatwg-fetch';
 
 function initPreview(posts) {
     return {
