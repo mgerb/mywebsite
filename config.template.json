@@ -1,0 +1,12 @@
+{
+    "database": {
+        "url": "",
+        "database": "",
+        "username": "",
+        "password": ""
+    },
+    "api": {
+        "key": ""
+    },
+    "port": 8080
+}

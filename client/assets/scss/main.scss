@@ -1,0 +1,81 @@
+@import './utils.scss';
+
+$linkColor: #3598db;
+
+html {
+    font-family: 'Roboto Slab', serif;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-weight: 300;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 400;
+    line-height: 1em;
+}
+p {
+    font-weight: 300;
+}
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a {
+    background-color: transparent;
+    color: $linkColor;
+    text-decoration: none;
+    &:hover {
+        color: $linkColor;
+    }
+}
+hr {
+    margin: 1em;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+.Footer,
+.Main {
+    display: flex;
+    padding-right: calc(50% - 997px / 2);
+    padding-left: calc(50% - 997px / 2);
+    &:after,
+    &:before {
+        content: " ";
+        width: 1em;
+    }
+}
+.Main {
+    padding-top: 1em;
+}
+.Header {
+    width: 100%;
+    background: url("../images/header.jpg");
+    background-size: cover;
+    height: 30em;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #DADADA;
+    h1 {
+        text-align: center;
+    }
+}
+.Loading{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}

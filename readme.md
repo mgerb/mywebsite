@@ -1,5 +1,23 @@
-# Golang Site Implementation
+# A new branch to rebuild this entire application using:
 
-I have been working on converting my entire website over to the Go programming language. Along with doing this I have also converted the front end entirely to AngularJS. MongoDB is still used and the data base queries have been more optimized.
+- ReactJS
+- Go App Engine
 
-I have also made this project open source. Passwords are no longer stored in the code. Rename "config-template.json" to "config.json" to start the server.
+`npm run build` - builds the application using webpack and runs metadata.js
+
+- metadata.js recursivly scans the posts folder for markdown files and then parses each into into a json object
+- the posts folder is then copied into the dist folder
+
+## TODO
+- fix font sizing
+- clean up css
+- adjust animations
+
+- fix goapp serve and webpack-dev-server so paths work correctly
+- posts page
+- add sensor page
+- finally do writeups on my projects
+- clean go code up
+- host on app engine (run mongodb on compute engine???)
+- pull everything off digital ocean
+- add paging
