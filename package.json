@@ -8,10 +8,7 @@
     "c9": "webpack-dev-server --port $PORT --host $IP --hot --content-base dist --history-api-fallback",
     "dev": "webpack-dev-server --content-base public --inline --hot --history-api-fallback",
     "prod": "export NODE_ENV=production && webpack -p && babel-node metadata.js",
-    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js",
-    "deploy": "goapp deploy",
-    "serve": "npm run build && goapp serve --host=0.0.0.0",
-    "serve-c9": "npm run build && goapp serve --port=$PORT --host=$IP"
+    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js"
   },
   "repository": {
     "type": "git",
