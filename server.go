@@ -4,7 +4,8 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-
+	"github.com/NYTimes/gziphandler"
+	
 	//local import paths relative to app.yaml file
 	"mywebsite/server/controller/api"
 	"mywebsite/server/db"
@@ -34,7 +35,10 @@ func main(){
 	api.Configure(configurations.Api)
 
 	db.Mongo.Connect()
-
+	
+	//register middleware
+	handle := gziphandler.GzipHandler(route.Routes())
+	
 	log.Println("Starting Server...")
-	log.Println(http.ListenAndServe(":"+strconv.Itoa(configurations.Port), route.Routes()))
+	log.Println(http.ListenAndServe(":"+strconv.Itoa(configurations.Port), handle))
 }

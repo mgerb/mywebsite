@@ -2,6 +2,12 @@ import * as types from "./constants";
 import marked from 'marked';
 import 'whatwg-fetch';
 
+export function increasePostLimit(){
+    return {
+        type: types.INCREASE_POST_LIMIT
+    }
+}
+
 function initPreview(posts) {
     return {
         type: types.INIT_PREVIEW,

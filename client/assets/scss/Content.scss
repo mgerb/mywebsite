@@ -1,6 +1,7 @@
 .Content {
   flex: 1;
   flex-wrap: wrap;
+  min-width: 0;
     .post + .post {
         margin-top: 2em;
     }

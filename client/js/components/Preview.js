@@ -22,6 +22,8 @@ export default class Preview extends React.Component{
           </p>
         </div>
       );
+      
+      if(i >= this.props.postLimit) break;
     }
 
     return elements;
@@ -32,7 +34,7 @@ export default class Preview extends React.Component{
 
     return (
       <div class="Content">
-        {posts.length > 0 ? this.insertPosts(posts): ""}
+        {posts.length > 0 ? this.insertPosts(posts): null}
       </div>
     );
   }

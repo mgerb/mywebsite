@@ -14,12 +14,10 @@ const defaultState = {
     preview: {
         posts: []
     },
-    filteredPreview: {
-        posts: []
-    },
     post: "",
     fetched: false,
-    fetching: false
+    fetching: false,
+    postLimit: 10
 };
 
 //default reducer
@@ -32,10 +30,6 @@ function reducer(state = defaultState, action) {
                 fetched: true,
                 fetching: false
             });
-        case types.FILTER_PREVIEW:
-            return Object.assign({}, state, {
-                filteredPreview: Object.assign({}, state.filteredPreview, action.posts)
-            });
         case types.LOAD_POST:
             return Object.assign({}, state, {
                 post: action.post,
@@ -46,6 +40,10 @@ function reducer(state = defaultState, action) {
             return Object.assign({}, state, {
                 fetched : false,
                 fetching: true
+            });
+        case types.INCREASE_POST_LIMIT:
+            return Object.assign({}, state, {
+                postLimit : state.postLimit + 10
             });
     }
 
