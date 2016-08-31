@@ -34,6 +34,7 @@ func (s *Data) toJson() string {
 
 }
 
+//default store structure
 func (s *Data) StoreData() error {
 
 	if db.Mongo.Connected() {
@@ -57,13 +58,13 @@ func (s *Data) StoreData() error {
 }
 
 //handle queries for all sensors page
-//********************************************************************************
 type DataStore_AllSensors struct {
 	ID          string    `json:"location" bson:"_id"`
 	Temperature float64   `json:"temperature" bson:"temperature"`
 	Updated     time.Time `json:"updated" bson:"updated"`
 }
 
+//get latest update from each unique sensor
 func GetAllSensors() ([]DataStore_AllSensors, error) {
 
 	s := []DataStore_AllSensors{}
@@ -89,51 +90,3 @@ func GetAllSensors() ([]DataStore_AllSensors, error) {
 		return s, errors.New("Query failed")
 	}
 }
-
-//********************************************************************************
-
-//get sensor information by location
-//********************************************************************************
-type DataStore_SensorByLocation struct {
-	Id sensorByLocation `json:"_id" bson:"_id"`
-}
-
-type sensorByLocation struct {
-	Year     int    `json:"year" bson:"year"`
-	Month    int    `json:"month" bson:"month"`
-	Location string `json:"location" bson:"location"`
-}
-
-/*
-func GetSensorInfoByLocation(sensor_location string) ([]DataStore_SensorByLocation, error) {
-	s := []DataStore_SensorByLocation{}
-	if db.Mongo.Connected() == true {
-		session := db.Mongo.Session.Copy()
-		defer session.Close()
-		c := session.DB(db.Mongo.Info.Database).C(collection)
-		err := c.Pipe([]bson.M{{"$project": bson.M{"location": "$location", "year": bson.M{"$year": "$updated"}, "month": bson.M{"$month": "$updated"}}},
-			bson.M{"$match": bson.M{"location": sensor_location}},
-			bson.M{"$group": bson.M{"_id": bson.M{"year": "$year", "month": "$month", "location": "$location"}}},
-			bson.M{"$sort": bson.M{"_id.year": -1, "_id.month": -1}}}).All(&s)
-		if err != nil {
-			log.Println(err)
-			return s, nil
-		}
-		return s, nil
-	} else {
-		return s, errors.New("Query failed")
-	}
-}
-*/
-
-//********************************************************************************
-
-/*************************
-testStore := model.SensorData{
-		ID:          bson.NewObjectId(),
-		Temperature: 34.2,
-		Humidity:    33.22,
-		Location:    "Grand Meadow",
-		Updated:     time.Now(),
-}
-**************************/

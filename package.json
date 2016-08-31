@@ -7,8 +7,8 @@
     "build": "webpack && babel-node metadata.js",
     "c9": "webpack-dev-server --port $PORT --host $IP --hot --content-base dist --history-api-fallback",
     "dev": "webpack-dev-server --content-base public --inline --hot --history-api-fallback",
-    "prod": "export NODE_ENV=production && webpack -p && babel-node metadata.js && go build",
-    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js && go build",
+    "prod": "export NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go",
+    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go",
     "deploy" : "npm run prod && ./mywebsite"
   },
   "repository": {

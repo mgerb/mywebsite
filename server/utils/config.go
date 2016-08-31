@@ -14,7 +14,7 @@ import (
 type Config struct {
 	Database db.DatabaseInfo `json:"database"`
 	Api      api.ApiInfo     `json:"api"`
-	Port		 int						 `json:"port"`
+	Port     int		 `json:"port"`
 }
 
 //read the config file and return JsonObject struct
