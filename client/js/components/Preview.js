@@ -7,7 +7,7 @@ export default class Preview extends React.Component{
 
   insertPosts(posts){
     let elements = [];
-    for (let i in posts){
+    for (let i = 0; i < this.props.postLimit && i < posts.length; i++){
       elements.push(
         <div class="post" key={i}>
           <div class="date">
@@ -22,8 +22,6 @@ export default class Preview extends React.Component{
           </p>
         </div>
       );
-      
-      if(i >= this.props.postLimit) break;
     }
 
     return elements;
@@ -31,10 +29,13 @@ export default class Preview extends React.Component{
 
   render(){
     const posts = this.props.posts;
-
+    
     return (
       <div class="Content">
         {posts.length > 0 ? this.insertPosts(posts): null}
+        {posts.length > this.props.postLimit ?
+          <button class="btn" onClick={this.props.increasePostLimit.bind(this)}>Load More</button>
+          : null}
       </div>
     );
   }

@@ -31,8 +31,6 @@ func ReadConfig() Config {
 
 	log.Printf("%s\n", string(file))
 
-	//m := new(Dispatch)
-	//var m interface{}
 	var result Config
 
 	err := json.Unmarshal(file, &result)

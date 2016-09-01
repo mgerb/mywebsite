@@ -50,7 +50,6 @@ export default class SensorList extends React.Component {
     );
   }
   render(){
-    console.log(this.state);
     return (
       <div>
         {this.state.fetched ? this.state.sensors.map(this.insertSensorData) : null}

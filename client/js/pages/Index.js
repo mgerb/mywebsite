@@ -43,7 +43,11 @@ export default class Index extends React.Component {
           <div>
             <Header />
               <div class="Main">
-                  {typeof this.page === 'undefined' && !fetching ? <Preview posts={this.props.redux.preview.posts} postLimit={this.props.redux.postLimit}/> : null}
+                  {typeof this.page === 'undefined' && !fetching
+                    ? <Preview posts={this.props.redux.preview.posts}
+                               postLimit={this.props.redux.postLimit}
+                               increasePostLimit={this.props.actions.increasePostLimit}/>
+                    : null}
                   {this.page === 'post' && !fetching ? <Post content={this.props.redux.post}/> : null}
                   {fetching ? loadingElement : null}
                 <Sidebar />

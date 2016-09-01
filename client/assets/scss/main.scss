@@ -1,6 +1,7 @@
 @import './utils.scss';
 
 $linkColor: #3598db;
+$backgroundColor: #FFFFFF;
 
 html {
     font-family: 'Roboto Slab', serif;
@@ -9,6 +10,7 @@ html {
     overflow-y: scroll;
 }
 body {
+    background-color: $backgroundColor;
     max-width: 100%;
     overflow-x: hidden;
     position: relative;
@@ -78,4 +80,15 @@ hr {
     display: flex;
     flex: 1;
     justify-content: center;
+}
+.btn{
+    background-color: $backgroundColor;
+    border: 1px solid #DADADA;
+    border-radius: .2em;
+    cursor: pointer;
+    padding: .5em;
+    
+    &:hover{
+        background-color: #F3F3F3;
+    }
 }
