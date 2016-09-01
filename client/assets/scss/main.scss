@@ -3,17 +3,18 @@ $linkColor: #3598db;
 $backgroundColor: #FFFFFF;
 html {
     font-family: 'Roboto Slab', serif;
-    max-width: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: auto;
+    
+    @media (max-width: 768px) {
+        overflow-x: hidden;   
+    }
 }
 
 body {
+    overflow: hidden;
     background-color: $backgroundColor;
-    max-width: 100%;
-    overflow-x: hidden;
     position: relative;
-    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-font-smoothing: antialiased;
     font-weight: 300;
 }
 
