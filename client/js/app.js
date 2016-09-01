@@ -13,22 +13,22 @@ import * as actions from './redux/actions';
 
 import Index from './pages/Index';
 
-class Main extends React.Component{
-    render(){
-        return(
+class Main extends React.Component {
+    render() {
+        return (
             <div>{React.cloneElement(this.props.children, this.props)}</div>
         );
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         redux: state.reducer
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return{
+function mapDispatchToProps(dispatch) {
+    return {
         actions: bindActionCreators(actions, dispatch)
     }
 }
@@ -44,4 +44,4 @@ ReactDOM.render((
             </Route>
         </Router>
     </Provider>
-),document.getElementById('app'));
+), document.getElementById('app'));

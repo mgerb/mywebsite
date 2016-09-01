@@ -1,20 +1,19 @@
 .Content {
-  flex: 1;
-  flex-wrap: wrap;
-  min-width: 0;
-    .post + .post {
+    flex: 1;
+    flex-wrap: wrap;
+    min-width: 0;
+    .post+ .post {
         margin-top: 2em;
     }
     .date {
         display: block;
         margin: 0;
         opacity: 0.7;
-
-        @media (min-width: 1200px){
-          position: absolute;
-          width: 7em;
-          text-align: right;
-          margin-left: -8em;
+        @media (min-width: 1200px) {
+            position: absolute;
+            width: 7em;
+            text-align: right;
+            margin-left: -8em;
         }
     }
     .intro {
@@ -29,7 +28,7 @@
     pre {
         white-space: pre-wrap;
     }
-    .btn{
+    .btn {
         width: 100%;
     }
 }

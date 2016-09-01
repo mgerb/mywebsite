@@ -7,9 +7,9 @@ import SensorList from './sensors/SensorList';
 import me from '../../assets/images/me.jpg';
 import '../../assets/scss/Sidebar.scss';
 
-export default class Sidebar extends React.Component{
+export default class Sidebar extends React.Component {
 
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
@@ -19,7 +19,7 @@ export default class Sidebar extends React.Component{
     this.onToggle = this.onToggle.bind(this);
   }
 
-  onToggle(){
+  onToggle() {
     let temp = this.state.toggler;
     temp = temp === "open" ? "" : "open";
 
@@ -28,8 +28,8 @@ export default class Sidebar extends React.Component{
     });
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div class={"Sidebar " + this.state.toggler}>
         <a onClick={this.onToggle} class="toggler">
           <i

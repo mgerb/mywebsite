@@ -1,8 +1,8 @@
-import {applyMiddleware, createStore} from 'redux';
-import {syncHistoryWithStore} from 'react-router-redux';
-import {browserHistory} from 'react-router';
-import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import {applyMiddleware, createStore} from 'redux';
+import {browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
 
 import reducers from './reducers';
 

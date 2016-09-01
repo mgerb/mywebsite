@@ -2,7 +2,7 @@ import * as types from "./constants";
 import marked from 'marked';
 import 'whatwg-fetch';
 
-export function increasePostLimit(){
+export function increasePostLimit() {
     return {
         type: types.INCREASE_POST_LIMIT
     }
@@ -15,15 +15,15 @@ function initPreview(posts) {
     }
 }
 
-function loadPost(post){
+function loadPost(post) {
     return {
-      type: types.LOAD_POST,
-      post
+        type: types.LOAD_POST,
+        post
     }
 }
 
-function fetching(){
-    return{
+function fetching() {
+    return {
         type: types.FETCHING
     }
 }

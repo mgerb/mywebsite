@@ -3,21 +3,21 @@ import 'whatwg-fetch';
 
 export default class SensorList extends React.Component {
 
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
-      sensors : {},
+      sensors: {},
       fetching: false,
       fetched: false
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.loadSensorData();
   }
 
-  loadSensorData(){
+  loadSensorData() {
     this.setState({
       fetching: true
     });
@@ -49,7 +49,7 @@ export default class SensorList extends React.Component {
       </div>
     );
   }
-  render(){
+  render() {
     return (
       <div>
         {this.state.fetched ? this.state.sensors.map(this.insertSensorData) : null}

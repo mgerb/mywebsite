@@ -3,11 +3,11 @@ import {Link} from 'react-router';
 
 import '../../assets/scss/Content.scss';
 
-export default class Preview extends React.Component{
+export default class Preview extends React.Component {
 
-  insertPosts(posts){
+  insertPosts(posts) {
     let elements = [];
-    for (let i = 0; i < this.props.postLimit && i < posts.length; i++){
+    for (let i = 0; i < this.props.postLimit && i < posts.length; i++) {
       elements.push(
         <div class="post" key={i}>
           <div class="date">
@@ -27,9 +27,9 @@ export default class Preview extends React.Component{
     return elements;
   }
 
-  render(){
+  render() {
     const posts = this.props.posts;
-    
+
     return (
       <div class="Content">
         {posts.length > 0 ? this.insertPosts(posts): null}

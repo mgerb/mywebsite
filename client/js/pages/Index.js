@@ -17,31 +17,31 @@ import '../../assets/css/dracula.css';
 import loading from '../../assets/images/loading.svg';
 
 export default class Index extends React.Component {
-    componentDidMount() {
-        this.props.actions.fetchPreview();
-        this.page = this.props.params.page;
-        this.page === 'post' ? this.props.actions.fetchPost(this.props.params.category, this.props.params.post) : "";
+  componentDidMount() {
+    this.props.actions.fetchPreview();
+    this.page = this.props.params.page;
+    this.page === 'post' ? this.props.actions.fetchPost(this.props.params.category, this.props.params.post) : "";
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.params !== nextProps.params) {
+      const params = nextProps.params;
+      this.page = params.page;
+
+      if (typeof params.post !== 'undefined' && typeof params.category !== 'undefined') {
+        this.props.actions.fetchPost(params.category, params.post);
+      }
     }
+  }
 
+  render() {
+    const fetched = this.props.redux.fetched;
+    const fetching = this.props.redux.fetching;
 
-    componentWillReceiveProps(nextProps){
-        if(this.props.params !== nextProps.params){
-            const params = nextProps.params;
-            this.page = params.page;
-
-            if(typeof params.post !== 'undefined' && typeof params.category !== 'undefined'){
-              this.props.actions.fetchPost(params.category, params.post);
-            }
-        }
-    }
-
-    render() {
-      const fetched = this.props.redux.fetched;
-      const fetching = this.props.redux.fetching;
-
-        return (
-          <div>
-            <Header />
+    return (
+      <div>
+            <Header/>
               <div class="Main">
                   {typeof this.page === 'undefined' && !fetching
                     ? <Preview posts={this.props.redux.preview.posts}
@@ -50,12 +50,12 @@ export default class Index extends React.Component {
                     : null}
                   {this.page === 'post' && !fetching ? <Post content={this.props.redux.post}/> : null}
                   {fetching ? loadingElement : null}
-                <Sidebar />
+                <Sidebar/>
               </div>
-            <Footer />
+            <Footer/>
           </div>
-        );
-    }
+    );
+  }
 }
 
 const loadingElement = <div class="Loading">

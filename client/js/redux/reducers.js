@@ -1,10 +1,6 @@
 //just using one reducer - use combineReducers from redux to modularize things
-import {
-    combineReducers
-} from 'redux';
-import {
-    routerReducer
-} from 'react-router-redux';
+import {combineReducers} from 'redux';
+import {routerReducer} from 'react-router-redux';
 
 //import typs
 import * as types from './constants';
@@ -38,12 +34,12 @@ function reducer(state = defaultState, action) {
             });
         case types.FETCHING:
             return Object.assign({}, state, {
-                fetched : false,
+                fetched: false,
                 fetching: true
             });
         case types.INCREASE_POST_LIMIT:
             return Object.assign({}, state, {
-                postLimit : state.postLimit + 10
+                postLimit: state.postLimit + 10
             });
     }
 
