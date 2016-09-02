@@ -40,8 +40,8 @@ function parse_dir(dir, folder_name){
                 filename: post.slice(0, post.length - 3),
                 category: folder_name,
                 date: post.slice(0, 10),
-                title: tokens[0].text,
-                intro: tokens[1].text
+                title: `<h1>${tokens[0].text}</h1>`,
+                intro: marked(tokens[1].text)
             }
             json.posts.push(temp);
         }

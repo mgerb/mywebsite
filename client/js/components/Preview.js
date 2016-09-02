@@ -13,8 +13,7 @@ export default class Preview extends React.Component {
           <div class="date">
             {posts[i].date}
           </div>
-          <h1 class="intro" >{posts[i].title.toString()}</h1>
-          <p>{posts[i].intro.toString()}</p>
+          <div dangerouslySetInnerHTML={{__html : posts[i].title.toString() + posts[i].intro.toString()}} />
           <p>
             <Link class="link" to={`/post/${posts[i].category}/${posts[i].filename}`}>
               continue reading <i class="fa fa-caret-right" aria-hidden="true"></i>

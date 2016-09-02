@@ -23,7 +23,6 @@ export default class Index extends React.Component {
     this.page === 'post' ? this.props.actions.fetchPost(this.props.params.category, this.props.params.post) : "";
   }
 
-
   componentWillReceiveProps(nextProps) {
     if (this.props.params !== nextProps.params) {
       const params = nextProps.params;
@@ -58,6 +57,6 @@ export default class Index extends React.Component {
   }
 }
 
-const loadingElement = <div class="Loading">
+const loadingElement =  <div class="Loading">
                           <img src={loading} alt="loading..."/>
                         </div>;
