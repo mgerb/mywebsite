@@ -1,13 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+//components
+import Loading from './utils/Loading';
+
 import '../../assets/scss/Content.scss';
 
 export default class Preview extends React.Component {
 
+  componentDidMount() {
+    this.props.actions.fetchPreview();
+  }
+
   insertPosts(posts) {
     let elements = [];
-    for (let i = 0; i < this.props.postLimit && i < posts.length; i++) {
+    for (let i = 0; i < this.props.redux.postLimit && i < posts.length; i++) {
       elements.push(
         <div class="post" key={i}>
           <div class="date">
@@ -27,14 +34,21 @@ export default class Preview extends React.Component {
   }
 
   render() {
-    const posts = this.props.posts;
+    const posts = this.props.redux.preview.posts;
+    const postLimit = this.props.redux.postLimit;
+    const increasePostLimit = this.props.actions.increasePostLimit;
+    const fetched = this.props.redux.fetched;
 
     return (
       <div class="Content">
-        {posts.length > 0 ? this.insertPosts(posts): null}
-        {posts.length > this.props.postLimit ?
-          <button class="btn" onClick={this.props.increasePostLimit.bind(this)}>Load More</button>
-          : null}
+        {fetched ?
+        <div>
+          {posts.length > 0 ? this.insertPosts(posts): null}
+          {posts.length > postLimit ?
+            <button class="btn" onClick={increasePostLimit}>Load More</button>
+            : null}
+        </div>
+        : <Loading/>}
       </div>
     );
   }
