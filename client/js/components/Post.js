@@ -21,13 +21,13 @@ export default class Post extends React.Component {
 
   componentDidMount() {
     const params = this.props.params;
-    this.props.actions.fetchPost(params.category, params.post);
+    this.props.appActions.fetchPost(params.category, params.post);
   }
 
   render() {
-    const post = this.props.redux.post;
-    const fetched = this.props.redux.fetched;
-    const fetching = this.props.redux.fetching;
+    const post = this.props.app.post;
+    const fetched = this.props.app.fetched;
+    const fetching = this.props.app.fetching;
 
     return (
       <div class="Content">

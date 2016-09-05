@@ -9,12 +9,12 @@ import '../../assets/scss/Content.scss';
 export default class Preview extends React.Component {
 
   componentDidMount() {
-    this.props.actions.fetchPreview();
+    this.props.appActions.fetchPreview();
   }
 
   insertPosts(posts) {
     let elements = [];
-    for (let i = 0; i < this.props.redux.postLimit && i < posts.length; i++) {
+    for (let i = 0; i < this.props.app.postLimit && i < posts.length; i++) {
       elements.push(
         <div class="post" key={i}>
           <div class="date">
@@ -34,10 +34,10 @@ export default class Preview extends React.Component {
   }
 
   render() {
-    const posts = this.props.redux.preview.posts;
-    const postLimit = this.props.redux.postLimit;
-    const increasePostLimit = this.props.actions.increasePostLimit;
-    const fetched = this.props.redux.fetched;
+    const posts = this.props.app.preview.posts;
+    const postLimit = this.props.app.postLimit;
+    const fetched = this.props.app.fetched;
+    const increasePostLimit = this.props.appActions.increasePostLimit;
 
     return (
       <div class="Content">

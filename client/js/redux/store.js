@@ -4,7 +4,7 @@ import {applyMiddleware, createStore} from 'redux';
 import {browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 
-import reducers from './reducers';
+import reducers from './reducers/reducers';
 
 const middleware = applyMiddleware(thunk, logger());
 

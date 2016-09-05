@@ -63,7 +63,7 @@ export default class Sidebar extends React.Component {
 
         <h2>Sensors</h2>
         <hr/>
-        <SensorList/>
+        {this.props.sensor.fetchedList ? <SensorList list={this.props.sensor.list}/> : null}
       </div>
     );
   }

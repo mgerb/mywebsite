@@ -12,14 +12,17 @@ import 'font-awesome/css/font-awesome.min.css';
 import '../../assets/css/dracula.css';
 
 export default class Index extends React.Component {
-
+  
+  componentDidMount(){
+    this.props.sensorActions.fetchSensorList();
+  }
   render() {
     return (
       <div>
             <Header/>
               <div class="Main">
                 {React.cloneElement(this.props.children, this.props)}
-                <Sidebar/>
+                <Sidebar sensor={Object.assign({}, this.props.sensor)}/>
               </div>
             <Footer/>
           </div>
