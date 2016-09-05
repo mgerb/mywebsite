@@ -1,28 +1,43 @@
+import hljs from 'highlight.js';
+import marked from 'marked';
 import React from 'react';
 import {Link} from 'react-router';
-import marked from 'marked';
-import hljs from 'highlight.js';
+
+//components
+import Loading from './utils/Loading';
 
 import '../../assets/scss/Content.scss';
 
 const renderer = new marked.Renderer();
 
 marked.setOptions({
-    langPrefix: 'hljs ',
-    highlight: (code) => {
-      return  hljs.highlightAuto(code).value;
-    }
+  langPrefix: 'hljs ',
+  highlight: (code) => {
+    return hljs.highlightAuto(code).value;
+  }
 });
 
-export default class Post extends React.Component{
+export default class Post extends React.Component {
 
-  render(){
-    return(
+  componentDidMount() {
+    const params = this.props.params;
+    this.props.appActions.fetchPost(params.category, params.post);
+  }
+
+  render() {
+    const post = this.props.app.post;
+    const fetched = this.props.app.fetched;
+    const fetching = this.props.app.fetching;
+
+    return (
       <div class="Content">
-        <div dangerouslySetInnerHTML={{__html : marked(this.props.content, {renderer : renderer})}}>
+          {fetched ?
+          <div>
+            <div dangerouslySetInnerHTML={{__html : marked(post, {renderer : renderer})}}/>
+            <Link to="/" class="link"><i class="fa fa-caret-left" aria-hidden="true"></i> Home</Link>
+          </div>
+          : <Loading/>}
         </div>
-        <Link to="/" class="link"><i class="fa fa-caret-left" aria-hidden="true"></i> Home</Link>
-      </div>
     );
   }
 }

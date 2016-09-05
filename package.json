@@ -6,9 +6,12 @@
   "scripts": {
     "build": "webpack && babel-node metadata.js",
     "c9": "webpack-dev-server --port $PORT --host $IP --hot --content-base dist --history-api-fallback",
+    "check_gzip_size": "gzip -9 -c ./public/client.min.js | wc -c | numfmt --to=iec-i --suffix=B --padding=10",
+    "deploy" : "npm run get_dependencies && npm run prod && ./mywebsite",
     "dev": "webpack-dev-server --content-base public --inline --hot --history-api-fallback",
-    "prod": "export NODE_ENV=production && webpack -p && babel-node metadata.js",
-    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js"
+    "get_dependencies": "go get ./server && npm install",
+    "prod": "export NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go",
+    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go"
   },
   "repository": {
     "type": "git",

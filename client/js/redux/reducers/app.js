@@ -1,29 +1,19 @@
-//just using one reducer - use combineReducers from redux to modularize things
-import {
-    combineReducers
-} from 'redux';
-import {
-    routerReducer
-} from 'react-router-redux';
-
 //import typs
-import * as types from './constants';
+import * as types from '../constants/app';
 
 //defaults -
 const defaultState = {
     preview: {
         posts: []
     },
-    filteredPreview: {
-        posts: []
-    },
     post: "",
     fetched: false,
-    fetching: false
+    fetching: false,
+    postLimit: 10
 };
 
 //default reducer
-function reducer(state = defaultState, action) {
+export default function app(state = defaultState, action) {
     //every reducer gets called when an action is called - we check for the type to modify our state accordingly
     switch (action.type) {
         case types.INIT_PREVIEW:
@@ -31,10 +21,6 @@ function reducer(state = defaultState, action) {
                 preview: Object.assign({}, state.preview, action.posts),
                 fetched: true,
                 fetching: false
-            });
-        case types.FILTER_PREVIEW:
-            return Object.assign({}, state, {
-                filteredPreview: Object.assign({}, state.filteredPreview, action.posts)
             });
         case types.LOAD_POST:
             return Object.assign({}, state, {
@@ -44,18 +30,15 @@ function reducer(state = defaultState, action) {
             });
         case types.FETCHING:
             return Object.assign({}, state, {
-                fetched : false,
+                fetched: false,
                 fetching: true
+            });
+        case types.INCREASE_POST_LIMIT:
+            return Object.assign({}, state, {
+                postLimit: state.postLimit + 10
             });
     }
 
     //return present state if no actions get called
     return state;
 }
-
-const allReducers = combineReducers({
-    reducer,
-    routing: routerReducer
-});
-
-export default allReducers;

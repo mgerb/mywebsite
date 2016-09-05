@@ -9,39 +9,38 @@ import {connect, Provider} from 'react-redux';
 import store, {history} from './redux/store';
 
 //import actions
-import * as actions from './redux/actions';
+import * as appActions from './redux/actions/app';
+import * as sensorActions from './redux/actions/sensor';
 
 import Index from './pages/Index';
+import Preview from './components/Preview';
+import Post from './components/Post';
+import SensorInfo from './components/sensors/SensorInfo';
 
-class Main extends React.Component{
-    render(){
-        return(
-            <div>{React.cloneElement(this.props.children, this.props)}</div>
-        );
-    }
-}
-
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
-        redux: state.reducer
+        app: state.app,
+        sensor: state.sensor
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return{
-        actions: bindActionCreators(actions, dispatch)
+function mapDispatchToProps(dispatch) {
+    return {
+        appActions: bindActionCreators(appActions, dispatch),
+        sensorActions: bindActionCreators(sensorActions, dispatch)
     }
 }
 
-const App = connect(mapStateToProps, mapDispatchToProps)(Main);
+const App = connect(mapStateToProps, mapDispatchToProps)(Index);
 
 ReactDOM.render((
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={App}>
-                <IndexRoute component={Index}/>
-                <Route path="/:page(/:category)(/:post)" component={Index}/>
+                <IndexRoute component={Preview}/>
+                <Route path="post/:category/:post" component={Post}/>
+                <Route path="sensor/:location/:year/:month" component={SensorInfo}/>
             </Route>
         </Router>
     </Provider>
-),document.getElementById('app'));
+), document.getElementById('app'));

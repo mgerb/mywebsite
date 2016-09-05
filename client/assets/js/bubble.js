@@ -1,4 +1,4 @@
-var width, height, largeHeader, canvas, ctx, circles, target, animateHeader = true;
+let width, height, largeHeader, canvas, ctx, circles, target, animateHeader = true;
 
 // Main
 export function bubble() {

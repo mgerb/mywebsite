@@ -14,7 +14,7 @@ import (
 type Config struct {
 	Database db.DatabaseInfo `json:"database"`
 	Api      api.ApiInfo     `json:"api"`
-	Port		 int						 `json:"port"`
+	Port     int		 `json:"port"`
 }
 
 //read the config file and return JsonObject struct
@@ -31,8 +31,6 @@ func ReadConfig() Config {
 
 	log.Printf("%s\n", string(file))
 
-	//m := new(Dispatch)
-	//var m interface{}
 	var result Config
 
 	err := json.Unmarshal(file, &result)
