@@ -4,7 +4,6 @@ $backgroundColor: #FFFFFF;
 html {
     font-family: 'Roboto Slab', serif;
     overflow: auto;
-    
     @media (max-width: 768px) {
         overflow-x: hidden;   
     }

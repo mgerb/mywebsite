@@ -17,6 +17,7 @@ export default class Sidebar extends React.Component {
     };
 
     this.onToggle = this.onToggle.bind(this);
+    this.toggleOff = this.toggleOff.bind(this);
   }
 
   onToggle() {
@@ -27,7 +28,15 @@ export default class Sidebar extends React.Component {
       toggler: temp
     });
   }
-
+  
+  toggleOff(){
+    if(this.state.toggler !== ""){
+      this.setState({
+        toggler : ""
+      });
+    }
+  }
+  
   render() {
     return (
       <div class={"Sidebar " + this.state.toggler}>
@@ -37,7 +46,7 @@ export default class Sidebar extends React.Component {
             aria-hidden="true" />
         </a>
         <AboutMe/>
-        {this.props.sensor.fetchedList ? <SensorList list={this.props.sensor.list}/> : null}
+        {this.props.sensor.fetchedList ? <SensorList list={this.props.sensor.list} toggleOff={this.toggleOff}/> : null}
       </div>
     );
   }

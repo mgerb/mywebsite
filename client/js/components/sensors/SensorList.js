@@ -1,30 +1,52 @@
 import React from 'react';
+import {browserHistory} from 'react-router';
 import 'whatwg-fetch';
 
 import './SensorList.scss';
 
-export default class SensorList extends React.Component {
+const options = {
+  month: 'numeric',
+  day: 'numeric',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true
+};
 
+export default class SensorList extends React.Component {
+  
+  constructor(){
+    super();
+    this.openLink = this.openLink.bind(this);
+  }
+  
+  openLink(){
+    browserHistory.push("/");
+    this.props.toggleOff();
+  }
+  
   insertSensorData = (sensor, index) => {
     const date = new Date(sensor.updated);
 
     return (
-      <div key={index} class="row">
-        <div class="item"><h1>{sensor.temperature}</h1><p>Connected</p></div>
+      <div key={index} class="row" onClick={this.openLink}>
+        <div class="item">
+          <h1>{sensor.temperature}°f</h1>
+        </div>
         <div class="item">
           <h3>{sensor.location}</h3>
-          <p>{date.toString()}</p>
+          <span class="date">Updated: {date.toLocaleString('en-us', options)}</span>
         </div>
       </div>
     );
   }
+  
   render() {
     const list = this.props.list;
     
     return (
       <div class="SensorList">
         <h2>Sensors</h2>
-        <hr/>
         {list.map(this.insertSensorData)}
       </div>
     )
