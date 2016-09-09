@@ -16,22 +16,24 @@ const (
 
 type Data struct {
 	ID        bson.ObjectId `bson:"_id,omitempty"`
-	MaxTemp   float64       `json:"maxtemp" bson:"maxtemp"`
-	MinTemp   float64       `json:"mintemp" bson:"mintemp"`
-	Location  string        `json:"location" bson:"location"`
-	Month     int           `json:"month" bson:"month"`
-	MonthName string        `json:"monthname" bson:"monthname"`
-	Day       int           `json:"day" bson:"day"`
-	Year      int           `json:"year" bson:"year"`
+	MaxTemp   float64       `json:"maxtemp,omitempty" bson:"maxtemp"`
+	MinTemp   float64       `json:"mintemp,omitempty" bson:"mintemp"`
+	Location  string        `json:"location,omitempty" bson:"location"`
+	Month     int           `json:"month,omitempty" bson:"month"`
+	MonthName string        `json:"monthname,omitempty" bson:"monthname"`
+	Day       int           `json:"day,omitempty" bson:"day"`
+	Year      int           `json:"year,omitempty" bson:"year"`
+	Updated	  time.Time		`json:"updated" bson:"updated"`
 }
 
 //convert struct to json string
-func (s *Data) toJson() string {
+func (s *Data) ToJson() string {
 
 	b, err := json.MarshalIndent(s, "", "    ")
 
 	if err != nil {
-		log.Println(err.Error)
+		log.Println(err)
+		return "{message : \"Error loading data from database\""
 	}
 
 	return string(b)
@@ -73,7 +75,7 @@ func (s *Data) UpdateData() error {
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 
 		colQuerier := bson.M{"location": s.Location, "month": s.Month, "monthname": s.MonthName, "day": s.Day, "year": s.Year}
-		change := bson.M{"$set": bson.M{"maxtemp": s.MaxTemp, "mintemp": s.MinTemp}}
+		change := bson.M{"$set": bson.M{"maxtemp": s.MaxTemp, "mintemp": s.MinTemp, "updated": time.Now()}}
 
 		err := c.Update(colQuerier, change)
 
@@ -198,3 +200,31 @@ func GetAllSensorInfoByMonth(sensor_location string, year int, monthname string)
 		return d, errors.New("Query failed")
 	}
 }
+
+/*
+func GetUniqueSensorDates(sensor_location string) ([]Data, error){
+	d := []Data{}
+	
+	if db.Mongo.Connected() == true {
+
+		session := db.Mongo.Session.Copy()
+		defer session.Close()
+
+		c := session.DB(db.Mongo.Info.Database).C(collection)
+
+		err := c.Pipe([]bson.M{{"$match": bson.M{"location": sensor_location}},
+								{"$project": bson.M{""}},
+			{"$sort": bson.M{"year": -1, "month": 1}}}).All(&d)
+
+		if err != nil {
+			log.Println(err)
+			return d, nil
+		}
+
+		return d, nil
+
+	} else {
+		return d, errors.New("Query failed")
+	}
+}
+*/

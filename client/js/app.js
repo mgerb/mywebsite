@@ -39,7 +39,7 @@ ReactDOM.render((
             <Route path="/" component={App}>
                 <IndexRoute component={Preview}/>
                 <Route path="post/:category/:post" component={Post}/>
-                <Route path="sensor/:location/:year/:month" component={SensorInfo}/>
+                <Route path="sensor/:location" component={SensorInfo}/>
             </Route>
         </Router>
     </Provider>
