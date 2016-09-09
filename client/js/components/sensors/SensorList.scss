@@ -1,0 +1,28 @@
+.SensorList{
+    .row{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        margin-left: -1em;
+        margin-right: -1em;
+        padding: 1em;
+        
+        &:hover{
+            background-color: gray;
+        }
+        
+        .item + .item{
+            margin-left: 1em;
+        }
+        
+        h2{
+            margin-bottom: 0;
+        }
+        
+        .date{
+            font-size: .8em;
+        }
+    }
+    
+}
