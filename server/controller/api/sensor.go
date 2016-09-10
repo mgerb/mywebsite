@@ -149,7 +149,21 @@ func HandleSensorByLocationYear(w http.ResponseWriter, r *http.Request, ps httpr
 
 	s, err := daily_sensor.GetAllSensorInfoByYear(location, year)
 
-	response := createResponse(s, err)
+	var response string
+
+	if err != nil {
+		log.Println(err)
+		response = "{message : \"Error loading data from database\""
+	} else {
+		js, err := json.MarshalIndent(s, "", "    ")
+
+		if err != nil {
+			log.Println(err)
+			response = "{message : \"Error loading data from database\""
+		} else {
+			response = string(js)
+		}
+	}
 
 	fmt.Fprint(w, response)
 }
@@ -164,12 +178,25 @@ func HandleSensorByLocationMonth(w http.ResponseWriter, r *http.Request, ps http
 
 	s, err := daily_sensor.GetAllSensorInfoByMonth(location, year, monthname)
 
-	response := createResponse(s, err)
+	var response string
+
+	if err != nil {
+		log.Println(err)
+		response = "{message : \"Error loading data from database\""
+	} else {
+		js, err := json.MarshalIndent(s, "", "    ")
+
+		if err != nil {
+			log.Println(err)
+			response = "{message : \"Error loading data from database\""
+		} else {
+			response = string(js)
+		}
+	}
 
 	fmt.Fprint(w, response)
 }
 
-/*
 func HandleUniqueDates(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	
 	location := ps.ByName("location")
@@ -182,7 +209,7 @@ func HandleUniqueDates(w http.ResponseWriter, r *http.Request, ps httprouter.Par
 
 	fmt.Fprint(w, response)
 }
-*/
+
 func createResponse(s []daily_sensor.Data, err error) string{
 	var response string
 
@@ -190,10 +217,10 @@ func createResponse(s []daily_sensor.Data, err error) string{
 		log.Println(err)
 		response = "{message : \"Error loading data from database\""
 	} else {
-		js, err1 := json.MarshalIndent(s, "", "    ")
+		js, err := json.MarshalIndent(s, "", "    ")
 
-		if err1 != nil {
-			log.Println(err1)
+		if err != nil {
+			log.Println(err)
 			response = "{message : \"Error loading data from database\""
 		} else {
 			response = string(js)

@@ -23,7 +23,7 @@ type Data struct {
 	MonthName string        `json:"monthname,omitempty" bson:"monthname"`
 	Day       int           `json:"day,omitempty" bson:"day"`
 	Year      int           `json:"year,omitempty" bson:"year"`
-	Updated	  time.Time		`json:"updated" bson:"updated"`
+	Updated	  time.Time		`json:"updated,omitempty" bson:"updated"`
 }
 
 //convert struct to json string
@@ -132,7 +132,6 @@ func GetAllSensorInfo(sensor_location string) ([]Data, error) {
 
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 
-		//err := c.Find(bson.M{"location": sensor_location}).Sort("-year, -month").All(&d)
 		err := c.Pipe([]bson.M{{"$match": bson.M{"location": sensor_location}},
 			{"$sort": bson.M{"year": -1, "month": 1}}}).All(&d)
 
@@ -201,9 +200,13 @@ func GetAllSensorInfoByMonth(sensor_location string, year int, monthname string)
 	}
 }
 
-/*
+type UniqueDates struct{
+	Dates	  []Data	    `json:"dates" bson:"dates"`
+}
+
 func GetUniqueSensorDates(sensor_location string) ([]Data, error){
 	d := []Data{}
+	temp := UniqueDates{};
 	
 	if db.Mongo.Connected() == true {
 
@@ -213,9 +216,11 @@ func GetUniqueSensorDates(sensor_location string) ([]Data, error){
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 
 		err := c.Pipe([]bson.M{{"$match": bson.M{"location": sensor_location}},
-								{"$project": bson.M{""}},
-			{"$sort": bson.M{"year": -1, "month": 1}}}).All(&d)
-
+								{"$group": bson.M{"_id": "null", "dates": bson.M{"$addToSet": bson.M{"month": "$month", "monthname": "$monthname", "year": "$year"}}}},
+		}).One(&temp)
+		
+		d = temp.Dates;
+		
 		if err != nil {
 			log.Println(err)
 			return d, nil
@@ -227,4 +232,3 @@ func GetUniqueSensorDates(sensor_location string) ([]Data, error){
 		return d, errors.New("Query failed")
 	}
 }
-*/
