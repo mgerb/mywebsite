@@ -149,21 +149,7 @@ func HandleSensorByLocationYear(w http.ResponseWriter, r *http.Request, ps httpr
 
 	s, err := daily_sensor.GetAllSensorInfoByYear(location, year)
 
-	var response string
-
-	if err != nil {
-		log.Println(err)
-		response = "{message : \"Error loading data from database\""
-	} else {
-		js, err := json.MarshalIndent(s, "", "    ")
-
-		if err != nil {
-			log.Println(err)
-			response = "{message : \"Error loading data from database\""
-		} else {
-			response = string(js)
-		}
-	}
+	response := createResponse(s, err)
 
 	fmt.Fprint(w, response)
 }
@@ -178,21 +164,7 @@ func HandleSensorByLocationMonth(w http.ResponseWriter, r *http.Request, ps http
 
 	s, err := daily_sensor.GetAllSensorInfoByMonth(location, year, monthname)
 
-	var response string
-
-	if err != nil {
-		log.Println(err)
-		response = "{message : \"Error loading data from database\""
-	} else {
-		js, err := json.MarshalIndent(s, "", "    ")
-
-		if err != nil {
-			log.Println(err)
-			response = "{message : \"Error loading data from database\""
-		} else {
-			response = string(js)
-		}
-	}
+	response := createResponse(s, err)
 
 	fmt.Fprint(w, response)
 }
