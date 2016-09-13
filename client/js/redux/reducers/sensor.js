@@ -6,19 +6,23 @@ const defaultState = {
     list : [],
     infoMonth: [],
     infoYear: [],
+    uniqueDates: {},
     
     fetchingList: false,
     fetchingInfoMonth: false,
     fetchingInfoYear: false,
+    fetchingUniqueDates: false,
     
     fetchedList: false,
     fetchedInfoMonth: false,
-    fetchedInfoYear: false
+    fetchedInfoYear: false,
+    fetchedUniqueDates: false
 };
 
 //default reducer
 export default function app(state = defaultState, action) {
     switch(action.type){
+        //fetching functions - we use a fetching state to display loading images
         case types.FETCHING_LIST:
             return Object.assign({}, state, {
                 fetchingList: true,
@@ -34,7 +38,13 @@ export default function app(state = defaultState, action) {
                fetchingInfoYear: true,
                fetchedInfoYear: false
             });
+        case types:FETCHING_UNIQUE_DATES:
+            return Object.assign({}, state, {
+               fetchingUniqueDates: true,
+               fetchedUniqueDates: false
+            });
         
+        //other functions
         case types.LOAD_SENSOR_LIST:
             return Object.assign({}, state, {
                list: action.sensor_list,
@@ -52,6 +62,12 @@ export default function app(state = defaultState, action) {
                 infoYear: action.sensor_info,
                 fetchingInfoYear: false,
                 fetchedInfoYear: true
+            });
+        case types.LOAD_UNIQUE_DATES:
+            return Object.assign({}, state, {
+               uniqueDates: action.dates,
+               fetchingUniqueDates: false,
+               fetchedUniqueDates: true
             });
     }
     //return present state if no actions get called

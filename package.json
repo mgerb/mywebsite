@@ -11,7 +11,8 @@
     "dev": "webpack-dev-server --content-base public --inline --hot --history-api-fallback",
     "get_dependencies": "go get ./server && npm install",
     "prod": "export NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go",
-    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go"
+    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go",
+    "watch": "webpack --watch --colors --progress"
   },
   "repository": {
     "type": "git",

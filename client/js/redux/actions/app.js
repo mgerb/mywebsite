@@ -44,10 +44,14 @@ export function fetchPreview() {
     }
 }
 
-export function fetchPost(category, post) {
+//adjust url according to parameters
+//mainly used to load md files in the parent directory within /posts
+export function fetchPost(post, category = null) {
+    let url;
     return (dispatch) => {
         dispatch(fetching());
-        return fetch(`/public/posts/${category}/${post}.md`)
+        url = category !== null || typeof category === 'undefined' ? `/public/posts/${category}/${post}.md` : `/public/posts/${post}.md`;
+        return fetch(url)
             .then(response => response.text())
             .then(response => {
                 dispatch(loadPost(response));

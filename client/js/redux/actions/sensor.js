@@ -22,6 +22,13 @@ function loadSensorInfoMonth(sensor_info){
     }
 }
 
+function loadUniqueDates(dates){
+    return{
+        type: types.LOAD_UNIQUE_DATES,
+        dates
+    }
+}
+
 function fetchingList(){
     return {
         type: types.FETCHING_LIST
@@ -38,6 +45,12 @@ function fetchingInfoMonth(){
     return {
         type: types.FETCHING_INFO_MONTH
     }
+}
+
+function fetchingUniqueDates(){
+    return {
+        type: types.FETCHING_UNIQUE_DATES
+    }    
 }
 
 export function fetchSensorList(){
@@ -75,6 +88,20 @@ export function fetchSensorInfoMonth(location, year, month){
             .then(response => response.json())
             .then(json => {
                 dispatch(loadSensorInfoMonth(json));
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+}
+
+export function fetchUniqueDates(location){
+    return (dispatch) => {
+        dispatch(fetchingUniqueDates());
+        return fetch(`/api/uniquedates/${location}`)
+            .then(response => response.json())
+            .then(json => {
+                dispatch(loadUniqueDates(json));
             })
             .catch(error => {
                 console.log(error);
