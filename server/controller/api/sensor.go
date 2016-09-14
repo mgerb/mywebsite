@@ -177,7 +177,21 @@ func HandleUniqueDates(w http.ResponseWriter, r *http.Request, ps httprouter.Par
 	
 	s, err := daily_sensor.GetUniqueSensorDates(location)
 	
-	response := createResponse(s, err)
+	var response string
+
+	if err != nil {
+		log.Println(err)
+		response = "{message : \"Error loading data from database\""
+	} else {
+		js, err := json.MarshalIndent(s, "", "    ")
+
+		if err != nil {
+			log.Println(err)
+			response = "{message : \"Error loading data from database\""
+		} else {
+			response = string(js)
+		}
+	}
 
 	fmt.Fprint(w, response)
 }

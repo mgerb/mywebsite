@@ -203,14 +203,25 @@ func GetAllSensorInfoByMonth(sensor_location string, year int, monthname string)
 //I need to find a better implementation of this
 //MongoDB $addToSet creates an array of objecta
 //this ends up being a different type than the Data struct above
-//it would be nice to make all MongoDB queries load directly into a Data struct 
+//it would be nice to make all MongoDB queries load directly into a Data struct
+/*
 type UniqueDates struct{
 	Dates	  []Data	    `json:"dates" bson:"dates"`
 }
+*/
 
-func GetUniqueSensorDates(sensor_location string) ([]Data, error){
-	d := []Data{}
-	//temp := UniqueDates{};
+type Years struct {
+	Year int		`json:"year", bson:"year"`
+	Months []Month	`json:"months", bson:"months"`
+}
+
+type Month struct {
+	Month int			`json:"month", bson:"month"`
+	MonthName string	`json:"monthname", bson:"monthname"`
+}
+
+func GetUniqueSensorDates(sensor_location string) ([]Years, error){
+	d := []Years{}
 	
 	if db.Mongo.Connected() == true {
 
@@ -220,18 +231,10 @@ func GetUniqueSensorDates(sensor_location string) ([]Data, error){
 		c := session.DB(db.Mongo.Info.Database).C(collection)
 		
 		err := c.Pipe([]bson.M{bson.M{"$match": bson.M{"location": sensor_location}},
-								{"$group": bson.M{"_id": "null", "dates": bson.M{"$addToSet": bson.M{"month": "$month", "monthname": "$monthname", "year": "$year"}}}},
-								{"$unwind": "$dates"},
-								{"$project": bson.M{"_id": 0, "month": "$dates.month", "monthname": "$dates.monthname", "year": "$dates.year"}},
-								{"$sort": bson.M{"year": 1, "month": 1}},
+								bson.M{"$group": bson.M{"_id": "$year", "months": bson.M{"$addToSet": bson.M{"month": "$month", "monthname": "$monthname"}}}},
+								bson.M{"$project": bson.M{"year": "$_id", "months": "$months"}},
 								
 		}).All(&d)
-		
-		//d = temp.Dates;
-		
-		test12, _ := json.MarshalIndent(d, "", "  ")
-		
-		log.Println(string(test12))
 		
 		if err != nil {
 			log.Println(err)
