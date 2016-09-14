@@ -8,6 +8,9 @@ const defaultState = {
     infoYear: [],
     uniqueDates: {},
     
+    selectedYearIndex: 0,
+    selectedMonthIndex: 0,
+    
     fetchingList: false,
     fetchingInfoMonth: false,
     fetchingInfoYear: false,
@@ -68,6 +71,16 @@ export default function app(state = defaultState, action) {
                uniqueDates: action.dates,
                fetchingUniqueDates: false,
                fetchedUniqueDates: true
+            });
+            
+        //indexes
+        case types.SET_SELECTED_YEAR_INDEX:
+            return Object.assign({}, state, {
+                selectedYearIndex: action.index
+            });
+        case types.SET_SELECTED_MONTH_INDEX:
+            return Object.assign({}, state, {
+                selectedMonthIndex: action.index
             });
     }
     //return present state if no actions get called

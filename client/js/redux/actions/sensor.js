@@ -29,6 +29,20 @@ function loadUniqueDates(dates){
     }
 }
 
+export function setSelectedYearIndex(index){
+    return{
+        type: types.SET_SELECTED_YEAR_INDEX,
+        index
+    }
+}
+
+export function setSelectedMonthIndex(index){
+    return{
+        type: types.SET_SELECTED_MONTH_INDEX,
+        index
+    }
+}
+
 function fetchingList(){
     return {
         type: types.FETCHING_LIST
@@ -102,6 +116,12 @@ export function fetchUniqueDates(location){
             .then(response => response.json())
             .then(json => {
                 dispatch(loadUniqueDates(json));
+                if(json.length > 0){
+                    let year = json[0].year;
+                    let month = json[0].months[0].monthname;
+                    dispatch(fetchSensorInfoYear(location, year));
+                    dispatch(fetchSensorInfoMonth(location, year, month));
+                }
             })
             .catch(error => {
                 console.log(error);
