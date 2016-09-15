@@ -1,0 +1,15 @@
+.SensorInfo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    .selector-row{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .recharts-wrapper{
+        flex: 1;
+    }
+}

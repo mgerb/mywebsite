@@ -8,16 +8,9 @@ function loadSensorList(sensor_list){
     }
 }
 
-function loadSensorInfoYear(sensor_info){
+function loadSensorInfo(sensor_info){
     return{
-        type: types.LOAD_SENSOR_INFO_YEAR,
-        sensor_info
-    }
-}
-
-function loadSensorInfoMonth(sensor_info){
-    return{
-        type: types.LOAD_SENSOR_INFO_MONTH,
+        type: types.LOAD_SENSOR_INFO,
         sensor_info
     }
 }
@@ -49,15 +42,9 @@ function fetchingList(){
     }
 }
 
-function fetchingInfoYear(){
+function fetchingInfo(){
     return {
-        type: types.FETCHING_INFO_YEAR
-    }
-}
-
-function fetchingInfoMonth(){
-    return {
-        type: types.FETCHING_INFO_MONTH
+        type: types.FETCHING_INFO
     }
 }
 
@@ -83,11 +70,11 @@ export function fetchSensorList(){
 
 export function fetchSensorInfoYear(location, year){
     return (dispatch) => {
-        dispatch(fetchingInfoYear());
+        dispatch(fetchingInfo());
         return fetch(`/api/sensor/${location}/${year}`)
             .then(response => response.json())
             .then(json => {
-                dispatch(loadSensorInfoYear(json));
+                dispatch(loadSensorInfo(json));
             })
             .catch(error => {
                 console.log(error);
@@ -97,11 +84,11 @@ export function fetchSensorInfoYear(location, year){
 
 export function fetchSensorInfoMonth(location, year, month){
     return (dispatch) => {
-        dispatch(fetchingInfoMonth());
+        dispatch(fetchingInfo());
         return fetch(`/api/sensor/${location}/${year}/${month}`)
             .then(response => response.json())
             .then(json => {
-                dispatch(loadSensorInfoMonth(json));
+                dispatch(loadSensorInfo(json));
             })
             .catch(error => {
                 console.log(error);
@@ -119,7 +106,6 @@ export function fetchUniqueDates(location){
                 if(json.length > 0){
                     let year = json[0].year;
                     let month = json[0].months[0].monthname;
-                    dispatch(fetchSensorInfoYear(location, year));
                     dispatch(fetchSensorInfoMonth(location, year, month));
                 }
             })

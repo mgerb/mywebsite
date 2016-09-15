@@ -4,21 +4,18 @@ import * as types from '../constants/sensor';
 //defaults -
 const defaultState = {
     list : [],
-    infoMonth: [],
-    infoYear: [],
+    info: [],
     uniqueDates: {},
     
     selectedYearIndex: 0,
     selectedMonthIndex: 0,
     
     fetchingList: false,
-    fetchingInfoMonth: false,
-    fetchingInfoYear: false,
+    fetchingInfo: false,
     fetchingUniqueDates: false,
     
     fetchedList: false,
-    fetchedInfoMonth: false,
-    fetchedInfoYear: false,
+    fetchedInfo: false,
     fetchedUniqueDates: false
 };
 
@@ -31,15 +28,10 @@ export default function app(state = defaultState, action) {
                 fetchingList: true,
                 fetchedList: false
             });
-        case types.FETCHING_INFO_MONTH:
+        case types.FETCHING_INFO:
             return Object.assign({}, state, {
-                fetchingInfoMonth: true,
-                fetchedInfoMonth: false
-            });
-        case types.FETCHING_INFO_YEAR:
-            return Object.assign({}, state, {
-               fetchingInfoYear: true,
-               fetchedInfoYear: false
+                fetchingInfo: true,
+                fetchedInfo: false
             });
         case types:FETCHING_UNIQUE_DATES:
             return Object.assign({}, state, {
@@ -54,17 +46,11 @@ export default function app(state = defaultState, action) {
                fetchingList: false,
                fetchedList: true
             });
-        case types.LOAD_SENSOR_INFO_MONTH:
+        case types.LOAD_SENSOR_INFO:
             return Object.assign({}, state, {
-               infoMonth: action.sensor_info,
-               fetchingInfoMonth: false,
-               fetchedInfoMonth: true
-            });
-        case types.LOAD_SENSOR_INFO_YEAR:
-            return Object.assign({}, state, {
-                infoYear: action.sensor_info,
-                fetchingInfoYear: false,
-                fetchedInfoYear: true
+               info: action.sensor_info,
+               fetchingInfo: false,
+               fetchedInfo: true
             });
         case types.LOAD_UNIQUE_DATES:
             return Object.assign({}, state, {
