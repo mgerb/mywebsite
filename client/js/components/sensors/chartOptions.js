@@ -1,21 +1,21 @@
-export const Options = {
+export const ChartOptions = {
     responsive: true,
-    scaleOverride: true,
-    scaleSteps: 20,
-    scaleStartValue: 0,
-    scaleStepWidth: 5
+    // scaleOverride: true,
+    //scaleSteps: 20,
+    // scaleStartValue: 0,
+    //scaleStepWidth: 5
 };
 
-export let Data = {
+export let DataTemplate = {
     labels: [],
     datasets: [{
         label: "Max Temperature °F",
-        fillColor: "rgba(255,100,100,0)",
-        strokeColor: "rgba(255,100,100,1)",
-        pointColor: "rgba(255,100,100,1)",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(255,100,100,1)",
+        pointHighlightStroke: "rgba(220,220,220,1)",
         data: []
     }, {
         label: "Min Temperature °F",

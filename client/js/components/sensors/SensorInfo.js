@@ -3,8 +3,8 @@ import Loading from '../utils/Loading';
 import _chartjs from 'chart.js';
 import Chart from 'react-chartjs';
 import {
-    Options,
-    Data
+    ChartOptions,
+    DataTemplate
 }
 from './chartOptions';
 
@@ -62,8 +62,9 @@ export default class SensorInfo extends React.Component {
     }
 
     filterData(data) {
-        let temp = JSON.parse(JSON.stringify(Data));
-
+        let temp = JSON.parse(JSON.stringify(DataTemplate));
+        
+        console.log(temp);
         for (let d of data) {
             let label = `${d.month}/${d.day}`;
             temp.labels.push(label);
@@ -77,11 +78,11 @@ export default class SensorInfo extends React.Component {
     render() {
         let sensor = this.props.sensor;
         let data = this.filterData(sensor.info);
-
         return (
             <div class="SensorInfo">
                 {sensor.fetchedUniqueDates ?
                     <div class="selector-row">
+                        <h2>{this.props.params.location}</h2>
                         <select onChange={(e) => {this.onChange(e, 'year')}}>
                             {sensor.uniqueDates.map(this.loadYearOptions)}
                         </select>
@@ -92,7 +93,9 @@ export default class SensorInfo extends React.Component {
                     </div>
                 : <Loading/>}
                 
-                {sensor.fetchedUniqueDates ? <LineChart data={data} options={Options}/> : null}
+                {sensor.fetchedUniqueDates && sensor.fetchedInfo
+                    ? <LineChart data={data} options={ChartOptions} redraw/>
+                    : null}
             </div>
         );
     }

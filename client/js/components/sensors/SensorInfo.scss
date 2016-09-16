@@ -6,10 +6,10 @@
     min-width: 0;
     width: 80%;
     .selector-row{
-        margin-left: auto;
-        margin-right: auto;
+        display: flex;
+        justify-content: center;
         margin-bottom: 1em;
-        select+select{
+        select{
             margin-left: 5px;
         }
     }
