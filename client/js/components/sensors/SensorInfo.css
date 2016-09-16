@@ -1,0 +1,15 @@
+.SensorInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  min-width: 0;
+  width: 80%; }
+  .SensorInfo .selector-row {
+    margin-left: auto;
+    margin-right: auto; }
+    .SensorInfo .selector-row select + select {
+      margin-left: 5px; }
+
+/*# sourceMappingURL=SensorInfo.css.map */

@@ -1,23 +1,29 @@
 import React from 'react';
 import Loading from '../utils/Loading';
+import _chartjs from 'chart.js';
+import Chart from 'react-chartjs';
 import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend
+    Options,
+    Data
 }
-from 'recharts';
+from './chartOptions';
 
 import './SensorInfo.scss';
+
+const LineChart = Chart.Line;
 
 export default class SensorInfo extends React.Component {
 
     componentDidMount() {
         let location = this.props.params.location;
         this.props.sensorActions.fetchUniqueDates(location);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let currentLocation = this.props.params.location,
+            nextLocation = nextProps.params.location;
+
+        currentLocation !== nextLocation ? this.props.sensorActions.fetchUniqueDates(nextLocation) : null;
     }
 
     loadYearOptions = (date, index) => {
@@ -56,54 +62,37 @@ export default class SensorInfo extends React.Component {
     }
 
     filterData(data) {
-        let filteredData = [];
+        let temp = JSON.parse(JSON.stringify(Data));
 
         for (let d of data) {
-            filteredData.push({
-                name: d.day,
-                max: d.maxtemp,
-                min: d.mintemp
-            });
+            let label = `${d.month}/${d.day}`;
+            temp.labels.push(label);
+            temp.datasets[0].data.push(d.maxtemp);
+            temp.datasets[1].data.push(d.mintemp);
         }
-        
-        return filteredData;
+
+        return temp;
     }
-    
+
     render() {
         let sensor = this.props.sensor;
         let data = this.filterData(sensor.info);
-        
+
         return (
             <div class="SensorInfo">
-                <div class="selector-row">
-                    <select onChange={(e) => {this.onChange(e, 'year')}}>
-                        {sensor.fetchedUniqueDates
-                            ? sensor.uniqueDates.map(this.loadYearOptions)
-                            : null
-                        }
-                    </select>
-                    
-                    <select onChange={(e) => {this.onChange(e, 'month')}} value={sensor.selectedMonthIndex}>
-                        {sensor.fetchedUniqueDates
-                            ? sensor.uniqueDates[sensor.selectedYearIndex].months.map(this.loadMonthOptions)
-                            : null
-                        }
-                    </select>
-                </div>
-                <div>
-                    {sensor.fetchedInfo ?  
-                    <LineChart width={600} height={300} data={data}
-                            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                        <XAxis dataKey="name"/>
-                        <YAxis/>
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <Tooltip/>
-                        <Legend />
-                        <Line type="monotone" dataKey="max" stroke="#8884d8" activeDot={{r: 8}}/>
-                        <Line type="monotone" dataKey="min" stroke="#82ca9d" />
-                    </LineChart>
-                    : <Loading/>}
-                </div>
+                {sensor.fetchedUniqueDates ?
+                    <div class="selector-row">
+                        <select onChange={(e) => {this.onChange(e, 'year')}}>
+                            {sensor.uniqueDates.map(this.loadYearOptions)}
+                        </select>
+                        
+                        <select onChange={(e) => {this.onChange(e, 'month')}} value={sensor.selectedMonthIndex}>
+                            {sensor.uniqueDates[sensor.selectedYearIndex].months.map(this.loadMonthOptions)}
+                        </select>
+                    </div>
+                : <Loading/>}
+                
+                {sensor.fetchedUniqueDates ? <LineChart data={data} options={Options}/> : null}
             </div>
         );
     }

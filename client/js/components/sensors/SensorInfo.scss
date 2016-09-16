@@ -2,14 +2,15 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    
+    align-items: center;
+    min-width: 0;
+    width: 80%;
     .selector-row{
-        display: flex;
-        justify-content: center;
-    }
-    
-    .recharts-wrapper{
-        flex: 1;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1em;
+        select+select{
+            margin-left: 5px;
+        }
     }
 }

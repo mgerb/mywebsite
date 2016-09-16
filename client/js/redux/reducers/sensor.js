@@ -33,7 +33,7 @@ export default function app(state = defaultState, action) {
                 fetchingInfo: true,
                 fetchedInfo: false
             });
-        case types:FETCHING_UNIQUE_DATES:
+        case types.FETCHING_UNIQUE_DATES:
             return Object.assign({}, state, {
                fetchingUniqueDates: true,
                fetchedUniqueDates: false
