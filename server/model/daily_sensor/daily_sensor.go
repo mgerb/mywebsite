@@ -233,6 +233,10 @@ func GetUniqueSensorDates(sensor_location string) ([]Years, error){
 		err := c.Pipe([]bson.M{bson.M{"$match": bson.M{"location": sensor_location}},
 								bson.M{"$group": bson.M{"_id": "$year", "months": bson.M{"$addToSet": bson.M{"month": "$month", "monthname": "$monthname"}}}},
 								bson.M{"$project": bson.M{"year": "$_id", "months": "$months"}},
+								bson.M{"$unwind": "$months"},
+								bson.M{"$sort": bson.M{"months.month": -1}},
+								bson.M{"$group": bson.M{"_id": "$year", "months": bson.M{"$push": "$months"}}},
+								bson.M{"$project": bson.M{"year": "$_id", "months": "$months"}},
 								
 		}).All(&d)
 		
