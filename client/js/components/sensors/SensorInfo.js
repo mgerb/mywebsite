@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router';
+
 import Loading from '../utils/Loading';
 import _chartjs from 'chart.js';
 import Chart from 'react-chartjs';
@@ -96,6 +98,9 @@ export default class SensorInfo extends React.Component {
                 
                 {sensor.fetchedUniqueDates && sensor.fetchedInfo
                     ? <LineChart data={data} options={ChartOptions} redraw/>
+                    : null}
+                {sensor.fetchedUniqueDates && sensor.fetchedInfo
+                    ? <div class="home"><Link to="/" class="link"><i class="fa fa-caret-left" aria-hidden="true"></i> Home</Link></div>
                     : null}
             </div>
         );

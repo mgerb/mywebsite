@@ -12,8 +12,13 @@
             background-color: #D1D1D1;
         }
         
-        .item + .item{
+        .temperature{
+            flex: .5;
+        }
+        
+        .info{
             margin-left: 1em;
+            flex: 1;
         }
         
         h2{
