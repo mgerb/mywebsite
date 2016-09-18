@@ -14,18 +14,20 @@ const LineChart = Chart.Line;
 
 export default class SensorInfo extends React.Component {
 
-    componentDidMount() {
+    componentWillMount() {
         let location = this.props.params.location;
         this.props.sensorActions.fetchUniqueDates(location);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillUpdate(nextProps) {
         let currentLocation = this.props.params.location,
             nextLocation = nextProps.params.location;
-
-        currentLocation !== nextLocation ? this.props.sensorActions.fetchUniqueDates(nextLocation) : null;
+        
+        if (currentLocation !== nextLocation){
+            this.props.sensorActions.fetchUniqueDates(nextLocation);
+        }
     }
-
+    
     loadYearOptions = (date, index) => {
         return (
             <option key={index} value={index}>{date.year}</option>
@@ -64,7 +66,6 @@ export default class SensorInfo extends React.Component {
     filterData(data) {
         let temp = JSON.parse(JSON.stringify(DataTemplate));
         
-        console.log(temp);
         for (let d of data) {
             let label = `${d.month}/${d.day}`;
             temp.labels.push(label);

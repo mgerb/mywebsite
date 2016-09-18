@@ -96,9 +96,14 @@ export function fetchSensorInfoMonth(location, year, month){
     }
 }
 
+//this is called to initialize the sensor info page
+//reloads unique dates and resets indexes
+//then fetches new data for chart
 export function fetchUniqueDates(location){
     return (dispatch) => {
         dispatch(fetchingUniqueDates());
+        dispatch(setSelectedMonthIndex(0));
+        dispatch(setSelectedYearIndex(0));
         return fetch(`/api/uniquedates/${location}`)
             .then(response => response.json())
             .then(json => {

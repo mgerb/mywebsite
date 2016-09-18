@@ -67,7 +67,6 @@ select{
     }
 }
 
-.Footer,
 .Main {
     display: flex;
     padding-right: calc(50% - 997px / 2);
@@ -81,19 +80,6 @@ select{
 
 .Main {
     padding-top: 1em;
-}
-
-.Header {
-    width: 100%;
-    background: url("../images/header.jpg");
-    background-size: cover;
-    height: 30em;
-    border-bottom: solid;
-    border-width: 1px;
-    border-color: #DADADA;
-    h1 {
-        text-align: center;
-    }
 }
 
 .Loading {

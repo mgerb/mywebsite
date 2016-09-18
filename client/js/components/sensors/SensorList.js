@@ -35,7 +35,12 @@ export default class SensorList extends React.Component {
         </div>
         <div class="item">
           <h3>{sensor.location}</h3>
-          <span class="date">Updated: {date.toLocaleString('en-us', options)}</span>
+          <span class="date">Updated: {date.toLocaleString('en-us', options)}
+            {Date.now() - date < 420000
+              ? <span class="connected"> Connected</span>
+              : <span class="disconnected"> Disconnected</span>
+            }
+          </span>
         </div>
       </div>
     );

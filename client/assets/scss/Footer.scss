@@ -7,4 +7,13 @@
     border-color: #DADADA;
     font-weight: 300;
     margin-top: 1em;
+    
+    display: flex;
+    padding-right: calc(50% - 997px / 2);
+    padding-left: calc(50% - 997px / 2);
+    &:after,
+    &:before {
+        content: " ";
+        width: 1em;
+    }
 }
