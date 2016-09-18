@@ -21,7 +21,7 @@ export default class Post extends React.Component {
 
   componentDidMount() {
     const params = this.props.params;
-    this.props.appActions.fetchPost(params.category, params.post);
+    this.props.appActions.fetchPost(params.post, params.category);
   }
 
   render() {

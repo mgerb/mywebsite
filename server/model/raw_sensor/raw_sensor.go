@@ -59,9 +59,10 @@ func (s *Data) StoreData() error {
 
 //handle queries for all sensors page
 type DataStore_AllSensors struct {
-	ID          string    `json:"location" bson:"_id"`
-	Temperature float64   `json:"temperature" bson:"temperature"`
-	Updated     time.Time `json:"updated" bson:"updated"`
+	ID          bson.ObjectId `bson:"_id,omitempty"`
+	Location	string        `json:"location", bson:"location"`
+	Temperature float64 	  `json:"temperature" bson:"temperature"`
+	Updated     time.Time     `json:"updated" bson:"updated"`
 }
 
 //get latest update from each unique sensor
@@ -78,7 +79,9 @@ func GetAllSensors() ([]DataStore_AllSensors, error) {
 
 		err := c.Pipe([]bson.M{{"$group": bson.M{"_id": "$location", "temperature": bson.M{"$last": "$temperature"},
 			"updated": bson.M{"$last": "$updated"}}},
-			bson.M{"$sort": bson.M{"_id": 1}}}).All(&s)
+			bson.M{"$sort": bson.M{"_id": 1}},
+			bson.M{"$project": bson.M{"location": "$_id", "temperature": "$temperature", "updated": "$updated"}},
+		}).All(&s)
 
 		if err != nil {
 			return s, nil

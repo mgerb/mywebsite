@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 import me from '../../../assets/images/me.jpg';
 
@@ -12,7 +13,10 @@ export default class AboutMe extends React.Component{
                 <p>
                   My name is Mitchell and I have a passion for software development. I am currently a software engineer and enjoy working on personal projects in my free time.
                 </p>
-        
+                <p>
+                  <i class="fa fa-home" aria-hidden="true"></i>
+                  <Link to={"/"} class="link"> Home</Link>
+                </p>
                 <p>
                   <i class="fa fa-envelope" aria-hidden="true"></i>
                   <a class="link" href="mailto:mgerb42@gmail.com"> eMail</a>
@@ -25,10 +29,12 @@ export default class AboutMe extends React.Component{
                   <i class="fa fa-github" aria-hidden="true"></i>
                   <a class="link" href="https://github.com/mgerb" target="_blank"> GitHub</a>
                 </p>
+                {/*
                 <p>
                   <i class="fa fa-wpforms" aria-hidden="true"> </i>
                   <a href="/resume" class="link"> Resume</a>
                 </p>
+                */}
             </div>
             );
     }

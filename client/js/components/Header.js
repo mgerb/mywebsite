@@ -1,6 +1,8 @@
 import React from 'react';
 import {bubble} from '../../assets/js/bubble';
 
+import '../../assets/scss/Header.scss';
+
 export default class Header extends React.Component {
   componentDidMount() {
     bubble();

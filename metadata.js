@@ -19,13 +19,15 @@ marked.setOptions({
     }
 });
 
-const dir = './posts/';
+const rootDirectory = './posts/';
 const json = {
     posts: []
 };
 
 //do everything synchronously to keep posts ordered
-function parse_dir(dir, folder_name){
+//we are not worried about execution time since this script only runs once when building
+//ignores files that are not in a directory
+function parse_dir(dir, folder_name = null){
     const posts = fs.readdirSync(dir);
 
     for(let post of posts){
@@ -33,7 +35,7 @@ function parse_dir(dir, folder_name){
 
         if(stats.isDirectory()){
             parse_dir(dir + post + '/', post);
-        } else {
+        } else if(folder_name !== null){
             const file = fs.readFileSync(dir+post, 'utf8');
             const tokens = marked.lexer(file, null);
             const temp = {
@@ -49,7 +51,8 @@ function parse_dir(dir, folder_name){
 }
 
 //recursively parse posts directory for all markdown files
-parse_dir(dir, 'posts');
+//folder defaults to null and immediate child files are not added to json
+parse_dir(rootDirectory);
 
 //sort posts by date
 json.posts.sort((a, b) => {

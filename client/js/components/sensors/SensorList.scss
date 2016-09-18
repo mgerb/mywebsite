@@ -9,11 +9,16 @@
         padding: 1em;
         
         &:hover{
-            background-color: gray;
+            background-color: #D1D1D1;
         }
         
-        .item + .item{
+        .temperature{
+            flex: .5;
+        }
+        
+        .info{
             margin-left: 1em;
+            flex: 1;
         }
         
         h2{
@@ -23,6 +28,13 @@
         .date{
             font-size: .8em;
         }
+    }
+    
+    .connected{
+        color: green;
+    }
+    .disconnected{
+        color: red;
     }
     
 }

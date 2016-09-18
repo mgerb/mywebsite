@@ -2,6 +2,7 @@ var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
@@ -17,7 +18,7 @@ module.exports = {
           plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
         }
       },
-      { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader"},
+      { test: /\.scss$/, loader: "style-loader!css-loader!postcss-loader!sass-loader"},
       { test: /\.css$/, loader: "style-loader!css-loader" },
       { test: /\.png$/, loader: "url-loader?limit=100000&name=images/[hash].[ext]" },
       { test: /\.jpg$/, loader: "url-loader?limit=100000&name=images/[hash].[ext]" },
@@ -32,6 +33,7 @@ module.exports = {
       }
     ]
   },
+  postcss: function(){ return [autoprefixer]},
   output: {
     path: __dirname + "/public/",
     publicPath: "/public/",

@@ -7,7 +7,7 @@ export default class Footer extends React.Component {
   render() {
     return (
       <div class="Footer">
-        Site created and maintained by Mitchell Gerber
+        Site created by Mitchell Gerber
       </div>
     );
   }

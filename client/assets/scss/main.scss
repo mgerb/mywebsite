@@ -25,7 +25,6 @@ h5,
 h6 {
     margin: 0;
     font-weight: 400;
-    line-height: 1em;
 }
 
 p {
@@ -55,7 +54,19 @@ hr {
     border-top: 1px solid #eee;
 }
 
-.Footer,
+select{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0.2em;
+    height: 35px;
+    color: #555;
+    &:focus{
+        border-color: #66afe9;
+        outline: 0;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    }
+}
+
 .Main {
     display: flex;
     padding-right: calc(50% - 997px / 2);
@@ -71,23 +82,11 @@ hr {
     padding-top: 1em;
 }
 
-.Header {
-    width: 100%;
-    background: url("../images/header.jpg");
-    background-size: cover;
-    height: 30em;
-    border-bottom: solid;
-    border-width: 1px;
-    border-color: #DADADA;
-    h1 {
-        text-align: center;
-    }
-}
-
 .Loading {
     display: flex;
     flex: 1;
     justify-content: center;
+    align-items: center;
 }
 
 .btn {

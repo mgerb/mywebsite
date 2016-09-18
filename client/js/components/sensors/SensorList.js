@@ -20,8 +20,8 @@ export default class SensorList extends React.Component {
     this.openLink = this.openLink.bind(this);
   }
   
-  openLink(){
-    browserHistory.push("/");
+  openLink(location){
+    browserHistory.push(`/sensor/${location}`);
     this.props.toggleOff();
   }
   
@@ -29,13 +29,18 @@ export default class SensorList extends React.Component {
     const date = new Date(sensor.updated);
 
     return (
-      <div key={index} class="row" onClick={this.openLink}>
-        <div class="item">
+      <div key={index} class="row" onClick={() => {this.openLink(sensor.location)}}>
+        <div class="temperature">
           <h1>{sensor.temperature}°f</h1>
         </div>
-        <div class="item">
+        <div class="info">
           <h3>{sensor.location}</h3>
-          <span class="date">Updated: {date.toLocaleString('en-us', options)}</span>
+          <span class="date">Updated: {date.toLocaleString('en-us', options)}
+            {Date.now() - date < 420000
+              ? <span class="connected"> Connected</span>
+              : <span class="disconnected"> Disconnected</span>
+            }
+          </span>
         </div>
       </div>
     );

@@ -7,11 +7,12 @@
     "build": "webpack && babel-node metadata.js",
     "c9": "webpack-dev-server --port $PORT --host $IP --hot --content-base dist --history-api-fallback",
     "check_gzip_size": "gzip -9 -c ./public/client.min.js | wc -c | numfmt --to=iec-i --suffix=B --padding=10",
-    "deploy" : "npm run get_dependencies && npm run prod && ./mywebsite",
+    "deploy": "npm run get_dependencies && npm run prod && ./mywebsite",
     "dev": "webpack-dev-server --content-base public --inline --hot --history-api-fallback",
     "get_dependencies": "go get ./server && npm install",
-    "prod": "export NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go",
-    "prod-win": "set NODE_ENV=production && webpack -p && babel-node metadata.js && go build ./server/mywebsite.go"
+    "prod": "export NODE_ENV=production && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors && babel-node metadata.js && go build ./server/mywebsite.go",
+    "prod-win": "set NODE_ENV=production && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors && babel-node metadata.js && go build ./server/mywebsite.go",
+    "watch": "webpack --watch --colors --progress"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/mgerb/mywebsite#readme",
   "dependencies": {
+    "autoprefixer": "^6.4.1",
     "babel": "^6.5.2",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
@@ -35,6 +37,7 @@
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
+    "chart.js": "^1.1.1",
     "css-loader": "^0.23.1",
     "exports-loader": "^0.6.3",
     "file-loader": "^0.9.0",
@@ -44,7 +47,10 @@
     "marked": "^0.3.6",
     "ncp": "^2.0.0",
     "node-sass": "^3.8.0",
+    "postcss-loader": "^0.13.0",
     "react": "^15.3.0",
+    "react-addons-transition-group": "^15.3.1",
+    "react-chartjs": "^0.8.0",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
