@@ -10,8 +10,8 @@
     "deploy": "npm run get_dependencies && npm run prod && ./mywebsite",
     "dev": "webpack-dev-server --content-base public --inline --hot --history-api-fallback",
     "get_dependencies": "go get ./server && npm install",
-    "prod": "export NODE_ENV=production && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors && babel-node metadata.js && go build ./server/mywebsite.go",
-    "prod-win": "set NODE_ENV=production && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors && babel-node metadata.js && go build ./server/mywebsite.go",
+    "prod": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors && babel-node metadata.js && go build ./server/mywebsite.go",
+    "prod-win": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors && babel-node metadata.js && go build ./server/mywebsite.go",
     "watch": "webpack --watch --colors --progress"
   },
   "repository": {
