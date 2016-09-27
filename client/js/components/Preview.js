@@ -36,19 +36,21 @@ export default class Preview extends React.Component {
   render() {
     const posts = this.props.app.preview.posts;
     const postLimit = this.props.app.postLimit;
-    const fetched = this.props.app.fetched;
+    let fetched = this.props.app.fetched;
     const increasePostLimit = this.props.appActions.increasePostLimit;
-
+    
+    if (!fetched){
+      return <Loading/>; 
+    } 
+    
     return (
       <div class="Content">
-        {fetched ?
         <div>
           {posts.length > 0 ? this.insertPosts(posts): null}
           {posts.length > postLimit ?
             <button class="btn" onClick={increasePostLimit}>Load More</button>
             : null}
         </div>
-        : <Loading/>}
       </div>
     );
   }

@@ -19,13 +19,13 @@ export default class Index extends React.Component {
   render() {
     return (
       <div>
-            <Header/>
-              <div class="Main">
-                {React.cloneElement(this.props.children, this.props)}
-                <Sidebar sensor={Object.assign({}, this.props.sensor)}/>
-              </div>
-            <Footer/>
+        <Header/>
+          <div class="Main">
+            {React.cloneElement(this.props.children, this.props)}
+            <Sidebar sensor={Object.assign({}, this.props.sensor)}/>
           </div>
+        <Footer/>
+      </div>
     );
   }
 }
