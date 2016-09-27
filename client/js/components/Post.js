@@ -28,16 +28,18 @@ export default class Post extends React.Component {
     const post = this.props.app.post;
     const fetched = this.props.app.fetched;
     const fetching = this.props.app.fetching;
-
+    
+    if(!fetched){
+      return <Loading/>;
+    }
+    
     return (
       <div class="Content">
-          {fetched ?
-          <div>
-            <div dangerouslySetInnerHTML={{__html : marked(post, {renderer : renderer})}}/>
-            <Link to="/" class="link"><i class="fa fa-caret-left" aria-hidden="true"></i> Home</Link>
-          </div>
-          : <Loading/>}
+        <div>
+          <div dangerouslySetInnerHTML={{__html : marked(post, {renderer : renderer})}}/>
+          <Link to="/" class="link"><i class="fa fa-caret-left" aria-hidden="true"></i> Home</Link>
         </div>
+      </div>
     );
   }
 }

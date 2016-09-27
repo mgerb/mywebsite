@@ -83,10 +83,11 @@ select{
 }
 
 .Loading {
-    display: flex;
     flex: 1;
+    display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 600px;
 }
 
 .btn {

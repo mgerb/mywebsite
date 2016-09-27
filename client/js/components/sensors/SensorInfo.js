@@ -81,27 +81,32 @@ export default class SensorInfo extends React.Component {
     render() {
         let sensor = this.props.sensor;
         let data = this.filterData(sensor.info);
+        
+        if(!sensor.fetchedUniqueDates){
+            return <Loading/>;
+        }
+        
         return (
             <div class="SensorInfo">
-                {sensor.fetchedUniqueDates ?
-                    <div class="selector-row">
-                        <h2>{this.props.params.location}</h2>
-                        <select onChange={(e) => {this.onChange(e, 'year')}}>
-                            {sensor.uniqueDates.map(this.loadYearOptions)}
-                        </select>
-                        
-                        <select onChange={(e) => {this.onChange(e, 'month')}} value={sensor.selectedMonthIndex}>
-                            {sensor.uniqueDates[sensor.selectedYearIndex].months.map(this.loadMonthOptions)}
-                        </select>
-                    </div>
-                : <Loading/>}
+                <div class="selector-row">
+                    <h2>{this.props.params.location}</h2>
+                    <select onChange={(e) => {this.onChange(e, 'year')}}>
+                        {sensor.uniqueDates.map(this.loadYearOptions)}
+                    </select>
+                    
+                    <select onChange={(e) => {this.onChange(e, 'month')}} value={sensor.selectedMonthIndex}>
+                        {sensor.uniqueDates[sensor.selectedYearIndex].months.map(this.loadMonthOptions)}
+                    </select>
+                </div>
                 
-                {sensor.fetchedUniqueDates && sensor.fetchedInfo
-                    ? <LineChart data={data} options={ChartOptions} redraw/>
-                    : null}
-                {sensor.fetchedUniqueDates && sensor.fetchedInfo
-                    ? <div class="home"><Link to="/" class="link"><i class="fa fa-caret-left" aria-hidden="true"></i> Home</Link></div>
-                    : null}
+                {sensor.fetchedInfo ? <LineChart data={data} options={ChartOptions} redraw/> : null}
+                
+                <p>Sensor data is recorded with a <a href="https://www.sparkfun.com/products/245">DS18B20</a> and <a href="https://www.sparkfun.com/products/13678">ESP8266</a> WiFi microcontroller.</p>
+                
+                <div>
+                    <Link to="/" class="link"><i class="fa fa-caret-left" aria-hidden="true"></i> Home</Link>
+                </div>
+                
             </div>
         );
     }
