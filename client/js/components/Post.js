@@ -1,4 +1,4 @@
-import hljs from 'highlight.js';
+import hljs from 'hljs';
 import marked from 'marked';
 import React from 'react';
 import {Link} from 'react-router';

@@ -6,7 +6,7 @@ var autoprefixer = require('autoprefixer');
 
 module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
-  entry: ["babel-polyfill", , "whatwg-fetch", "./client/js/app.js"],
+  entry: ["babel-polyfill", "./client/js/app.js"],
   module: {
     loaders: [
       {
@@ -35,17 +35,27 @@ module.exports = {
     publicPath: "/public/",
     filename: "client.min.js"
   },
-  plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-  ],
-  plugins: [
-    new HtmlWebpackPlugin({
+  plugins: getPlugins(),
+  externals:{hljs: "hljs"}
+};
+
+function getPlugins(){
+  var plugins = [
+      new HtmlWebpackPlugin({
       fileName: 'index.html',
       template: 'index.html',
       inject: 'body',
       hash: true
-    })
-  ]
-};
+    }),
+    new webpack.EnvironmentPlugin([
+      "NODE_ENV"
+    ])
+  ];
+  if(!debug){
+    plugins = plugins.concat([
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false})
+  ])}
+  return plugins; 
+}
