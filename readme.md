@@ -1,4 +1,4 @@
-# My personal website build with the following web technologies
+# My personal website built with the following web technologies
 - ReactJS
 - GoLang Server
 - MongoDB

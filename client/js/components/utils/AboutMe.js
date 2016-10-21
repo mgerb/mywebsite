@@ -14,6 +14,9 @@ export default class AboutMe extends React.Component{
                   My name is Mitchell and I have a passion for software development. I am currently a software engineer and enjoy working on personal projects in my free time.
                 </p>
                 <p>
+                  Check out the source code for this site <a class="link" target="_blank" href="https://github.com/mgerb/mywebsite">here <i class="fa fa-github" aria-hidden="true"/></a>.
+                </p>
+                <p>
                   <i class="fa fa-home" aria-hidden="true"></i>
                   <Link to={"/"} class="link"> Home</Link>
                 </p>
