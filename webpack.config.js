@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+var Visualizer = require('webpack-visualizer-plugin');
 
 module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
@@ -36,7 +37,12 @@ module.exports = {
     filename: "client.min.js"
   },
   plugins: getPlugins(),
-  externals:{hljs: "hljs"}
+  externals:{
+    "hljs": "hljs",
+    "react": "React",
+    "react-dom": "ReactDOM",
+    "react-router": "ReactRouter"
+  }
 };
 
 function getPlugins(){
@@ -49,7 +55,10 @@ function getPlugins(){
     }),
     new webpack.EnvironmentPlugin([
       "NODE_ENV"
-    ])
+    ]),
+    new Visualizer({
+      filename: "../stats.html"
+    })
   ];
   if(!debug){
     plugins = plugins.concat([
