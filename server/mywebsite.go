@@ -24,5 +24,11 @@ func main(){
 	handle := gziphandler.GzipHandler(route.Routes())
 	
 	log.Println("Starting Server...")
-	log.Println(http.ListenAndServe(":"+strconv.Itoa(configurations.Port), handle))
+	go func(){
+		log.Println(http.ListenAndServe(":"+strconv.Itoa(configurations.Port), handle))
+	}()
+	
+	if configurations.TLSCertFile != "" && configurations.TLSKeyFile != "" {
+		log.Println(http.ListenAndServeTLS(":"+strconv.Itoa(configurations.TLSPort), configurations.TLSCertFile, configurations.TLSKeyFile, handle))
+	}
 }

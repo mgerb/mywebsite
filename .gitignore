@@ -6,3 +6,5 @@ dist
 public
 npm-debug.log
 mywebsite
+tls.key
+tls.crt
