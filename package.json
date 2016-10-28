@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "analyze": "webpack --json | webpack-bundle-size-analyzer",
-    "build": "NODE_ENV=production webpack -p --progress --colors && babel-node metadata.js",
+    "build": "NODE_ENV=production webpack -p --progress --colors && NODE_ENV=production babel-node metadata.js",
     "c9": "webpack-dev-server --port $PORT --host $IP --hot --content-base dist --history-api-fallback",
     "check-gzip-size": "gzip -9 -c ./public/client.min.js | wc -c | numfmt --to=iec-i --suffix=B --padding=10",
     "deploy": "npm run get_dependencies && npm run prod && ./mywebsite",

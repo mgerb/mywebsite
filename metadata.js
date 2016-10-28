@@ -12,6 +12,8 @@ import ncp from 'ncp';
 import marked from 'marked';
 import highlight from 'highlight.js';
 
+const debug = process.env.NODE_ENV !== 'production';
+
 marked.setOptions({
     header: true,
     highlight: (code) => {
@@ -32,10 +34,9 @@ function parse_dir(dir, folder_name = null){
 
     for(let post of posts){
         const stats = fs.statSync(dir + post);
-
         if(stats.isDirectory()){
             parse_dir(dir + post + '/', post);
-        } else if(folder_name !== null){
+        } else if(folder_name !== null && dir !== './posts/extras/'){
             const file = fs.readFileSync(dir+post, 'utf8');
             const tokens = marked.lexer(file, null);
             const temp = {
@@ -59,8 +60,10 @@ json.posts.sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
 });
 
+const prettyJson = debug ? JSON.stringify(json, null, 4) : JSON.stringify(json, null, null);
+
 //output to public path
-fs.writeFile('./public/metadata.json', JSON.stringify(json,null,4), (err) => {
+fs.writeFile('./public/metadata.json', prettyJson, (err) => {
     if (err) throw err;
     console.log("Saved metadata.json");
 })
