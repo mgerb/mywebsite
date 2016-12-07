@@ -12,9 +12,12 @@ import (
 
 //structure for application configurations
 type Config struct {
-	Database db.DatabaseInfo `json:"database"`
-	Api      api.ApiInfo     `json:"api"`
-	Port     int		 `json:"port"`
+	Database db.DatabaseInfo `json:"Database"`
+	Api      api.ApiInfo     `json:"Api"`
+	Port     int			 `json:"Port"`
+	TLSPort  int			 `json:"TLSPort"`
+	TLSCertFile string		 `json:"TLSCertFile"`
+	TLSKeyFile string		 `json:"TLSKeyFile"`
 }
 
 //read the config file and return JsonObject struct

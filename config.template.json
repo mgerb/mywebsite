@@ -1,12 +1,15 @@
 {
-    "database": {
+    "Database": {
         "url": "",
         "database": "",
         "username": "",
         "password": ""
     },
-    "api": {
+    "Api": {
         "key": ""
     },
-    "port": 8080
+    "Port": 8080,
+    "TLSPort": 443,
+    "TLSCertFile": "",
+    "TLSKeyFile": ""
 }
