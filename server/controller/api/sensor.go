@@ -27,6 +27,11 @@ func HandleSensorRequest(w http.ResponseWriter, r *http.Request, ps httprouter.P
 
 		//get request parameters - convert temp to float64
 		temperature, _ := strconv.ParseFloat(r.URL.Query().Get("temperature"), 64)
+		if temperature < -50 {
+			fmt.Fprint(w, "{ message: \"Bad temperature reading\"}")
+			return
+		}
+
 		location := r.URL.Query().Get("location")
 		t := time.Now()
 
