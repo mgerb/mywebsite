@@ -2,20 +2,15 @@ import React from 'react';
 import {Link} from 'react-router';
 
 import Loading from '../utils/Loading';
-import _chartjs from 'chart.js';
 import Chart from 'react-chartjs';
-import {
-    ChartOptions,
-    DataTemplate
-}
-from './chartOptions';
+import { ChartOptions, DataTemplate } from './chartOptions';
 
 import './SensorInfo.scss';
 
 const LineChart = Chart.Line;
 
 export default class SensorInfo extends React.Component {
-
+    
     componentWillMount() {
         let location = this.props.params.location;
         this.props.sensorActions.fetchUniqueDates(location);
@@ -74,7 +69,7 @@ export default class SensorInfo extends React.Component {
             temp.datasets[0].data.push(d.maxtemp);
             temp.datasets[1].data.push(d.mintemp);
         }
-
+        
         return temp;
     }
 
