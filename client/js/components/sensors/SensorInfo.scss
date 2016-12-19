@@ -1,11 +1,11 @@
 .SensorInfo{
-    flex: 1;
     padding-right: 1em;
     padding-left: 1em;
-    min-width: 0;
+    
     .selector-row{
         display: flex;
         justify-content: center;
+        
         select{
             margin-left: 5px;
         }

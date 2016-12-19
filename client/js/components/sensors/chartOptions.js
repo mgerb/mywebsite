@@ -1,9 +1,9 @@
 export const ChartOptions = {
     responsive: true,
-    // scaleOverride: true,
-    //scaleSteps: 20,
-    // scaleStartValue: 0,
-    //scaleStepWidth: 5
+    scaleOverride: true,
+    scaleStartValue: -10,
+    scaleSteps: 11,
+    scaleStepWidth: 10,
 };
 
 export let DataTemplate = {
