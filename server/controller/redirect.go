@@ -13,7 +13,7 @@ func DiscordRedirect(w http.ResponseWriter, r *http.Request, _ httprouter.Params
 
 // Redirect to vpn
 func VPNRedirect(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	http.Redirect(w, r, "https://mitchel.io:943", 301)
+	http.Redirect(w, r, "https://mitchellgerber.com:943", 301)
 }
 
 // Redirect to security cameras
