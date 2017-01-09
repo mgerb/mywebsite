@@ -11,7 +11,7 @@ Sensor information is stored in MongoDB. [ChartJS](http://www.chartjs.org/) is t
 ## How posts are loaded
 - metadata.js recursivly scans the posts folder for markdown files and then parses each into into a json object
 - the posts folder is then copied into the dist folder
-[More information here](http://mitchel.io/post/Web%20Stuff/2016-09-19-loading-content)
+[More information here](http://mitchellgerber.com/post/Web%20Stuff/2016-09-19-loading-content)
 
 ## Installation
 - `npm run deploy`
