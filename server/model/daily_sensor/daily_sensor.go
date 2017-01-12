@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"mywebsite/server/db"
+	"../../db"
 )
 
 const (
@@ -23,7 +23,7 @@ type Data struct {
 	MonthName string        `json:"monthname,omitempty" bson:"monthname"`
 	Day       int           `json:"day,omitempty" bson:"day"`
 	Year      int           `json:"year,omitempty" bson:"year"`
-	Updated	  time.Time		`json:"updated,omitempty" bson:"updated"`
+	Updated   time.Time     `json:"updated,omitempty" bson:"updated"`
 }
 
 //convert struct to json string
@@ -211,35 +211,34 @@ type UniqueDates struct{
 */
 
 type Years struct {
-	Year int		`json:"year", bson:"year"`
-	Months []Month	`json:"months", bson:"months"`
+	Year   int     `json:"year", bson:"year"`
+	Months []Month `json:"months", bson:"months"`
 }
 
 type Month struct {
-	Month int			`json:"month", bson:"month"`
-	MonthName string	`json:"monthname", bson:"monthname"`
+	Month     int    `json:"month", bson:"month"`
+	MonthName string `json:"monthname", bson:"monthname"`
 }
 
-func GetUniqueSensorDates(sensor_location string) ([]Years, error){
+func GetUniqueSensorDates(sensor_location string) ([]Years, error) {
 	d := []Years{}
-	
+
 	if db.Mongo.Connected() == true {
 
 		session := db.Mongo.Session.Copy()
 		defer session.Close()
 
 		c := session.DB(db.Mongo.Info.Database).C(collection)
-		
+
 		err := c.Pipe([]bson.M{bson.M{"$match": bson.M{"location": sensor_location}},
-								bson.M{"$group": bson.M{"_id": "$year", "months": bson.M{"$addToSet": bson.M{"month": "$month", "monthname": "$monthname"}}}},
-								bson.M{"$project": bson.M{"year": "$_id", "months": "$months"}},
-								bson.M{"$unwind": "$months"},
-								bson.M{"$sort": bson.M{"months.month": -1}},
-								bson.M{"$group": bson.M{"_id": "$year", "months": bson.M{"$push": "$months"}}},
-								bson.M{"$project": bson.M{"year": "$_id", "months": "$months"}},
-								
+			bson.M{"$group": bson.M{"_id": "$year", "months": bson.M{"$addToSet": bson.M{"month": "$month", "monthname": "$monthname"}}}},
+			bson.M{"$project": bson.M{"year": "$_id", "months": "$months"}},
+			bson.M{"$unwind": "$months"},
+			bson.M{"$sort": bson.M{"months.month": -1}},
+			bson.M{"$group": bson.M{"_id": "$year", "months": bson.M{"$push": "$months"}}},
+			bson.M{"$project": bson.M{"year": "$_id", "months": "$months"}},
 		}).All(&d)
-		
+
 		if err != nil {
 			log.Println(err)
 			return d, nil

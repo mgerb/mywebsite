@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"mywebsite/server/controller/api"
-	"mywebsite/server/db"
-	"mywebsite/server/route"
-	"mywebsite/server/utils"
+	"./controller/api"
+	"./db"
+	"./route"
+	"./utils"
 )
 
 func main() {

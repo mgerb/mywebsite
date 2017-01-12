@@ -6,18 +6,18 @@ import (
 	"log"
 	"os"
 
-	"mywebsite/server/controller/api"
-	"mywebsite/server/db"
+	"../controller/api"
+	"../db"
 )
 
 //structure for application configurations
 type Config struct {
-	Database db.DatabaseInfo `json:"Database"`
-	Api      api.ApiInfo     `json:"Api"`
-	Port     int			 `json:"Port"`
-	TLSPort  int			 `json:"TLSPort"`
-	TLSCertFile string		 `json:"TLSCertFile"`
-	TLSKeyFile string		 `json:"TLSKeyFile"`
+	Database    db.DatabaseInfo `json:"Database"`
+	Api         api.ApiInfo     `json:"Api"`
+	Port        int             `json:"Port"`
+	TLSPort     int             `json:"TLSPort"`
+	TLSCertFile string          `json:"TLSCertFile"`
+	TLSKeyFile  string          `json:"TLSKeyFile"`
 }
 
 //read the config file and return JsonObject struct

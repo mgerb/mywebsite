@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"time"
 
-	"mywebsite/server/model/daily_sensor"
-	"mywebsite/server/model/raw_sensor"
+	"../../model/daily_sensor"
+	"../../model/raw_sensor"
 )
 
 // handle http request from sensors
@@ -175,13 +175,13 @@ func HandleSensorByLocationMonth(w http.ResponseWriter, r *http.Request, ps http
 }
 
 func HandleUniqueDates(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	
+
 	location := ps.ByName("location")
-	
+
 	w.Header().Set("Content-Type", "application/json")
-	
+
 	s, err := daily_sensor.GetUniqueSensorDates(location)
-	
+
 	var response string
 
 	if err != nil {
@@ -201,7 +201,7 @@ func HandleUniqueDates(w http.ResponseWriter, r *http.Request, ps httprouter.Par
 	fmt.Fprint(w, response)
 }
 
-func createResponse(s []daily_sensor.Data, err error) string{
+func createResponse(s []daily_sensor.Data, err error) string {
 	var response string
 
 	if err != nil {
@@ -217,6 +217,6 @@ func createResponse(s []daily_sensor.Data, err error) string{
 			response = string(js)
 		}
 	}
-	
+
 	return response
 }
