@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"mywebsite/server/db"
+	"../../db"
 )
 
 const (
@@ -60,8 +60,8 @@ func (s *Data) StoreData() error {
 //handle queries for all sensors page
 type DataStore_AllSensors struct {
 	ID          bson.ObjectId `bson:"_id,omitempty"`
-	Location	string        `json:"location", bson:"location"`
-	Temperature float64 	  `json:"temperature" bson:"temperature"`
+	Location    string        `json:"location", bson:"location"`
+	Temperature float64       `json:"temperature" bson:"temperature"`
 	Updated     time.Time     `json:"updated" bson:"updated"`
 }
 
