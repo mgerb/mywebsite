@@ -38,10 +38,7 @@ module.exports = {
   },
   plugins: getPlugins(),
   externals:{
-    "hljs": "hljs",
-    "react": "React",
-    "react-dom": "ReactDOM",
-    "react-router": "ReactRouter"
+    "hljs": "hljs"
   }
 };
 
