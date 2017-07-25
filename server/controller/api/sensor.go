@@ -3,14 +3,14 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
 
-	"../../model/daily_sensor"
-	"../../model/raw_sensor"
+	"github.com/julienschmidt/httprouter"
+	"github.com/mgerb/mywebsite/server/model/daily_sensor"
+	"github.com/mgerb/mywebsite/server/model/raw_sensor"
 )
 
 // handle http request from sensors

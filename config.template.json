@@ -8,8 +8,5 @@
     "Api": {
         "key": ""
     },
-    "Port": 8080,
-    "TLSPort": 443,
-    "TLSCertFile": "",
-    "TLSKeyFile": ""
+    "Address": ":8080"
 }

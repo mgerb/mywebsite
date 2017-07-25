@@ -2,22 +2,24 @@ package utils
 
 import (
 	"encoding/json"
+	"flag"
 	"io/ioutil"
 	"log"
 	"os"
 
-	"../controller/api"
-	"../db"
+	"github.com/mgerb/mywebsite/server/controller/api"
+	"github.com/mgerb/mywebsite/server/db"
 )
 
 //structure for application configurations
 type Config struct {
-	Database    db.DatabaseInfo `json:"Database"`
-	Api         api.ApiInfo     `json:"Api"`
-	Port        int             `json:"Port"`
-	TLSPort     int             `json:"TLSPort"`
-	TLSCertFile string          `json:"TLSCertFile"`
-	TLSKeyFile  string          `json:"TLSKeyFile"`
+	Database db.DatabaseInfo `json:"Database"`
+	Api      api.ApiInfo     `json:"Api"`
+	Address  string          `json:"Address"`
+}
+
+type Flags struct {
+	TLS bool
 }
 
 //read the config file and return JsonObject struct
@@ -43,4 +45,19 @@ func ReadConfig() Config {
 	}
 
 	return result
+}
+
+func ParseFlags() Flags {
+
+	flags := Flags{
+		TLS: false,
+	}
+
+	tls := flag.Bool("tls", false, "Use TLS")
+
+	flag.Parse()
+
+	flags.TLS = *tls
+
+	return flags
 }

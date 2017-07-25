@@ -1,13 +1,24 @@
 package route
 
 import (
-	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
 
-	"../controller"
-	"../controller/api"
+	"github.com/julienschmidt/httprouter"
+	"github.com/mgerb/mywebsite/server/controller"
+	"github.com/mgerb/mywebsite/server/controller/api"
 )
+
+func NonTLSRoutes() *httprouter.Router {
+
+	r := httprouter.New()
+	r.GET("/api/storedata", api.HandleSensorRequest)
+
+	// redirect to tls on not found
+	r.NotFound = http.HandlerFunc(tlsRedirect)
+
+	return r
+}
 
 func Routes() *httprouter.Router {
 
@@ -52,4 +63,15 @@ func fileHandler(path string) http.HandlerFunc {
 		http.ServeFile(w, r, path)
 
 	}
+}
+
+// redirect to tls
+func tlsRedirect(w http.ResponseWriter, req *http.Request) {
+	// remove/add not default ports from req.Host
+	target := "https://" + req.Host + req.URL.Path
+	if len(req.URL.RawQuery) > 0 {
+		target += "?" + req.URL.RawQuery
+	}
+
+	http.Redirect(w, req, target, http.StatusTemporaryRedirect)
 }

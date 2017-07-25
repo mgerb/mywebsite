@@ -3,11 +3,11 @@ package daily_sensor
 import (
 	"encoding/json"
 	"errors"
-	"gopkg.in/mgo.v2/bson"
 	"log"
 	"time"
 
-	"../../db"
+	"github.com/mgerb/mywebsite/server/db"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const (
