@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production webpack -p --progress --colors && NODE_ENV=production babel-node metadata.js",
     "c9": "webpack-dev-server --port $PORT --host $IP --hot --content-base dist --history-api-fallback",
     "check-gzip-size": "gzip -9 -c ./public/client.min.js | wc -c | numfmt --to=iec-i --suffix=B --padding=10",
-    "deploy": "npm run get_dependencies && npm run prod && ./mywebsite",
+    "deploy": "npm run get_dependencies && npm run prod && ./mywebsite -tls",
     "dev": "webpack-dev-server --content-base public --inline --hot --history-api-fallback",
     "generate-tls": "sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./tls.key -out ./tls.crt",
     "get_dependencies": "go get && npm install",
