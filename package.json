@@ -48,7 +48,7 @@
     "html-webpack-plugin": "^2.22.0",
     "marked": "^0.3.6",
     "ncp": "^2.0.0",
-    "node-sass": "^3.8.0",
+    "node-sass": "^3.13.1",
     "postcss-loader": "^0.13.0",
     "react": "^15.3.0",
     "react-addons-transition-group": "^15.3.1",

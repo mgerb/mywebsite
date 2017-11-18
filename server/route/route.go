@@ -12,6 +12,8 @@ import (
 func NonTLSRoutes() *httprouter.Router {
 
 	r := httprouter.New()
+
+	// need to keep this http end point open for devices
 	r.GET("/api/storedata", api.HandleSensorRequest)
 
 	// redirect to tls on not found

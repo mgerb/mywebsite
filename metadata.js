@@ -36,7 +36,7 @@ function parse_dir(dir, folder_name = null){
         const stats = fs.statSync(dir + post);
         if(stats.isDirectory()){
             parse_dir(dir + post + '/', post);
-        } else if(folder_name !== null && dir !== './posts/extras/'){
+        } else if(folder_name !== null && folder_name !== 'images' && dir !== './posts/extras/'){
             const file = fs.readFileSync(dir+post, 'utf8');
             const tokens = marked.lexer(file, null);
             const temp = {
