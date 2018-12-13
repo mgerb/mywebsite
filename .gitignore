@@ -9,3 +9,4 @@ mywebsite
 tls.key
 tls.crt
 stats.html
+/vendor
